@@ -31,6 +31,27 @@ Then tell the user: what has been completed, what is next, and **wait for them t
 
 ---
 
+## Visual checkpoint rule — MANDATORY after every visible change
+
+**Trigger this rule whenever ANY of the following occurs:**
+- A build is run (`npm run build`)
+- A new page is created
+- A new component is completed
+- Any visible change is pushed to Cloudflare Pages
+
+**What to do:**
+1. Commit all changes
+2. Push to GitHub (`git push origin main`)
+3. Stop and tell the user exactly this:
+
+> "Build deployed to https://calcyourfinance.pages.dev — please open the site, verify it looks correct, test the feature, and reply **'looks good'** or describe what needs fixing."
+
+4. **Do not proceed with any further work until the user confirms with "looks good"** (or describes a fix, which you then address before asking again).
+
+This rule exists because Cloudflare Pages auto-deploys on every push to `main`. A visual check after every change catches layout regressions, broken builds, and styling issues before they compound.
+
+---
+
 ## Never do these things
 
 - Never write any year other than the current actual year (verified by running `date`).
