@@ -8,11 +8,14 @@ Project root: D:\Dev\calcyourfinance\calcyourfinance
 PRD docs: docs\prd
 Repo: https://github.com/trilumos/cyf.git
 
-First do these 3 things before anything else:
+First do these 5 things before anything else:
 
 1. Run date "+%Y-%m-%d" and confirm the current date
 2. Run git log --oneline -10 to see what was last completed
 3. Read the relevant PRD doc for today's work
+4. Read the CLAUDE.md file 
+5. Read the SESSION-LOG.MD file
+
 
 Then tell me: what has been completed, what is next, and wait for me to say continue.
 
