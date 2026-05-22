@@ -152,11 +152,11 @@ Build these as reusable components in `/src/components/`:
 2. Hero section
    - Background: white
    - Centered content, max-width 480px
-   - Pill tag: "204+ FREE FINANCE CALCULATORS" (uppercase, `text-mini`, `bg-brand-primaryLight`, `text-brand-primaryText`)
+   - Pill tag: "200+ FREE FINANCE CALCULATORS" (uppercase, `text-mini`, `bg-brand-primaryLight`, `text-brand-primaryText`)
    - H1: "Make smarter money decisions with **CalcYourFinance**" (brand name in `text-brand-primary`)
    - Subtitle: "From EMI to SIP, tax to retirement — every calculator you'll ever need, free forever."
    - Big search bar (height 44px, `bg-page`, border, with search icon and "Search" button on the right)
-   - 4 trust stats in a row: `204+` Calculators · `12` Categories · `100%` Free forever · `0` Sign-up needed
+   - 4 trust stats in a row: `200+` Calculators · `12` Categories · `100%` Free forever · `0` Sign-up needed
 3. "Most popular tools" section
    - Heading + "View all →" link
    - 4-column grid (responsive: 2 cols tablet, 1 col mobile) of 8 ToolCards
@@ -177,10 +177,10 @@ Build these as reusable components in `/src/components/`:
 1. `<Navbar />`
 2. Page header
    - H2: "All Finance Calculators"
-   - Sub: "204+ free tools across 12 categories — no sign-up required"
+   - Sub: "200+ free tools across 12 categories — no sign-up required"
    - Search bar (Fuse.js, filters the list below in real time)
 3. Filter pills row (sticky to top when scrolled)
-   - Pills: `All (204+)` + one for each category
+   - Pills: `All (200+)` + one for each category
    - Active pill: `bg-brand-primaryLight` border `border-brand-primaryBorder` text `text-brand-primary`
 4. Two-column layout below filters
    - **Left rail (140px):** category nav list, sticky, vertical
@@ -299,7 +299,7 @@ Build these as reusable components in `/src/components/`:
    - H1 white: "We make finance simple for everyone"
    - Sub paragraph: "Free calculators, plain-English explanations, zero sign-up. Built so anyone — not just finance professionals — can make confident money decisions."
 3. Stats row (4 cards in a row)
-   - `204+` Free calculators
+   - `200+` Free calculators
    - `12` Finance categories
    - `100%` Free forever
    - `0` Data collected
@@ -462,7 +462,7 @@ border-top: 0.5px solid #f3f4f6; padding: 10px 20px
 background: #FAFAFA; display: flex; justify-content: space-between; align-items: center
 ```
 
-- Left: `font-size: 11px; color: #9ca3af` — "204 calculators across 12 categories — all free"
+- Left: `font-size: 11px; color: #9ca3af` — "200 calculators across 12 categories — all free"
 - Right: `font-size: 11.5px; font-weight: 600; color: #1B4FD8` — `<IconLayoutGrid size={12} /> View all [N] [Category Name] tools →` — updates with active category, links to `/all-tools/?category=[slug]`
 
 ### Data sources
@@ -521,7 +521,7 @@ function generateSummary(inputs, results) {
 }
 ```
 
-Each of the 204 calculators has its own `generateSummary` function tailored to that calculator's logic. Keep summaries short, conversational, and avoid jargon. Use comparisons ("roughly the cost of a decent dinner out, every day of the month") where helpful.
+Each of the 200 calculators has its own `generateSummary` function tailored to that calculator's logic. Keep summaries short, conversational, and avoid jargon. Use comparisons ("roughly the cost of a decent dinner out, every day of the month") where helpful.
 
 ---
 

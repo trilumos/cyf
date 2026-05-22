@@ -152,7 +152,7 @@ export function SearchBar({
                 className="text-sm text-brand-primary hover:underline mt-1 inline-block"
                 onClick={handleSelect}
               >
-                Browse all 204+ calculators &rarr;
+                Browse all 200+ calculators &rarr;
               </Link>
             </div>
           )}

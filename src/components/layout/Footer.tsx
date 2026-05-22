@@ -6,7 +6,7 @@ const links = {
     { label: "Investment Calculators", href: "/all-tools/?category=investment" },
     { label: "Tax Calculators", href: "/all-tools/?category=tax" },
     { label: "Retirement Calculators", href: "/all-tools/?category=retirement" },
-    { label: "All 204+ Calculators", href: "/all-tools/" },
+    { label: "All 200+ Calculators", href: "/all-tools/" },
   ],
   popular: [
     { label: "EMI Calculator", href: "/calculators/emi-calculator/" },

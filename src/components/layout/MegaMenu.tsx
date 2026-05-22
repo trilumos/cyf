@@ -146,7 +146,7 @@ function ToolRow({ name, description, slug, onClose }: {
 export default function MegaMenu({ onClose }: { onClose: () => void }) {
   const [activeId, setActiveId] = useState(CATEGORIES[0].id);
   const active = CATEGORIES.find((c) => c.id === activeId) ?? CATEGORIES[0];
-  const tools  = getByCategory(activeId);
+  const tools  = getByCategory(active.slug);
 
   // Split tools into 3 vertical columns
   const chunkSize = Math.ceil(tools.length / 3);
@@ -281,7 +281,7 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
         alignItems: "center",
       }}>
         <span style={{ fontSize: "11px", color: "#9ca3af" }}>
-          204 calculators across 12 categories — all free
+          200 calculators across 12 categories — all free
         </span>
         <Link
           href={`/all-tools/?category=${active.slug}`}

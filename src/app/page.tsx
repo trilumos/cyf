@@ -4,12 +4,12 @@ import { AdSlot } from '@/components/ads/AdSlot';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { CategoryCard } from '@/components/ui/CategoryCard';
 import { CALCULATORS } from '@/data/calculators';
-import { CATEGORIES, getCategoryById } from '@/data/categories';
+import { CATEGORIES, getCategoryBySlug } from '@/data/categories';
 
 const popularTools = CALCULATORS.filter((c) => c.isPopular).slice(0, 8);
 
 const TRUST_STATS = [
-  { value: '204+', label: 'Calculators' },
+  { value: '200', label: 'Calculators' },
   { value: '12',   label: 'Categories' },
   { value: '100%', label: 'Free forever' },
   { value: '0',    label: 'Sign-up needed' },
@@ -29,7 +29,7 @@ export default function HomePage() {
       <section className="bg-surface py-16 px-4">
         <div className="max-w-page mx-auto flex flex-col items-center text-center">
           <span className="text-mini uppercase tracking-widest bg-brand-primaryLight text-brand-primaryText px-3 py-1 rounded-full mb-5">
-            204+ Free Finance Calculators
+            200+ Free Finance Calculators
           </span>
 
           <h1 className="text-h1 text-ink-primary max-w-xl">
@@ -65,7 +65,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {popularTools.map((calc) => {
-              const category = getCategoryById(calc.categoryId);
+              const category = getCategoryBySlug(calc.category);
               if (!category) return null;
               return <ToolCard key={calc.slug} calculator={calc} category={category} />;
             })}

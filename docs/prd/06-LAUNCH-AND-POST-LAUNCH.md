@@ -10,7 +10,7 @@ This document covers everything that happens after Claude Code finishes building
 
 ### Technical readiness
 
-- [ ] All 204 calculators tested manually (at least sample 50 across categories)
+- [ ] All 200 calculators tested manually (at least sample 50 across categories)
 - [ ] PDF export tested on at least 10 calculators
 - [ ] Currency auto-detection tested with VPN to at least IN, US, UK locations
 - [ ] Mobile responsive verified on iPhone-sized and Android-sized viewports
@@ -34,7 +34,7 @@ This document covers everything that happens after Claude Code finishes building
 
 ### SEO readiness
 
-- [ ] `sitemap.xml` generated and includes all pages (verify count: 204 calc + 12 blog + 8 static + homepage = 225+)
+- [ ] `sitemap.xml` generated and includes all pages (verify count: 200 calc + 12 blog + 8 static + homepage = 225+)
 - [ ] `robots.txt` correctly points to sitemap
 - [ ] Every page has unique title and meta description (no duplicates)
 - [ ] All Open Graph tags set with proper og:image
@@ -185,7 +185,7 @@ This gives you professional email addresses for the contact page with zero cost.
 **Requirements before applying** (verify each):
 
 - [ ] Site is live for at least 7 days
-- [ ] At least 30 high-quality content pages (you'll have 204+ calculators + 12 articles = vastly more than needed)
+- [ ] At least 30 high-quality content pages (you'll have 200+ calculators + 12 articles = vastly more than needed)
 - [ ] Privacy Policy live and accessible from footer
 - [ ] About page with real content
 - [ ] Contact page with working email
@@ -353,7 +353,7 @@ Don't, unless MRR is consistently above $3,000. The site is designed to be maint
 
 | Risk | Mitigation |
 |------|------------|
-| AdSense rejection | You have 30+ pages requirement covered by 204 calculators. Most rejections in finance niche are due to thin content — your educational + FAQ sections solve this. |
+| AdSense rejection | You have 30+ pages requirement covered by 200 calculators. Most rejections in finance niche are due to thin content — your educational + FAQ sections solve this. |
 | Google de-ranking due to stale tax data | The Living Data system + visible "Last updated" badges + monthly GHA verification handle this. |
 | Cloudflare Pages outage | Free tier has 99.9% uptime SLA. Mitigation: backup `git push` to GitHub Pages as failover (free, takes 1 hour to set up). |
 | Lost domain | Set domain auto-renewal. Set 2FA on the registrar account. |

@@ -14,7 +14,7 @@
 |------|---------|
 | `00-README.md` | This file — read first |
 | `01-FRESHNESS-AND-RESEARCH.md` | **Critical rules** about current data, dates, and regulations |
-| `02-BLUEPRINT.md` | Site architecture, all pages, all 204 tools, URL structure |
+| `02-BLUEPRINT.md` | Site architecture, all pages, all 200 tools, URL structure |
 | `03-DESIGN-SYSTEM.md` | Exact colors, typography, components, layouts |
 | `04-TECHNICAL.md` | Tech stack, SEO, ads toggle, PDF export, build order |
 | `05-LIVING-DATA.md` | How financial rules JSON files work + update workflow |

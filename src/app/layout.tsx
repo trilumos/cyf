@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "CalcYourFinance — Free Finance Calculators",
   description:
-    "204+ free finance calculators for EMI, SIP, tax, retirement, and more. No sign-up required.",
+    "200+ free finance calculators for EMI, SIP, tax, retirement, and more. No sign-up required.",
 };
 
 export default function RootLayout({

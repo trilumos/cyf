@@ -95,7 +95,7 @@ export default nextConfig;
 │   ├── content/
 │   │   └── blog/                          // 12 MDX articles at launch
 │   ├── data/
-│   │   ├── calculators.ts                 // all 204 entries
+│   │   ├── calculators.ts                 // all 200 entries
 │   │   ├── categories.ts                  // 12 categories
 │   │   └── financial-rules/               // JSON files (see 05-LIVING-DATA.md)
 │   ├── lib/
@@ -184,7 +184,7 @@ All calculators are registered in a single index file:
 ```typescript
 // /src/calculators/index.ts
 import { emiCalculator } from './loan-emi/emi-calculator';
-// ... import all 204
+// ... import all 200
 export const allCalculators = { 'emi-calculator': emiCalculator, /* ... */ };
 ```
 
@@ -243,7 +243,7 @@ export function JsonLd({ data }: { data: object }) {
 
 Auto-generate at build time via `/scripts/generate-sitemap.mjs`:
 - All static pages
-- All 204 calculator pages
+- All 200 calculator pages
 - All blog post slugs (read from MDX files)
 - `lastmod` from file modified date OR JSON `last_verified` for regulated calculators
 
@@ -490,7 +490,7 @@ SearchBar component shows results in a dropdown below the input as user types. E
 - Build `CurrencySelector`
 
 **Day 3**
-- Populate `/src/data/calculators.ts` with all 204 entries (name, slug, category, description, keywords)
+- Populate `/src/data/calculators.ts` with all 200 entries (name, slug, category, description, keywords)
 - Populate `/src/data/categories.ts` with all 12 categories
 - Build the homepage end-to-end
 
