@@ -3,12 +3,14 @@ export interface Calculator {
   slug: string;
   categoryId: string;
   description: string;
+  isPopular?: boolean;
+  isTrending?: boolean;
 }
 
 export const CALCULATORS: Calculator[] = [
   // Loans (18)
-  { name: "EMI Calculator",                   slug: "emi-calculator",                    categoryId: "loans", description: "Monthly EMI for any loan type" },
-  { name: "Home Loan EMI Calculator",         slug: "home-loan-emi-calculator",          categoryId: "loans", description: "EMI, tenure & total interest" },
+  { name: "EMI Calculator",                   slug: "emi-calculator",                    categoryId: "loans", description: "Monthly EMI for any loan type",      isPopular: true },
+  { name: "Home Loan EMI Calculator",         slug: "home-loan-emi-calculator",          categoryId: "loans", description: "EMI, tenure & total interest",       isPopular: true, isTrending: true },
   { name: "Personal Loan EMI Calculator",     slug: "personal-loan-emi-calculator",      categoryId: "loans", description: "EMI for personal loans" },
   { name: "Car Loan EMI Calculator",          slug: "car-loan-emi-calculator",           categoryId: "loans", description: "EMI for car or vehicle loans" },
   { name: "Education Loan EMI Calculator",    slug: "education-loan-emi-calculator",     categoryId: "loans", description: "Plan your education loan" },
@@ -27,13 +29,13 @@ export const CALCULATORS: Calculator[] = [
   { name: "Debt Payoff Calculator",           slug: "debt-payoff-calculator",            categoryId: "loans", description: "Plan your debt repayment" },
 
   // Investment (20)
-  { name: "SIP Calculator",                   slug: "sip-calculator",                        categoryId: "investment", description: "Systematic Investment Plan returns" },
+  { name: "SIP Calculator",                   slug: "sip-calculator",                        categoryId: "investment", description: "Systematic Investment Plan returns",  isPopular: true },
   { name: "Lumpsum Calculator",               slug: "lumpsum-calculator",                    categoryId: "investment", description: "One-time investment returns" },
-  { name: "Step-Up SIP Calculator",           slug: "step-up-sip-calculator",                categoryId: "investment", description: "SIP with annual increase" },
+  { name: "Step-Up SIP Calculator",           slug: "step-up-sip-calculator",                categoryId: "investment", description: "SIP with annual increase",            isTrending: true },
   { name: "SWP Calculator",                   slug: "swp-calculator",                        categoryId: "investment", description: "Systematic withdrawal plan" },
-  { name: "FD Calculator",                    slug: "fd-calculator",                         categoryId: "investment", description: "Fixed deposit maturity amount" },
+  { name: "FD Calculator",                    slug: "fd-calculator",                         categoryId: "investment", description: "Fixed deposit maturity amount",        isPopular: true },
   { name: "RD Calculator",                    slug: "rd-calculator",                         categoryId: "investment", description: "Recurring deposit returns" },
-  { name: "PPF Calculator",                   slug: "ppf-calculator",                        categoryId: "investment", description: "Public Provident Fund maturity" },
+  { name: "PPF Calculator",                   slug: "ppf-calculator",                        categoryId: "investment", description: "Public Provident Fund maturity",      isPopular: true },
   { name: "ELSS Calculator",                  slug: "elss-calculator",                       categoryId: "investment", description: "Tax-saving mutual fund returns" },
   { name: "NSC Calculator",                   slug: "nsc-calculator",                        categoryId: "investment", description: "National Savings Certificate" },
   { name: "Sukanya Samriddhi Calculator",     slug: "sukanya-samriddhi-calculator",           categoryId: "investment", description: "SSY account maturity value" },
@@ -41,7 +43,7 @@ export const CALCULATORS: Calculator[] = [
   { name: "Compound Interest Calculator",     slug: "compound-interest-calculator",          categoryId: "investment", description: "Power of compounding" },
   { name: "Simple Interest Calculator",       slug: "simple-interest-calculator",            categoryId: "investment", description: "Basic interest calculation" },
   { name: "CAGR Calculator",                  slug: "cagr-calculator",                       categoryId: "investment", description: "Compound annual growth rate" },
-  { name: "SIP vs Lumpsum Calculator",        slug: "sip-vs-lumpsum-calculator",             categoryId: "investment", description: "Which is better for you?" },
+  { name: "SIP vs Lumpsum Calculator",        slug: "sip-vs-lumpsum-calculator",             categoryId: "investment", description: "Which is better for you?",           isPopular: true },
   { name: "Mutual Fund Returns Calculator",   slug: "mutual-fund-returns-calculator",        categoryId: "investment", description: "Mutual fund growth estimate" },
   { name: "Goal-Based SIP Calculator",        slug: "goal-based-sip-calculator",             categoryId: "investment", description: "SIP to achieve a goal" },
   { name: "Monthly Income Plan Calculator",   slug: "monthly-income-plan-calculator",        categoryId: "investment", description: "Regular income from MIP" },
@@ -49,13 +51,13 @@ export const CALCULATORS: Calculator[] = [
   { name: "Investment Tracker",               slug: "investment-tracker-calculator",          categoryId: "investment", description: "Track portfolio performance" },
 
   // Tax (15)
-  { name: "Income Tax Calculator",            slug: "income-tax-calculator",            categoryId: "tax", description: "FY 2025-26, new & old regime" },
+  { name: "Income Tax Calculator",            slug: "income-tax-calculator",            categoryId: "tax", description: "FY 2025-26, new & old regime",    isPopular: true },
   { name: "HRA Exemption Calculator",         slug: "hra-exemption-calculator",         categoryId: "tax", description: "House rent allowance benefit" },
   { name: "TDS Calculator",                   slug: "tds-calculator",                   categoryId: "tax", description: "Tax deducted at source" },
   { name: "Capital Gains Tax Calculator",     slug: "capital-gains-tax-calculator",     categoryId: "tax", description: "STCG & LTCG on investments" },
   { name: "80C Deduction Calculator",         slug: "80c-deduction-calculator",         categoryId: "tax", description: "Section 80C tax savings" },
   { name: "Advance Tax Calculator",           slug: "advance-tax-calculator",           categoryId: "tax", description: "Quarterly advance tax due" },
-  { name: "New vs Old Tax Regime",            slug: "new-vs-old-tax-regime-calculator", categoryId: "tax", description: "Which regime saves more?" },
+  { name: "New vs Old Tax Regime",            slug: "new-vs-old-tax-regime-calculator", categoryId: "tax", description: "Which regime saves more?",         isTrending: true },
   { name: "Salary Tax Calculator",            slug: "salary-tax-calculator",            categoryId: "tax", description: "Tax on salary income" },
   { name: "TDS on Salary Calculator",         slug: "tds-on-salary-calculator",         categoryId: "tax", description: "Monthly TDS deduction" },
   { name: "Rental Income Tax Calculator",     slug: "rental-income-tax-calculator",     categoryId: "tax", description: "Tax on rental income" },
@@ -66,10 +68,10 @@ export const CALCULATORS: Calculator[] = [
   { name: "Form 16 Calculator",               slug: "form-16-calculator",               categoryId: "tax", description: "Verify Form 16 figures" },
 
   // Retirement (13)
-  { name: "Retirement Corpus Calculator",     slug: "retirement-corpus-calculator",         categoryId: "retirement", description: "How much you need to retire" },
+  { name: "Retirement Corpus Calculator",     slug: "retirement-corpus-calculator",         categoryId: "retirement", description: "How much you need to retire",    isPopular: true },
   { name: "NPS Calculator",                   slug: "nps-calculator",                       categoryId: "retirement", description: "National Pension System returns" },
   { name: "EPF Calculator",                   slug: "epf-calculator",                       categoryId: "retirement", description: "Employee Provident Fund balance" },
-  { name: "FIRE Calculator",                  slug: "fire-calculator",                      categoryId: "retirement", description: "Financial independence planner" },
+  { name: "FIRE Calculator",                  slug: "fire-calculator",                      categoryId: "retirement", description: "Financial independence planner",  isTrending: true },
   { name: "Gratuity Calculator",              slug: "gratuity-calculator",                  categoryId: "retirement", description: "Gratuity amount on retirement" },
   { name: "Superannuation Calculator",        slug: "superannuation-calculator",            categoryId: "retirement", description: "Superannuation fund value" },
   { name: "Pension Calculator",               slug: "pension-calculator",                   categoryId: "retirement", description: "Monthly pension estimate" },
@@ -150,7 +152,7 @@ export const CALCULATORS: Calculator[] = [
   { name: "IPO Allotment Calculator",         slug: "ipo-allotment-calculator",        categoryId: "stocks", description: "IPO allotment chances" },
 
   // Currency (8)
-  { name: "Currency Converter",               slug: "currency-converter",        categoryId: "currency", description: "Convert between currencies" },
+  { name: "Currency Converter",               slug: "currency-converter",        categoryId: "currency", description: "Convert between currencies",  isTrending: true },
   { name: "USD to INR Calculator",            slug: "usd-to-inr-calculator",     categoryId: "currency", description: "US Dollar to Rupee" },
   { name: "EUR to INR Calculator",            slug: "eur-to-inr-calculator",     categoryId: "currency", description: "Euro to Rupee" },
   { name: "GBP to INR Calculator",            slug: "gbp-to-inr-calculator",     categoryId: "currency", description: "British Pound to Rupee" },
