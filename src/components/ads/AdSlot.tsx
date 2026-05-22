@@ -14,22 +14,13 @@ interface AdSlotProps {
   className?: string;
 }
 
-export function AdSlot({ size, slotId, position, className = '' }: AdSlotProps) {
+export function AdSlot({ size, slotId, className = '' }: AdSlotProps) {
   const enabled = process.env.NEXT_PUBLIC_ADS_ENABLED === 'true';
   const dims = size !== 'responsive' ? SIZE_MAP[size] : null;
   const style = dims ? { width: dims.width, height: dims.height } : { width: '100%', height: 90 };
 
   if (!enabled) {
-    return (
-      <div
-        style={style}
-        className={`flex items-center justify-center border border-dashed border-border text-ink-muted text-xs ${className}`}
-        data-position={position}
-        aria-hidden="true"
-      >
-        Advertisement
-      </div>
-    );
+    return null;
   }
 
   return (

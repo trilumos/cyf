@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import LayoutShell from '@/components/layout/LayoutShell';
-import { AdSlot } from '@/components/ads/AdSlot';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { CategoryCard } from '@/components/ui/CategoryCard';
 import { CALCULATORS } from '@/data/calculators';
@@ -72,11 +71,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ── Ad banner ────────────────────────────────────────────────────── */}
-      <div className="py-4 px-4 bg-page flex justify-center">
-        <AdSlot size="728x90" position="homepage-mid" />
-      </div>
 
       {/* ── Browse by category ───────────────────────────────────────────── */}
       <section className="py-12 px-4 bg-surface">
