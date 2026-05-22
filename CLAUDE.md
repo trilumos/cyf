@@ -85,3 +85,27 @@ All 8 PRD files live in `docs/prd/`. Read the relevant one before building anyth
 - Current progress is logged in `SESSION-LOG.md` — read it at the start of every session.
 - The high-level build order is in `docs/prd/04-TECHNICAL.md` (Weeks 1–4).
 - Day 0 setup checklist is in `docs/prd/07-DAY-ZERO-SETUP.md`.
+
+---
+
+## Design principles — non-negotiable
+
+These rules apply to every component, page, and UI element in this project.
+Never violate these without explicit user confirmation in chat.
+
+1. NO EMOJI — not in UI, not in copy, not in labels, not in headings, not anywhere on the site
+2. NO DECORATIVE COLOR — no colored dots, no colored icon squares, no color-coded category indicators, no amber/yellow/orange accents, no rainbow category colors in UI
+3. COLOR IS FUNCTIONAL ONLY:
+   - Brand blue #1B4FD8 → buttons, links, active states, hover borders, logo
+   - #EEF2FF → active/hover fill backgrounds only
+   - Charts → color only where it encodes data meaning, use #1B4FD8 as primary series
+   - Result cards → #EEF2FF background allowed, encodes "this is your result"
+   - Category colors → exist in data files only. ONLY visible use: 3px left border on active left panel row in mega menu. Nowhere else.
+4. NO BOXES OR BORDERS around tool rows inside dropdowns, lists, or navigation menus
+5. NO GRADIENTS — anywhere
+6. NO SHADOWS — except the mega menu dropdown box-shadow
+7. NO BLUR, NO GLOW, NO DECORATIVE EFFECTS
+8. WHITESPACE OVER DECORATION — if a section feels empty, increase padding or improve typography. Never add decorative elements to fill space.
+9. PROFESSIONAL FINANCIAL TOOL AESTHETIC — every design decision must reinforce trust and credibility. When choosing between two options always pick the more conservative, cleaner one.
+10. BEFORE adding any visual element using color, ask: does this color communicate something functional to the user? If no → remove it.
+11. VISUAL CHECKPOINT — any time a build is run, a new page is created, a new component is completed, or any visible change is deployed: stop, commit, push to GitHub, tell the user "Build deployed to https://calcyourfinance.pages.dev — please open the site, verify it looks correct, test the feature, and reply 'looks good' or describe what needs fixing." Do not proceed until the user confirms.

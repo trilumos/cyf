@@ -345,30 +345,142 @@ Simple page with `<Navbar />` and `<Footer />` (yes, even 404 has the same navba
 
 ## Mega menu detailed spec
 
-When user hovers/clicks "Calculators ▾" in the navbar, render `<MegaMenu />` directly below the navbar (full width, white background, `border-b border-border`, `py-4 px-6`).
+**Component path:** `/src/components/layout/MegaMenu.tsx`
+**Wired into:** `/src/components/layout/Navbar.tsx`
 
-4-column grid (`grid-cols-4 gap-4`):
+### Behavior
 
-**Column 1 — "LOANS" header (text-mini, uppercase, text-muted)**
-- 4 top tools as rows: icon + name (each row links to that calculator)
-- "View all 18 →" link in `text-brand-primary` (links to `/all-tools/?category=loan-emi`)
+- Opens on **click** of the "Calculators" nav item; `aria-expanded` is set on the trigger button
+- Closes on: click outside the dropdown, or pressing Escape (focus returns to trigger)
+- Width: spans the exact width of the navbar content area (logo left edge to All Tools button right edge). Achieved by rendering `position: absolute; top: 100%; left: 0; right: 0` inside the `relative` inner `max-w-page` container — not the full-viewport `<header>`
+- Sits flush below the navbar with no gap
+- `box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)` — below only
+- Desktop: right panel updates instantly on hover over any left panel row
+- Mobile: component collapses entirely; Navbar renders a simple stacked link list instead
 
-**Column 2 — "INVESTMENT"** — same structure, top 4 tools + "View all 20 →"
+### Structure — top to bottom
 
-**Column 3 — "TAX & RETIREMENT"** — top 4 tools (2 from tax, 2 from retirement) + "View all 28 →" (this links to the all-tools page but doesn't auto-filter since it spans two categories — instead shows a combined view)
+#### 1. Trending strip
 
-**Column 4 — "TRENDING NOW" (left border for visual separation)**
-- 3 flame-icon items in `bg-warningBg` mini cards
-- Below: small `bg-brand-primaryLight` panel titled "Can't find it?" with an inline search input
+```
+background: #ffffff
+border-bottom: 0.5px solid #f3f4f6
+padding: 9px 20px
+display: flex; align-items: center; gap: 8px; flex-wrap: wrap
+```
 
-**Click behavior for "View all N →":**
-- Navigate to `/all-tools/?category=[slug]`
-- The All Tools page reads the query param, activates the corresponding filter pill, scrolls to that category section
+- **Label "TRENDING":** `font-size: 11px; font-weight: 600; color: #9ca3af; letter-spacing: 0.04em; text-transform: uppercase`
+- **Pills:** `border: 0.5px solid #e5e7eb; border-radius: 20px; padding: 4px 12px; font-size: 11.5px; color: #374151; background: #ffffff`
+- **Pill hover:** `border-color: #1B4FD8; color: #1B4FD8; background: #EEF2FF; transition: all 0.1s`
+- **Hardcoded pills (5):** "Old vs New Tax Regime", "FIRE Calculator", "SIP Step-Up", "Home Loan EMI", "Currency Converter"
 
-**Open/close behavior:**
-- Desktop: opens on hover with 100ms delay, closes when mouse leaves both navbar and menu (with 200ms grace period to allow diagonal movement)
-- Mobile: opens on tap, closes on tap outside or selecting an item
-- Keyboard accessible: Esc closes, arrow keys navigate items
+#### 2. Two-panel body
+
+```
+display: flex; height: 400px
+```
+
+**Left panel**
+
+```
+width: 200px; flex-shrink: 0
+background: #FAFAFA; border-right: 0.5px solid #e5e7eb
+overflow-y: auto; padding: 8px 0
+```
+
+Each category row:
+
+```
+display: flex; align-items: center; padding: 10px 16px; gap: 10px
+border-left: 3px solid transparent; cursor: pointer; transition: all 0.1s
+```
+
+| State | Styles |
+|-------|--------|
+| Default | `color: #374151; font-size: 12.5px; count color: #9ca3af / 10.5px; chevron: #d1d5db` |
+| Hover | `background: #f3f4f6; border-left-color: #d1d5db` |
+| Active | `background: #ffffff; border-left: 3px solid #1B4FD8; name color: #1B4FD8; font-weight: 600; count color: rgba(27,79,216,0.6); chevron color: #1B4FD8` |
+
+First category active by default on open. Hovering any row immediately updates the right panel.
+
+**Right panel**
+
+```
+flex: 1; display: flex; flex-direction: column; background: #ffffff; min-width: 0
+```
+
+Header:
+
+```
+padding: 16px 20px 12px; border-bottom: 0.5px solid #f3f4f6; background: #ffffff; flex-shrink: 0
+```
+
+- Top row: category name `font-size: 15px; font-weight: 700; color: #111827` + tool count `font-size: 11px; color: #9ca3af`
+- Description line below: `font-size: 12px; color: #6b7280; margin-top: 3px`
+
+Tools area:
+
+```
+flex: 1; overflow-y: auto; padding: 6px 0; display: flex
+```
+
+Three vertical columns — data pre-chunked:
+
+```typescript
+const chunkSize = Math.ceil(tools.length / 3);
+const columns = [
+  tools.slice(0, chunkSize),
+  tools.slice(chunkSize, chunkSize * 2),
+  tools.slice(chunkSize * 2),
+];
+```
+
+Each column div: `flex: 1; border-right: 0.5px solid #f3f4f6` (last column has no border-right).
+
+Each tool row:
+
+```
+display: flex; align-items: center; justify-content: space-between
+padding: 8px 20px; gap: 8px; transition: background 0.08s; cursor: pointer
+```
+
+Row hover: `background: #EEF2FF`
+
+Left `.tinfo` block: `display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0`
+
+- Tool name: `font-size: 12px; font-weight: 500; color: #1f2937; line-height: 1.3` — hover: `color: #1B4FD8`
+- Sub-label: `font-size: 10px; color: #b0b7c3; line-height: 1.2` — value = `description` field from `calculators.ts`
+
+Right: `<IconChevronRight size={10}>` — `color: #1B4FD8; opacity: 0` by default — hover: `opacity: 1; transition: opacity 0.08s`
+
+**No card borders, no boxes around individual tool rows.**
+
+#### 3. Footer strip
+
+```
+border-top: 0.5px solid #f3f4f6; padding: 10px 20px
+background: #FAFAFA; display: flex; justify-content: space-between; align-items: center
+```
+
+- Left: `font-size: 11px; color: #9ca3af` — "204 calculators across 12 categories — all free"
+- Right: `font-size: 11.5px; font-weight: 600; color: #1B4FD8` — `<IconLayoutGrid size={12} /> View all [N] [Category Name] tools →` — updates with active category, links to `/all-tools/?category=[slug]`
+
+### Data sources
+
+| Data | Source |
+|------|--------|
+| Category list, slugs, counts | `/src/data/categories.ts` — `CATEGORIES` array |
+| Tool names + sub-labels | `/src/data/calculators.ts` — `getByCategory(categoryId)` — `description` field is the sub-label |
+| 3-column layout | Pre-chunked with `Math.ceil(tools.length / 3)` before rendering |
+
+### Accessibility
+
+- `role="navigation"` and `aria-label="Finance calculator categories"` on root div
+- `aria-expanded` on the Calculators trigger button in Navbar
+- `role="listbox"` / `aria-label="Calculator categories"` on the left panel
+- `role="option"` + `aria-selected` on each category row
+- Escape key closes menu; click outside closes menu
+- All rows keyboard navigable
 
 ---
 

@@ -56,6 +56,8 @@ Every page layout described in `03-DESIGN-SYSTEM.md` was reviewed and approved. 
 ### Rule 8 — The navbar is identical on every single page.
 Same logo, same divider, same nav items in the same order (`Home`, `Calculators ▾`, `Blog`, `About`), same search bar, same "All Tools →" button. No exceptions — not even on About or Contact or 404 pages.
 
+### Rule 9 — Professional design only. No emoji anywhere on the site. No decorative color. Color is functional only — brand blue #1B4FD8 for interactive elements only, #EEF2FF for active/hover fills only, chart colors only where encoding data meaning. No boxes or grid borders around tool rows inside dropdowns or lists. See 03-DESIGN-SYSTEM.md Global design principles for full rules.
+
 ---
 
 ## High-level build order
