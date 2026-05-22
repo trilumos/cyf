@@ -31,6 +31,36 @@ Copy the template below, fill it in, append it under "## Sessions" in reverse ch
 
 ## Sessions
 
+### Session 2 — 2026-05-22
+
+**Completed this session:**
+- Day 0 Step 8: Replaced default homepage with Tailwind test page (`bg-blue-50`, centered blue heading), build passed, visual checkpoint confirmed by user ✓
+- Day 0 Step 9: Created full folder structure — all `src/components/`, `src/calculators/` (13 categories), `src/content/`, `src/data/financial-rules/`, `scripts/`, `.github/workflows/` with `.gitkeep` placeholders
+- Day 0 Step 10: Committed and pushed folder structure
+- Day 0 Step 13: Created `.github/workflows/verify-rates.yml` workflow shell (monthly rate verification, runs 1st of each month)
+- Added `.agents/` and `skills-lock.json` to `.gitignore` (Claude Code internal files)
+- Day 0 Step 14: Final pre-build verification checklist — all 7 checks passed ✓
+- PAT updated to include `workflow` scope (needed for pushing GHA workflows)
+
+**Last git commit hash:** 4169939
+**Last git commit message:** chore: add verify-rates GitHub Actions workflow shell
+
+**Exact stopping point:**
+Day 0 complete. All steps 1–14 done. Ready to start Day 1 of 04-TECHNICAL.md.
+
+**What is next:**
+- Day 1 / Week 1 per `04-TECHNICAL.md`:
+  - Configure Tailwind with full design-system color tokens from `03-DESIGN-SYSTEM.md`
+  - Set up Inter font via `next/font/google`
+  - Build `LayoutShell.tsx` (Navbar + Footer wrapper)
+  - Build `Navbar.tsx` with mega menu trigger
+  - Build `Footer.tsx`
+
+**Blockers / notes:**
+- GitHub PAT now has `workflow` scope — pushes to `.github/workflows/` work
+- `calcyourfinance.com` domain still on Vercel — do NOT touch until launch day
+- 5 npm audit vulnerabilities (all dev deps, non-blocking)
+
 ### Session 1 — 2026-05-21
 
 **Completed this session:**
