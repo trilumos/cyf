@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import LayoutShell from '@/components/layout/LayoutShell';
-import { SearchBar } from '@/components/layout/SearchBar';
 import { AdSlot } from '@/components/ads/AdSlot';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { CategoryCard } from '@/components/ui/CategoryCard';
@@ -41,10 +40,6 @@ export default function HomePage() {
           <p className="text-body text-ink-tertiary mt-4 max-w-md">
             From EMI to SIP, tax to retirement — every calculator you&rsquo;ll ever need, free forever.
           </p>
-
-          <div className="w-full max-w-md mt-8">
-            <SearchBar size="hero" placeholder="Search 204+ calculators…" />
-          </div>
 
           {/* Trust stats */}
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-10">
