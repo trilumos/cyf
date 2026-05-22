@@ -61,7 +61,7 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     detectCurrency().then((code) => {
       const supported = SUPPORTED_CURRENCIES.some((c) => c.code === code);
-      setCurrencyState((supported ? code : 'INR') as CurrencyCode);
+      setCurrencyState((supported ? code : 'USD') as CurrencyCode);
     }).catch(() => { /* keep default INR */ });
   }, []);
 
