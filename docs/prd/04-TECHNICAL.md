@@ -471,6 +471,8 @@ SearchBar component shows results in a dropdown below the input as user types. E
 
 ## Build order (detailed)
 
+> **RULE: Complete each Day fully before starting the next.** Sessions may span multiple days or restart mid-day. Always check `SESSION-LOG.md` for the exact stopping point and resume from there. Never skip a Day or start a later Day while tasks from an earlier Day remain incomplete.
+
 ### Week 1 — Foundations
 
 **Day 1**

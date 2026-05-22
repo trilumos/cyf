@@ -25,6 +25,7 @@ Then tell the user: what has been completed, what is next, and **wait for them t
 
 - **Stop after every individual step.** Tell the user: what you just did, whether it passed or failed, and what the next step is.
 - **Wait for "continue" before starting the next step.** Never proceed through multiple steps in one response.
+- **Complete each Day fully before starting the next Day.** The build order in `04-TECHNICAL.md` is sequential — Day 2 must be 100% done before any Day 3 work begins. Sessions may span multiple days or restart mid-day; always check `SESSION-LOG.md` to find the exact stopping point and resume from there. Never skip ahead.
 - **Commit to GitHub after every major milestone**, not just at the end of the session. Use `git push origin main`.
 - **Warn immediately if approaching context limit.** If the conversation is getting long, stop at the next clean step boundary and summarise: which step you stopped at, what was completed, what is next, and any blockers. This allows a fresh session to resume without losing progress.
 - **Update `SESSION-LOG.md` as the LAST action of every session** before ending. Never end a session without updating it.
