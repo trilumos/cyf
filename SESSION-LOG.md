@@ -31,6 +31,37 @@ Copy the template below, fill it in, append it under "## Sessions" in reverse ch
 
 ## Sessions
 
+### Session 3 — 2026-05-22
+
+**Completed this session:**
+- Day 1 Step 1: Configured Tailwind design tokens (full color system: brand, page, surface, ink, border, semantic, 12 cat colors), Inter font via `next/font/google`, typography scale (h1–mini), maxWidth tokens
+- Day 1 Step 2: Built `LayoutShell.tsx`, `Navbar.tsx`, `Footer.tsx`, `MegaMenu.tsx`
+- Navbar refinements: logo | divider | nav links | spacer | Fuse.js search (in-place results, 7 hits, 2-char threshold) | All Tools solid button (right)
+- MegaMenu: iterated from 3-cat hover grid → all-12-cat flat grid → approved two-panel click-based design
+  - Left rail: 200px, `#FAFAFA`, 12 CategoryRow items, 3px blue left-border on active
+  - Right panel: trending strip + header + 3-column vertical chunk tool list + footer strip
+  - Supporting data: `src/data/categories.ts` (12 categories), `src/data/calculators.ts` (151 tools), `src/data/calculators-index.ts` (47 Fuse.js entries)
+- Task 1: `docs/prd/03-DESIGN-SYSTEM.md` — replaced old mega menu spec with full approved two-panel spec
+- Task 2: `docs/prd/00-README.md` — added Rule 9 (professional design, no emoji, functional color only)
+- Task 3: `CLAUDE.md` — appended "Design principles — non-negotiable" (11 rules)
+- Task 4: Emoji grep — `src/` confirmed clean (zero emoji in any Unicode emoji block)
+
+**Last git commit hash:** 608d5ec
+**Last git commit message:** docs: approved mega menu spec, global design principles, emoji removal
+
+**Exact stopping point:**
+Day 1 layout shell complete. Navbar + MegaMenu + Footer built and deployed. Documentation and design rules updated. Visual checkpoint pending (no build pushed this session after docs-only commit).
+
+**What is next:**
+- Build the Homepage per `02-BLUEPRINT.md` and `03-DESIGN-SYSTEM.md`
+- Then build the All Tools page
+- Then build the EMI Calculator as the reference implementation template
+
+**Blockers / notes:**
+- `calcyourfinance.com` domain still on Vercel — do NOT touch until launch day
+- MegaMenu has 151 tools in data file vs 204 planned — remaining tools to be added as calculators are built
+- `src/data/calculators-index.ts` has 47 entries — grow alongside calculator builds
+
 ### Session 2 — 2026-05-22
 
 **Completed this session:**
