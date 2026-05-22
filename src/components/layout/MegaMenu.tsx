@@ -31,15 +31,15 @@ function TrendingPill({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: "#ffffff",
-        border: `0.5px solid ${hovered ? "#1B4FD8" : "#e5e7eb"}`,
+        background: hovered ? "#EEF2FF" : "#ffffff",
+        border: `0.5px solid ${hovered ? "#1B4FD8" : "#d1d5db"}`,
         borderRadius: "20px",
-        padding: "3px 10px",
-        fontSize: "11px",
+        padding: "4px 12px",
+        fontSize: "11.5px",
         color: hovered ? "#1B4FD8" : "#374151",
         textDecoration: "none",
         whiteSpace: "nowrap",
-        transition: "border-color 0.1s, color 0.1s",
+        transition: "border-color 0.1s, color 0.1s, background 0.1s",
       }}
     >
       {label}
@@ -75,20 +75,20 @@ function CategoryRow({
         display: "flex",
         alignItems: "center",
         gap: "8px",
-        padding: "8px 14px",
+        padding: "10px 14px",
         background: active ? "#EEF2FF" : "transparent",
         cursor: "pointer",
         textAlign: "left" as const,
         outline: "none",
         border: "none",
-        borderLeft: `2px solid ${active ? "#1B4FD8" : "transparent"}`,
+        borderLeft: `3px solid ${active ? "#1B4FD8" : "transparent"}`,
       }}
     >
       <span
         style={{
           fontSize: "12px",
-          color: active ? "#1B4FD8" : "#374151",
-          fontWeight: active ? 500 : 400,
+          color: active ? "#1B4FD8" : "#111827",
+          fontWeight: active ? 600 : 400,
           flex: 1,
           textAlign: "left",
         }}
@@ -122,30 +122,25 @@ function ToolCard({
       onMouseLeave={() => setHovered(false)}
       style={{
         background: hovered ? "#EEF2FF" : "#ffffff",
-        border: `0.5px solid ${hovered ? "#1B4FD8" : "#e5e7eb"}`,
+        border: hovered ? "1px solid #1B4FD8" : "0.5px solid #e5e7eb",
         borderRadius: "6px",
-        padding: "7px 10px",
+        padding: "9px 12px",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
         textDecoration: "none",
-        transition: "background 0.1s, border-color 0.1s",
-        gap: "6px",
+        transition: "all 0.1s ease",
       }}
     >
       <span
         style={{
-          fontSize: "11.5px",
-          color: hovered ? "#1B4FD8" : "#1f2937",
+          fontSize: "12px",
+          color: hovered ? "#1B4FD8" : "#374151",
+          fontWeight: hovered ? 600 : 500,
           lineHeight: "1.3",
         }}
       >
         {name}
       </span>
-      <IconChevronRight
-        size={10}
-        style={{ color: hovered ? "#1B4FD8" : "#d1d5db", flexShrink: 0 }}
-      />
     </Link>
   );
 }
@@ -166,7 +161,7 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
         right: 0,
         zIndex: 50,
         background: "#ffffff",
-        boxShadow: "0 4px 16px -2px rgba(0,0,0,0.08)",
+        boxShadow: "0 8px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
       }}
     >
       {/* Trending strip */}
@@ -181,7 +176,7 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
           flexWrap: "wrap",
         }}
       >
-        <span style={{ fontSize: "11px", color: "#9ca3af", flexShrink: 0 }}>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#6B7280", flexShrink: 0 }}>
           Trending:
         </span>
         {TRENDING.map((t) => (
@@ -199,7 +194,7 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
             width: "185px",
             flexShrink: 0,
             borderRight: "0.5px solid #e5e7eb",
-            background: "#ffffff",
+            background: "#FAFAFA",
             overflowY: "auto",
             padding: "6px 0",
           }}
@@ -229,7 +224,7 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
           {/* Panel header */}
           <div
             style={{
-              padding: "12px 16px 8px",
+              padding: "14px 16px 10px",
               borderBottom: "0.5px solid #e5e7eb",
               background: "#ffffff",
               display: "flex",
@@ -238,10 +233,10 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
               flexShrink: 0,
             }}
           >
-            <span style={{ fontSize: "13px", fontWeight: 500, color: "#111827" }}>
+            <span style={{ fontSize: "14px", fontWeight: 600, color: "#111827" }}>
               {active.label}
             </span>
-            <span style={{ fontSize: "11px", color: "#9ca3af" }}>
+            <span style={{ fontSize: "11px", color: "#6B7280" }}>
               {active.count} tools
             </span>
           </div>
@@ -277,9 +272,9 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
       {/* Footer strip */}
       <div
         style={{
-          padding: "8px 16px",
+          padding: "10px 16px",
           borderTop: "0.5px solid #e5e7eb",
-          background: "#ffffff",
+          background: "#F9FAFB",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -293,7 +288,7 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           style={{
             fontSize: "11px",
-            fontWeight: 500,
+            fontWeight: 600,
             color: "#1B4FD8",
             textDecoration: "none",
           }}
