@@ -56,6 +56,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         inter: ["var(--font-inter)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
       },
       fontSize: {
         h1: ["32px", { lineHeight: "36px", fontWeight: "700" }],

@@ -7,3 +7,66 @@
     font-family: var(--font-inter), system-ui, sans-serif;
   }
 }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Hero section responsive */
+.hero-left {
+  background: #ffffff;
+  padding: 52px 44px 52px 52px;
+}
+
+.hero-right {
+  background: #F8F9FC;
+  border-left: 0.5px solid #e5e7eb;
+}
+
+.trending-strip {
+  background: #ffffff;
+  border-bottom: 0.5px solid #e5e7eb;
+  padding: 12px 52px;
+}
+
+/* Trending pill */
+.trending-pill {
+  border: 0.5px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11.5px;
+  color: #374151;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+  display: inline-block;
+  line-height: 1.5;
+}
+
+.trending-pill:hover {
+  border-color: #1B4FD8;
+  color: #1B4FD8;
+  background: #EEF2FF;
+}
+
+/* Hero tab hover (for non-active tabs rendered as buttons) */
+.hero-tab:hover {
+  color: #111827;
+  background: #F3F4F6;
+}
+
+@media (max-width: 767px) {
+  .hero-left {
+    padding: 36px 20px 36px 20px;
+  }
+
+  .hero-right {
+    border-left: none;
+    border-top: 0.5px solid #e5e7eb;
+  }
+
+  .trending-strip {
+    padding: 12px 20px;
+  }
+}

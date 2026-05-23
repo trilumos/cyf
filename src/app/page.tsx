@@ -2,16 +2,25 @@ import Link from 'next/link';
 import LayoutShell from '@/components/layout/LayoutShell';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { CategoryCard } from '@/components/ui/CategoryCard';
+import { HeroCalculatorPanel } from '@/components/ui/HeroCalculatorPanel';
 import { CALCULATORS } from '@/data/calculators';
 import { CATEGORIES, getCategoryBySlug } from '@/data/categories';
 
 const popularTools = CALCULATORS.filter((c) => c.isPopular).slice(0, 8);
 
 const TRUST_STATS = [
-  { value: '200', label: 'Calculators' },
+  { value: '200+', label: 'Calculators' },
   { value: '12',   label: 'Categories' },
   { value: '100%', label: 'Free forever' },
   { value: '0',    label: 'Sign-up needed' },
+];
+
+const TRENDING_PILLS = [
+  { label: 'Old vs New Tax Regime', slug: 'old-vs-new-tax-regime-calculator' },
+  { label: 'FIRE Calculator',       slug: 'fire-number-calculator' },
+  { label: 'SIP Step-Up',           slug: 'sip-step-up-calculator' },
+  { label: 'PPF Calculator',        slug: 'ppf-calculator' },
+  { label: 'Currency Converter',    slug: 'currency-converter' },
 ];
 
 // Placeholder blog posts — replaced once blog content is built (Day 7)
@@ -24,33 +33,108 @@ const BLOG_PLACEHOLDERS = [
 export default function HomePage() {
   return (
     <LayoutShell>
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="bg-surface py-16 px-4">
-        <div className="max-w-page mx-auto flex flex-col items-center text-center">
-          <span className="text-mini uppercase tracking-widest bg-brand-primaryLight text-brand-primaryText px-3 py-1 rounded-full mb-5">
-            200+ Free Finance Calculators
-          </span>
 
-          <h1 className="text-h1 text-ink-primary max-w-xl">
-            Make smarter money decisions with{' '}
-            <span className="text-brand-primary">CalcYourFinance</span>
-          </h1>
+      {/* ── Hero — two-column asymmetric layout ─────────────────────────── */}
+      <section style={{ borderBottom: '0.5px solid #e5e7eb' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2">
 
-          <p className="text-body text-ink-tertiary mt-4 max-w-md">
-            From EMI to SIP, tax to retirement — every calculator you&rsquo;ll ever need, free forever.
-          </p>
+          {/* Left column — headline, stats */}
+          <div className="hero-left">
+            {/* Eyebrow pill with pulsing dot */}
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '7px',
+              background: '#EEF2FF',
+              border: '0.5px solid #C7D2FE',
+              borderRadius: '20px',
+              padding: '4px 13px',
+              fontSize: '10.5px',
+              fontWeight: 600,
+              color: '#3730A3',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              marginBottom: '18px',
+            }}>
+              <span style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: '#1B4FD8',
+                animation: 'pulse-dot 2s ease-in-out infinite',
+                flexShrink: 0,
+              }} />
+              200+ Free Finance Calculators
+            </span>
 
-          {/* Trust stats */}
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-10">
-            {TRUST_STATS.map((s) => (
-              <div key={s.label} className="flex items-baseline gap-1.5">
-                <span className="text-h3 font-bold text-brand-primary">{s.value}</span>
-                <span className="text-sm text-ink-tertiary">{s.label}</span>
-              </div>
-            ))}
+            {/* H1 — DM Serif Display */}
+            <h1
+              className="font-serif"
+              style={{
+                fontSize: 'clamp(32px, 3.5vw, 46px)',
+                fontWeight: 400,
+                lineHeight: 1.13,
+                letterSpacing: '-0.3px',
+                color: '#0A0F1E',
+                marginBottom: '16px',
+              }}
+            >
+              Every money decision made{' '}
+              <em style={{ color: '#1B4FD8', fontStyle: 'italic' }}>smarter.</em>
+            </h1>
+
+            {/* Subtitle */}
+            <p style={{
+              fontSize: '14px',
+              color: '#6B7280',
+              lineHeight: 1.65,
+              maxWidth: '42ch',
+              marginBottom: '32px',
+            }}>
+              From EMI to SIP, tax to retirement &mdash; every calculator you&rsquo;ll ever need.
+              Free forever, no sign-up required.
+            </p>
+
+            {/* Stats row */}
+            <div className="flex flex-wrap gap-6 md:gap-[24px]">
+              {TRUST_STATS.map((s) => (
+                <div key={s.label} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                  <span style={{ fontSize: '22px', fontWeight: 700, color: '#1B4FD8', lineHeight: 1 }}>
+                    {s.value}
+                  </span>
+                  <span style={{ fontSize: '10.5px', color: '#9CA3AF' }}>
+                    {s.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* Right column — calculator panel */}
+          <div className="hero-right">
+            <HeroCalculatorPanel />
+          </div>
+
         </div>
       </section>
+
+      {/* ── Trending strip ────────────────────────────────────────────────── */}
+      <div className="trending-strip">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 500, flexShrink: 0 }}>
+            Trending:
+          </span>
+          {TRENDING_PILLS.map((pill) => (
+            <Link
+              key={pill.slug}
+              href={`/calculators/${pill.slug}/`}
+              className="trending-pill"
+            >
+              {pill.label}
+            </Link>
+          ))}
+        </div>
+      </div>
 
       {/* ── Most popular tools ───────────────────────────────────────────── */}
       <section className="py-12 px-4 bg-page">
@@ -119,6 +203,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
     </LayoutShell>
   );
 }
