@@ -42,13 +42,14 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-surface">
       <div
         ref={navRef}
-        className="max-w-page mx-auto px-4 sm:px-6 relative border-b border-border"
+        className="px-5 sm:px-8 relative border-b border-border"
       >
         <div className="flex items-center h-16">
           {/* Logo */}
           <Link
             href="/"
-            className="shrink-0 text-h4 font-bold text-brand-primary tracking-tight"
+            className="shrink-0 font-bold text-brand-primary tracking-tight"
+            style={{ fontSize: '18px' }}
             onClick={() => setMegaOpen(false)}
           >
             CalcYourFinance
@@ -127,14 +128,32 @@ export default function Navbar() {
             className="mb-3"
             onSelect={() => setMobileOpen(false)}
           />
-          <Link href="/all-tools/?category=loan-emi"   className="block px-3 py-2 rounded-md text-sm font-medium text-ink-secondary hover:text-brand-primary hover:bg-brand-primaryLight" onClick={() => setMobileOpen(false)}>Loan Calculators</Link>
-          <Link href="/all-tools/?category=investment"  className="block px-3 py-2 rounded-md text-sm font-medium text-ink-secondary hover:text-brand-primary hover:bg-brand-primaryLight" onClick={() => setMobileOpen(false)}>Investment Calculators</Link>
-          <Link href="/all-tools/?category=tax"         className="block px-3 py-2 rounded-md text-sm font-medium text-ink-secondary hover:text-brand-primary hover:bg-brand-primaryLight" onClick={() => setMobileOpen(false)}>Tax &amp; Retirement</Link>
-          <div className="border-t border-border-subtle pt-2 mt-2 space-y-1">
-            <Link href="/all-tools/" className="block px-3 py-2 rounded-md text-sm font-medium text-brand-primary bg-brand-primaryLight" onClick={() => setMobileOpen(false)}>All Tools</Link>
-            {NAV_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className="block px-3 py-2 rounded-md text-sm text-ink-secondary hover:text-brand-primary hover:bg-brand-primaryLight" onClick={() => setMobileOpen(false)}>{l.label}</Link>
-            ))}
+          <Link
+            href="/all-tools/"
+            className="block px-3 py-2 rounded-md text-sm font-medium text-ink-secondary hover:text-brand-primary hover:bg-brand-primaryLight"
+            onClick={() => setMobileOpen(false)}
+          >
+            Calculators
+          </Link>
+          {NAV_LINKS.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="block px-3 py-2 rounded-md text-sm font-medium text-ink-secondary hover:text-brand-primary hover:bg-brand-primaryLight"
+              onClick={() => setMobileOpen(false)}
+            >
+              {l.label}
+            </Link>
+          ))}
+          <div className="border-t border-border-subtle pt-3 mt-2 flex items-center justify-between">
+            <CurrencySelector />
+            <Link
+              href="/all-tools/"
+              className="px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-md hover:bg-brand-primaryDark transition-colors"
+              onClick={() => setMobileOpen(false)}
+            >
+              All Tools
+            </Link>
           </div>
         </div>
       )}
