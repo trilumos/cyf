@@ -31,6 +31,37 @@ Copy the template below, fill it in, append it under "## Sessions" in reverse ch
 
 ## Sessions
 
+### Session 4 — 2026-05-22
+
+**Completed this session:**
+- Completed Day 2 (carried over): `AdSlot`, standalone `SearchBar`, `CurrencySelector` with geo-detection (localStorage → ipapi.co → browser locale → USD fallback for unsupported currencies)
+- Completed Day 3: Homepage built end-to-end (hero, popular tools grid, category grid, blog teaser), `ToolCard`, `CategoryCard`
+- Removed redundant hero search bar — navbar search is the single primary search
+- Full data audit and sync — rewrote `calculators.ts` with all 200 PRD entries using new interface (`category` slug field, `keywords`, `relatedSlugs`, `articleSlugs`)
+- Updated `categories.ts` — correct PRD counts (loan-emi:24, investment:24, tax:20, retirement:16, insurance:12, real-estate:14, business:18, personal-finance:18, stocks-crypto:16, currency-fx:10, economics:12, financial-math:16), added `getCategoryBySlug` helper
+- Fixed broken consumers after data rewrite: MegaMenu now uses `cat.slug` for `getByCategory`, homepage uses `getCategoryBySlug(calc.category)`
+- Fixed all hardcoded "204" count references across `src/` and `docs/prd/` → "200"
+- Hidden all ad slots until AdSense approval (`AdSlot` returns `null` when `NEXT_PUBLIC_ADS_ENABLED !== 'true'`), removed homepage ad banner wrapper
+
+**Last git commit hash:** 2b84aab
+**Last git commit message:** fix: hide ad slots until AdSense approval
+
+**Exact stopping point:**
+Days 2 and 3 fully complete. All 200 calculators in data files. Site deployed and visually confirmed at https://calcyourfinance.pages.dev.
+
+**What is next:**
+- **Day 4** — Build the All Tools page (`/all-tools/`) per `03-DESIGN-SYSTEM.md`:
+  - Page header (H2 + subtitle + SearchBar)
+  - Sticky filter pills row (`All` + one per category, query param `?category=` on mount)
+  - Two-column layout: sticky left rail (category nav) + right content (one section per category, 3-col tool grid)
+  - Build search index (`calculators-index.ts`) and connect Navbar SearchBar
+  - Wire up MegaMenu "View all" footer links
+
+**Blockers / notes:**
+- `calcyourfinance.com` domain still on Vercel — do NOT touch until launch day
+- `NEXT_PUBLIC_ADS_ENABLED` env var controls ad visibility — flip to `'true'` in Cloudflare Pages settings after AdSense approval
+- `src/data/calculators-index.ts` (Fuse.js entries) needs to be rebuilt from the new `calculators.ts` — current file has stale 47-entry subset
+
 ### Session 3 — 2026-05-22
 
 **Completed this session:**
