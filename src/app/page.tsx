@@ -35,7 +35,7 @@ export default function HomePage() {
     <LayoutShell>
 
       {/* ── Hero — seamless two-column layout ───────────────────────────── */}
-      <section style={{ background: '#ffffff', borderBottom: '0.5px solid #e5e7eb' }}>
+      <section style={{ background: '#F5F7FF', borderBottom: '0.5px solid #e5e7eb' }}>
         <div className="max-w-page mx-auto grid grid-cols-1 md:grid-cols-2" style={{ minHeight: '520px' }}>
 
         {/* Left column — headline, stats */}
