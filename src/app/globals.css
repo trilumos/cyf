@@ -13,33 +13,42 @@
   50% { opacity: 0.5; transform: scale(0.8); }
 }
 
-/* Hero section responsive */
+/* ── Hero columns ──────────────────────────────────────────────────────── */
 .hero-left {
   background: #ffffff;
-  padding: 52px 44px 52px 52px;
+  padding: 60px 52px 60px 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .hero-right {
-  background: #F8F9FC;
-  border-left: 0.5px solid #e5e7eb;
+  background: #ffffff;
+  padding: 44px 52px 44px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
 }
 
+/* ── Trending strip ────────────────────────────────────────────────────── */
 .trending-strip {
   background: #ffffff;
-  border-bottom: 0.5px solid #e5e7eb;
-  padding: 12px 52px;
+  border-bottom: 0.5px solid #E5E7EB;
+  padding: 11px 56px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-/* Trending pill */
 .trending-pill {
-  border: 0.5px solid #e5e7eb;
+  border: 0.5px solid #E5E7EB;
   border-radius: 20px;
   padding: 4px 12px;
   font-size: 11.5px;
   color: #374151;
+  background: #ffffff;
   text-decoration: none;
   transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   white-space: nowrap;
@@ -53,23 +62,21 @@
   background: #EEF2FF;
 }
 
-/* Hero tab hover (for non-active tabs rendered as buttons) */
+/* Hero tab inactive hover */
 .hero-tab:hover {
   color: #111827;
   background: #F3F4F6;
 }
 
+/* ── Mobile ────────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .hero-left {
     padding: 36px 20px 36px 20px;
   }
-
   .hero-right {
-    border-left: none;
-    border-top: 0.5px solid #e5e7eb;
+    padding: 24px 20px 32px 20px;
   }
-
   .trending-strip {
-    padding: 12px 20px;
+    padding: 11px 20px;
   }
 }

@@ -34,106 +34,101 @@ export default function HomePage() {
   return (
     <LayoutShell>
 
-      {/* ── Hero — two-column asymmetric layout ─────────────────────────── */}
-      <section style={{ borderBottom: '0.5px solid #e5e7eb', background: '#ffffff' }}>
-        <div className="max-w-page mx-auto grid grid-cols-1 md:grid-cols-2">
-
-          {/* Left column — headline, stats */}
-          <div className="hero-left">
-            {/* Eyebrow pill with pulsing dot */}
+      {/* ── Hero — seamless two-column layout ───────────────────────────── */}
+      <section
+        className="grid grid-cols-1 md:grid-cols-2"
+        style={{ background: '#ffffff', minHeight: '520px', borderBottom: '0.5px solid #e5e7eb' }}
+      >
+        {/* Left column — headline, stats */}
+        <div className="hero-left">
+          {/* Eyebrow pill — fit-content so it never stretches full width */}
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '7px',
+            width: 'fit-content',
+            whiteSpace: 'nowrap',
+            background: '#EEF2FF',
+            border: '0.5px solid #C7D2FE',
+            borderRadius: '20px',
+            padding: '4px 13px',
+            fontSize: '10.5px',
+            fontWeight: 600,
+            color: '#3730A3',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            marginBottom: '18px',
+          }}>
             <span style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '7px',
-              background: '#EEF2FF',
-              border: '0.5px solid #C7D2FE',
-              borderRadius: '20px',
-              padding: '4px 13px',
-              fontSize: '10.5px',
-              fontWeight: 600,
-              color: '#3730A3',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              marginBottom: '18px',
-            }}>
-              <span style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                background: '#1B4FD8',
-                animation: 'pulse-dot 2s ease-in-out infinite',
-                flexShrink: 0,
-              }} />
-              200+ Free Finance Calculators
-            </span>
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              background: '#1B4FD8',
+              animation: 'pulse-dot 2s ease-in-out infinite',
+              flexShrink: 0,
+            }} />
+            200+ Free Finance Calculators
+          </span>
 
-            {/* H1 — DM Serif Display */}
-            <h1
-              className="font-serif"
-              style={{
-                fontSize: 'clamp(32px, 3.5vw, 46px)',
-                fontWeight: 400,
-                lineHeight: 1.13,
-                letterSpacing: '-0.3px',
-                color: '#0A0F1E',
-                marginBottom: '16px',
-              }}
-            >
-              Every money decision made{' '}
-              <em style={{ color: '#1B4FD8', fontStyle: 'italic' }}>smarter.</em>
-            </h1>
+          {/* H1 — DM Serif Display */}
+          <h1
+            className="font-serif"
+            style={{
+              fontSize: 'clamp(32px, 3.5vw, 44px)',
+              fontWeight: 400,
+              lineHeight: 1.12,
+              letterSpacing: '-0.5px',
+              color: '#0A0F1E',
+              marginBottom: '16px',
+            }}
+          >
+            Every money decision made{' '}
+            <em style={{ color: '#1B4FD8', fontStyle: 'italic' }}>smarter.</em>
+          </h1>
 
-            {/* Subtitle */}
-            <p style={{
-              fontSize: '14px',
-              color: '#6B7280',
-              lineHeight: 1.65,
-              maxWidth: '42ch',
-              marginBottom: '32px',
-            }}>
-              From EMI to SIP, tax to retirement &mdash; every calculator you&rsquo;ll ever need.
-              Free forever, no sign-up required.
-            </p>
+          {/* Subtitle */}
+          <p style={{
+            fontSize: '14.5px',
+            color: '#6B7280',
+            lineHeight: 1.65,
+            maxWidth: '40ch',
+            marginBottom: '36px',
+          }}>
+            From EMI to SIP, tax to retirement &mdash; every calculator you&rsquo;ll ever need.
+            Free forever, no sign-up required.
+          </p>
 
-            {/* Stats row */}
-            <div className="flex flex-wrap gap-6 md:gap-[24px]">
-              {TRUST_STATS.map((s) => (
-                <div key={s.label} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-                  <span style={{ fontSize: '22px', fontWeight: 700, color: '#1B4FD8', lineHeight: 1 }}>
-                    {s.value}
-                  </span>
-                  <span style={{ fontSize: '10.5px', color: '#9CA3AF' }}>
-                    {s.label}
-                  </span>
-                </div>
-              ))}
-            </div>
+          {/* Stats row */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '28px' }}>
+            {TRUST_STATS.map((s) => (
+              <div key={s.label} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                <span style={{ fontSize: '23px', fontWeight: 700, color: '#1B4FD8', lineHeight: 1 }}>
+                  {s.value}
+                </span>
+                <span style={{ fontSize: '10.5px', color: '#9CA3AF' }}>
+                  {s.label}
+                </span>
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* Right column — calculator panel */}
-          <div className="hero-right">
-            <HeroCalculatorPanel />
-          </div>
-
+        {/* Right column — floating calculator card */}
+        <div className="hero-right">
+          <HeroCalculatorPanel />
         </div>
       </section>
 
       {/* ── Trending strip ────────────────────────────────────────────────── */}
       <div className="trending-strip">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 500, flexShrink: 0 }}>
-            Trending:
-          </span>
-          {TRENDING_PILLS.map((pill) => (
-            <Link
-              key={pill.slug}
-              href={`/calculators/${pill.slug}/`}
-              className="trending-pill"
-            >
-              {pill.label}
-            </Link>
-          ))}
-        </div>
+        <span style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 500, flexShrink: 0 }}>
+          Trending:
+        </span>
+        {TRENDING_PILLS.map((pill) => (
+          <Link key={pill.slug} href={`/calculators/${pill.slug}/`} className="trending-pill">
+            {pill.label}
+          </Link>
+        ))}
       </div>
 
       {/* ── Most popular tools ───────────────────────────────────────────── */}

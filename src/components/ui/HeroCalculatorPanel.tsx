@@ -119,7 +119,7 @@ export function HeroCalculatorPanel() {
   }
 
   return (
-    <div style={{ padding: '32px 32px 28px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%' }}>
       {/* "Try a calculator" label */}
       <p style={{
         fontSize: '10px',
@@ -127,13 +127,12 @@ export function HeroCalculatorPanel() {
         color: '#9CA3AF',
         letterSpacing: '0.07em',
         textTransform: 'uppercase',
-        marginBottom: '10px',
       }}>
         Try a calculator
       </p>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
         {TAB_LABELS.map((label, i) => (
           <button
             key={label}
@@ -156,13 +155,13 @@ export function HeroCalculatorPanel() {
         ))}
       </div>
 
-      {/* Calculator card */}
+      {/* Calculator card — the floating element, #F8F9FC on white column */}
       <div style={{
-        background: '#ffffff',
-        border: '0.5px solid #e5e7eb',
-        borderRadius: '10px',
-        padding: '18px 18px 14px',
-        boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
+        background: '#F8F9FC',
+        border: '0.5px solid #E5E7EB',
+        borderRadius: '12px',
+        padding: '20px 20px 16px',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.04)',
       }}>
         {/* Title row */}
         <div style={{
@@ -188,10 +187,10 @@ export function HeroCalculatorPanel() {
             <div style={{ fontSize: '10.5px', color: '#6B7280', marginBottom: '4px' }}>
               {input.label}
             </div>
-            {/* Input display row */}
+            {/* Input display row — white on the off-white card */}
             <div style={{
-              background: '#F8F9FC',
-              border: '0.5px solid #e5e7eb',
+              background: '#ffffff',
+              border: '0.5px solid #E5E7EB',
               borderRadius: '6px',
               height: '32px',
               padding: '0 10px',
