@@ -9,22 +9,24 @@ export function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Link
       href={`/all-tools/?category=${category.slug}`}
-      className="group flex flex-col gap-2 p-4 bg-surface border border-border rounded-xl hover:border-brand-primaryBorder hover:shadow-sm transition-all overflow-hidden relative"
+      className="category-card group flex flex-col"
+      style={{
+        background: '#ffffff',
+        border: '0.5px solid #E5E7EB',
+        borderRadius: '10px',
+        padding: '20px',
+      }}
     >
-      {/* 3px color bar at top — functional: encodes category identity */}
-      <div
-        className="absolute top-0 left-0 right-0 h-0.5"
-        style={{ backgroundColor: category.color }}
-        aria-hidden="true"
-      />
-
-      <p className="text-sm font-semibold text-ink-primary group-hover:text-brand-primary transition-colors pt-1">
+      <p
+        className="group-hover:text-brand-primary transition-colors"
+        style={{ fontSize: '15px', fontWeight: 600, color: '#111827', marginBottom: '6px' }}
+      >
         {category.label}
       </p>
-      <p className="text-xs text-ink-muted leading-relaxed">
+      <p style={{ fontSize: '12.5px', color: '#6B7280', lineHeight: 1.5, marginBottom: '14px' }}>
         {category.description}
       </p>
-      <p className="text-xs text-brand-primary font-medium mt-auto pt-1">
+      <p style={{ fontSize: '12.5px', color: '#1B4FD8', fontWeight: 500, marginTop: 'auto' }}>
         {category.count} calculators &rarr;
       </p>
     </Link>

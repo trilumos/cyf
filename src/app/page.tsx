@@ -25,10 +25,20 @@ const TRENDING_PILLS = [
 
 // Placeholder blog posts — replaced once blog content is built (Day 7)
 const BLOG_PLACEHOLDERS = [
-  { title: 'SIP vs Lumpsum: Which strategy wins in 2026?',          slug: 'sip-vs-lumpsum-2026',         category: 'Investment', readTime: '5 min read' },
-  { title: 'Old vs New Tax Regime: Complete FY 2025-26 comparison', slug: 'old-vs-new-tax-regime-2026',  category: 'Tax',        readTime: '7 min read' },
-  { title: 'How to calculate your FIRE number in India',             slug: 'fire-number-india',           category: 'Retirement', readTime: '6 min read' },
+  { title: 'SIP vs Lumpsum: Which strategy wins in 2026?',          slug: 'sip-vs-lumpsum-2026',        category: 'Investment', readTime: '5 min read', date: 'May 2026' },
+  { title: 'Old vs New Tax Regime: Complete FY 2026-27 comparison', slug: 'old-vs-new-tax-regime-2027', category: 'Tax',        readTime: '7 min read', date: 'Apr 2026' },
+  { title: 'How to calculate your FIRE number in India',            slug: 'fire-number-india',          category: 'Retirement', readTime: '6 min read', date: 'May 2026' },
 ];
+
+const BLOG_GRADIENTS: Record<string, string> = {
+  'Investment': 'linear-gradient(135deg, #EEF2FF 0%, #DBEAFE 100%)',
+  'Tax':        'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)',
+  'Retirement': 'linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%)',
+  'Loans':      'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)',
+  'Insurance':  'linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)',
+  'Business':   'linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%)',
+};
+const BLOG_GRADIENT_DEFAULT = 'linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%)';
 
 export default function HomePage() {
   return (
@@ -135,8 +145,8 @@ export default function HomePage() {
       </div>
 
       {/* ── Most popular tools ───────────────────────────────────────────── */}
-      <section className="py-12 px-4 bg-page">
-        <div className="max-w-page mx-auto">
+      <section className="py-12 bg-page">
+        <div className="max-w-page mx-auto px-4 sm:px-6">
           <div className="flex items-baseline justify-between mb-6">
             <h2 className="text-h2 text-ink-primary">Most popular tools</h2>
             <Link href="/all-tools/" className="text-sm text-brand-primary hover:underline font-medium">
@@ -155,8 +165,8 @@ export default function HomePage() {
       </section>
 
       {/* ── Browse by category ───────────────────────────────────────────── */}
-      <section className="py-12 px-4 bg-surface">
-        <div className="max-w-page mx-auto">
+      <section className="py-12 bg-surface">
+        <div className="max-w-page mx-auto px-4 sm:px-6">
           <div className="flex items-baseline justify-between mb-6">
             <h2 className="text-h2 text-ink-primary">Browse by category</h2>
             <Link href="/all-tools/" className="text-sm text-brand-primary hover:underline font-medium">
@@ -173,8 +183,8 @@ export default function HomePage() {
       </section>
 
       {/* ── Latest from the blog ─────────────────────────────────────────── */}
-      <section className="py-12 px-4 bg-page">
-        <div className="max-w-page mx-auto">
+      <section className="py-12 bg-page">
+        <div className="max-w-page mx-auto px-4 sm:px-6">
           <div className="flex items-baseline justify-between mb-6">
             <h2 className="text-h2 text-ink-primary">Latest from the blog</h2>
             <Link href="/blog/" className="text-sm text-brand-primary hover:underline font-medium">
@@ -187,15 +197,39 @@ export default function HomePage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}/`}
-                className="group flex flex-col gap-3 p-5 bg-surface border border-border rounded-xl hover:border-brand-primaryBorder hover:shadow-sm transition-all"
+                className="blog-card group flex flex-col"
+                style={{
+                  background: '#ffffff',
+                  border: '0.5px solid #E5E7EB',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                }}
               >
-                <span className="text-mini uppercase tracking-wide text-brand-primaryText bg-brand-primaryLight px-2 py-0.5 rounded-full self-start font-semibold">
-                  {post.category}
-                </span>
-                <p className="text-sm font-semibold text-ink-primary group-hover:text-brand-primary transition-colors leading-snug">
-                  {post.title}
-                </p>
-                <p className="text-xs text-ink-muted mt-auto">{post.readTime}</p>
+                {/* Thumbnail gradient */}
+                <div style={{
+                  height: '96px',
+                  background: BLOG_GRADIENTS[post.category] ?? BLOG_GRADIENT_DEFAULT,
+                  flexShrink: 0,
+                }} />
+
+                {/* Card body */}
+                <div style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                  <p style={{
+                    fontSize: '10px', fontWeight: 700, color: '#1B4FD8',
+                    letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '6px',
+                  }}>
+                    {post.category}
+                  </p>
+                  <p
+                    className="group-hover:text-brand-primary transition-colors"
+                    style={{ fontSize: '13px', fontWeight: 600, color: '#111827', lineHeight: 1.4, marginBottom: '8px' }}
+                  >
+                    {post.title}
+                  </p>
+                  <p style={{ fontSize: '11px', color: '#9CA3AF', marginTop: 'auto' }}>
+                    {post.readTime} &middot; {post.date}
+                  </p>
+                </div>
               </Link>
             ))}
           </div>

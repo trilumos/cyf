@@ -1,52 +1,56 @@
 import Link from 'next/link';
-import * as TablerIcons from '@tabler/icons-react';
+import { IconArrowRight } from '@tabler/icons-react';
 import type { Calculator } from '@/data/calculators';
 import type { Category } from '@/data/categories';
-
-type IconProps = { size?: number; className?: string };
-type IconMap = Record<string, React.ComponentType<IconProps>>;
 
 interface ToolCardProps {
   calculator: Calculator;
   category: Category;
 }
 
-export function ToolCard({ calculator, category }: ToolCardProps) {
-  const IconComponent = (TablerIcons as unknown as IconMap)[category.icon];
+const trendingBadge: React.CSSProperties = {
+  fontSize: '9px', fontWeight: 700, letterSpacing: '0.05em',
+  textTransform: 'uppercase', color: '#065F46',
+  background: '#D1FAE5', border: '0.5px solid #A7F3D0',
+  borderRadius: '4px', padding: '2px 6px',
+};
 
+const popularBadge: React.CSSProperties = {
+  fontSize: '9px', fontWeight: 700, letterSpacing: '0.05em',
+  textTransform: 'uppercase', color: '#1B4FD8',
+  background: '#EEF2FF', border: '0.5px solid #C7D2FE',
+  borderRadius: '4px', padding: '2px 6px',
+};
+
+export function ToolCard({ calculator }: ToolCardProps) {
   return (
     <Link
       href={`/calculators/${calculator.slug}/`}
-      className="group flex flex-col gap-3 p-4 bg-surface border border-border rounded-xl hover:border-brand-primaryBorder hover:shadow-sm transition-all"
+      className="tool-card group flex flex-col gap-2 p-4 bg-surface border border-border rounded-xl"
     >
-      {/* Icon + badge row */}
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-brand-primaryLight shrink-0">
-          {IconComponent && (
-            <IconComponent size={18} className="text-brand-primary" />
-          )}
-        </div>
-        {calculator.isPopular && !calculator.isTrending && (
-          <span className="text-mini uppercase tracking-wide px-2 py-0.5 rounded-full bg-brand-primaryLight text-brand-primaryText font-semibold">
-            Popular
-          </span>
-        )}
-        {calculator.isTrending && (
-          <span className="text-mini uppercase tracking-wide px-2 py-0.5 rounded-full bg-brand-primaryLight text-brand-primaryText font-semibold">
-            Trending
-          </span>
-        )}
+      {/* Badge + arrow row */}
+      <div className="flex items-center justify-between">
+        <span style={calculator.isTrending ? trendingBadge : popularBadge}>
+          {calculator.isTrending ? 'Trending' : 'Popular'}
+        </span>
+        <IconArrowRight
+          size={14}
+          className="text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity"
+        />
       </div>
 
-      {/* Name + description */}
-      <div>
-        <p className="text-sm font-semibold text-ink-primary group-hover:text-brand-primary transition-colors leading-snug">
-          {calculator.name}
-        </p>
-        <p className="text-xs text-ink-muted mt-0.5 leading-relaxed">
-          {calculator.description}
-        </p>
-      </div>
+      {/* Name */}
+      <p
+        className="group-hover:text-brand-primary transition-colors"
+        style={{ fontSize: '13px', fontWeight: 600, color: '#111827', lineHeight: 1.4 }}
+      >
+        {calculator.name}
+      </p>
+
+      {/* Description */}
+      <p style={{ fontSize: '11.5px', color: '#6B7280', lineHeight: 1.5 }}>
+        {calculator.description}
+      </p>
     </Link>
   );
 }
