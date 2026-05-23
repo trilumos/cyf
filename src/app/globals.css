@@ -16,7 +16,7 @@
 /* ── Hero columns ──────────────────────────────────────────────────────── */
 .hero-left {
   background: #ffffff;
-  padding: 60px 52px 60px 56px;
+  padding: 60px 48px 60px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,7 +24,7 @@
 
 .hero-right {
   background: #ffffff;
-  padding: 44px 52px 44px 40px;
+  padding: 44px 24px 44px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,10 +32,9 @@
 }
 
 /* ── Trending strip ────────────────────────────────────────────────────── */
+/* bg + border-bottom live on the outer full-width wrapper in page.tsx */
 .trending-strip {
-  background: #ffffff;
-  border-bottom: 0.5px solid #E5E7EB;
-  padding: 11px 56px;
+  padding: 11px 24px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -77,6 +76,6 @@
     padding: 24px 20px 32px 20px;
   }
   .trending-strip {
-    padding: 11px 20px;
+    padding: 11px 16px;
   }
 }

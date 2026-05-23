@@ -35,10 +35,9 @@ export default function HomePage() {
     <LayoutShell>
 
       {/* ── Hero — seamless two-column layout ───────────────────────────── */}
-      <section
-        className="grid grid-cols-1 md:grid-cols-2"
-        style={{ background: '#ffffff', minHeight: '520px', borderBottom: '0.5px solid #e5e7eb' }}
-      >
+      <section style={{ background: '#ffffff', borderBottom: '0.5px solid #e5e7eb' }}>
+        <div className="max-w-page mx-auto grid grid-cols-1 md:grid-cols-2" style={{ minHeight: '520px' }}>
+
         {/* Left column — headline, stats */}
         <div className="hero-left">
           {/* Eyebrow pill — fit-content so it never stretches full width */}
@@ -117,18 +116,22 @@ export default function HomePage() {
         <div className="hero-right">
           <HeroCalculatorPanel />
         </div>
+
+        </div>{/* /max-w-page grid */}
       </section>
 
       {/* ── Trending strip ────────────────────────────────────────────────── */}
-      <div className="trending-strip">
-        <span style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 500, flexShrink: 0 }}>
-          Trending:
-        </span>
-        {TRENDING_PILLS.map((pill) => (
-          <Link key={pill.slug} href={`/calculators/${pill.slug}/`} className="trending-pill">
-            {pill.label}
-          </Link>
-        ))}
+      <div style={{ background: '#ffffff', borderBottom: '0.5px solid #E5E7EB' }}>
+        <div className="max-w-page mx-auto trending-strip">
+          <span style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 500, flexShrink: 0 }}>
+            Trending:
+          </span>
+          {TRENDING_PILLS.map((pill) => (
+            <Link key={pill.slug} href={`/calculators/${pill.slug}/`} className="trending-pill">
+              {pill.label}
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* ── Most popular tools ───────────────────────────────────────────── */}
