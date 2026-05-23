@@ -17,6 +17,9 @@
 .hero-left {
   background: #ffffff;
   padding: 52px 44px 52px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hero-right {

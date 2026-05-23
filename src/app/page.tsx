@@ -35,8 +35,8 @@ export default function HomePage() {
     <LayoutShell>
 
       {/* ── Hero — two-column asymmetric layout ─────────────────────────── */}
-      <section style={{ borderBottom: '0.5px solid #e5e7eb' }}>
-        <div className="grid grid-cols-1 md:grid-cols-2">
+      <section style={{ borderBottom: '0.5px solid #e5e7eb', background: '#ffffff' }}>
+        <div className="max-w-page mx-auto grid grid-cols-1 md:grid-cols-2">
 
           {/* Left column — headline, stats */}
           <div className="hero-left">
