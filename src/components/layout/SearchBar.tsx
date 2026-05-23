@@ -13,17 +13,18 @@ const fuse = new Fuse(CALCULATORS_INDEX, {
 });
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Loans:              'bg-cat-loan/10 text-cat-loan',
-  Investment:         'bg-cat-investment/10 text-cat-investment',
-  Tax:                'bg-cat-tax/10 text-cat-tax',
-  Retirement:         'bg-cat-retirement/10 text-cat-retirement',
-  Insurance:          'bg-cat-insurance/10 text-cat-insurance',
-  Business:           'bg-cat-business/10 text-cat-business',
-  Currency:           'bg-cat-currency/10 text-cat-currency',
+  'Loan & EMI':       'bg-cat-loan/10 text-cat-loan',
+  'Investment':       'bg-cat-investment/10 text-cat-investment',
+  'Tax':              'bg-cat-tax/10 text-cat-tax',
+  'Retirement':       'bg-cat-retirement/10 text-cat-retirement',
+  'Insurance':        'bg-cat-insurance/10 text-cat-insurance',
+  'Business':         'bg-cat-business/10 text-cat-business',
+  'Currency & FX':    'bg-cat-currency/10 text-cat-currency',
   'Real Estate':      'bg-cat-realestate/10 text-cat-realestate',
   'Personal Finance': 'bg-cat-personal/10 text-cat-personal',
-  Stocks:             'bg-cat-stocks/10 text-cat-stocks',
-  Math:               'bg-cat-math/10 text-cat-math',
+  'Stocks & Crypto':  'bg-cat-stocks/10 text-cat-stocks',
+  'Economics':        'bg-cat-economics/10 text-cat-economics',
+  'Financial Math':   'bg-cat-math/10 text-cat-math',
 };
 
 interface SearchBarProps {

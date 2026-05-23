@@ -89,6 +89,16 @@ All 8 PRD files live in `docs/prd/`. Read the relevant one before building anyth
 
 ---
 
+## Deferred features — implement when calculator pages are built
+
+These two items were intentionally left incomplete and must be wired up during Day 6+ (calculator page implementation). Do not attempt to build them earlier.
+
+1. **Hero calculator interactivity** — The hero panel's 5-tab calculator (EMI/SIP/Tax/FD/FIRE) currently shows static placeholder values. Full interactivity (live sliders, real-time formula results) must wait until the real calculator pages exist with their `compute()` functions, so the hero panel can share the same logic rather than duplicating it.
+
+2. **Hero panel currency context** — The hero panel currently hardcodes INR as the display currency. It must be wired to read from `CurrencyProvider` context (the same context the navbar `CurrencySelector` writes to), so that changing the currency in the navbar is immediately reflected in the hero panel's displayed amounts.
+
+---
+
 ## Design principles — non-negotiable
 
 These rules apply to every component, page, and UI element in this project.
