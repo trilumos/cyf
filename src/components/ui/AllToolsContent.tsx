@@ -14,6 +14,7 @@ export function AllToolsContent() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [highlightedCategory, setHighlightedCategory] = useState<string | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   const fuse = useMemo(
     () =>
@@ -25,7 +26,7 @@ export function AllToolsContent() {
     [],
   );
 
-  // Activate category from ?category= param on mount
+  // On mount: activate ?category= param, scroll + briefly highlight section
   useEffect(() => {
     const cat = searchParams.get('category');
     if (!cat) return;
@@ -36,10 +37,31 @@ export function AllToolsContent() {
       const top = el.getBoundingClientRect().top + window.scrollY - 130;
       window.scrollTo({ top, behavior: 'smooth' });
       setHighlightedCategory(cat);
-      setTimeout(() => setHighlightedCategory(null), 1000);
+      setTimeout(() => setHighlightedCategory(null), 1200);
     };
     setTimeout(attempt, 300);
   }, [searchParams]);
+
+  // IntersectionObserver: auto-update left rail active state as user scrolls
+  useEffect(() => {
+    if (query.trim()) return;
+    observerRef.current?.disconnect();
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const slug = entry.target.getAttribute('data-category');
+            if (slug) setActiveCategory(slug);
+          }
+        });
+      },
+      { rootMargin: '-130px 0px -60% 0px', threshold: 0 },
+    );
+    Object.values(sectionRefs.current).forEach((el) => {
+      if (el) observerRef.current?.observe(el);
+    });
+    return () => observerRef.current?.disconnect();
+  }, [query]);
 
   const filteredCalcs = query.trim()
     ? fuse.search(query).map((r) => r.item)
@@ -64,61 +86,66 @@ export function AllToolsContent() {
 
   return (
     <div className="bg-page min-h-screen">
-      {/* Page header */}
-      <div className="max-w-page mx-auto px-4 sm:px-6 pt-8 pb-6">
-        <h2 className="text-h2 text-ink-primary font-bold">All Finance Calculators</h2>
-        <p className="text-body text-ink-tertiary mt-1">
-          200+ free tools across 12 categories — no sign-up required
-        </p>
-        <div className="mt-4 max-w-lg relative">
-          <IconSearch
-            size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted pointer-events-none"
-          />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search all 200+ calculators..."
-            className="w-full h-11 pl-10 pr-10 border border-border rounded-md text-body text-ink-primary bg-surface focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary placeholder:text-ink-muted"
-          />
-          {query && (
-            <button
-              onClick={() => setQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted hover:text-ink-secondary"
-              aria-label="Clear search"
-            >
-              <IconX size={14} />
-            </button>
-          )}
+      {/* ── Page header ────────────────────────────────────────────── */}
+      <div className="bg-surface border-b border-border">
+        <div className="max-w-page mx-auto px-4 sm:px-6 py-10">
+          <h1 className="text-h1 font-bold tracking-tight text-ink-primary">
+            All Finance Calculators
+          </h1>
+          <p className="mt-1.5 text-body text-ink-tertiary">
+            {CALCULATORS.length} free tools across {CATEGORIES.length} categories — no sign-up required
+          </p>
+
+          <div className="mt-6 max-w-xl relative">
+            <IconSearch
+              size={16}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-muted pointer-events-none"
+            />
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search calculators by name or keyword..."
+              className="w-full h-12 pl-11 pr-11 border border-border rounded-lg text-sm text-ink-primary bg-page focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primaryBorder placeholder:text-ink-muted transition-all"
+            />
+            {query && (
+              <button
+                onClick={() => setQuery('')}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted hover:text-ink-secondary transition-colors"
+                aria-label="Clear search"
+              >
+                <IconX size={15} />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Filter pills — sticky below navbar (top-16 = 64px) */}
+      {/* ── Filter pills — sticky below navbar (top-16 = 64px) ────── */}
       <div className="sticky top-16 z-20 bg-surface border-b border-border">
         <div className="max-w-page mx-auto px-4 sm:px-6">
           <div
-            className="flex gap-1.5 py-3 overflow-x-auto"
+            className="flex gap-1 py-2.5 overflow-x-auto"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             <button
               onClick={() => scrollToCategory('all')}
-              className={`flex-shrink-0 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              className={`flex-shrink-0 h-7 px-3 rounded text-xs font-semibold transition-colors ${
                 activeCategory === 'all'
                   ? 'bg-brand-primaryLight border border-brand-primaryBorder text-brand-primary'
-                  : 'text-ink-secondary hover:text-ink-primary'
+                  : 'text-ink-muted hover:text-ink-secondary hover:bg-border-subtle'
               }`}
             >
-              All ({CALCULATORS.length})
+              All
             </button>
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.slug}
                 onClick={() => scrollToCategory(cat.slug)}
-                className={`flex-shrink-0 px-3 py-1.5 rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
+                className={`flex-shrink-0 h-7 px-3 rounded text-xs font-semibold whitespace-nowrap transition-colors ${
                   activeCategory === cat.slug
                     ? 'bg-brand-primaryLight border border-brand-primaryBorder text-brand-primary'
-                    : 'text-ink-secondary hover:text-ink-primary'
+                    : 'text-ink-muted hover:text-ink-secondary hover:bg-border-subtle'
                 }`}
               >
                 {cat.label}
@@ -128,110 +155,152 @@ export function AllToolsContent() {
         </div>
       </div>
 
-      {/* Two-column layout */}
-      <div className="max-w-page mx-auto px-4 sm:px-6 py-6">
-        <div className="flex gap-8">
-          {/* Left rail — sticky category nav, hidden on mobile */}
-          <aside className="hidden lg:block w-36 flex-shrink-0">
+      {/* ── Two-column layout ──────────────────────────────────────── */}
+      <div className="max-w-page mx-auto px-4 sm:px-6 py-8">
+        <div className="flex gap-10">
+          {/* Left rail — sticky category nav */}
+          <aside className="hidden lg:block w-[140px] flex-shrink-0" aria-label="Category navigation">
             <nav className="sticky top-[120px]">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.slug}
-                  onClick={() => scrollToCategory(cat.slug)}
-                  className="w-full text-left flex items-center justify-between py-2 px-3 transition-colors group"
-                  style={
-                    activeCategory === cat.slug
-                      ? { borderLeft: '3px solid #1B4FD8', backgroundColor: '#EEF2FF' }
-                      : { borderLeft: '3px solid transparent' }
-                  }
-                >
-                  <span
-                    className={`text-xs leading-snug ${
-                      activeCategory === cat.slug
-                        ? 'text-brand-primary font-semibold'
-                        : 'text-ink-secondary group-hover:text-ink-primary'
-                    }`}
+              {CATEGORIES.map((cat) => {
+                const isActive = activeCategory === cat.slug;
+                return (
+                  <button
+                    key={cat.slug}
+                    onClick={() => scrollToCategory(cat.slug)}
+                    className="w-full text-left flex items-center justify-between py-[9px] px-3 transition-colors group"
+                    style={
+                      isActive
+                        ? { borderLeft: '3px solid #1B4FD8', backgroundColor: '#EEF2FF' }
+                        : { borderLeft: '3px solid transparent' }
+                    }
                   >
-                    {cat.label}
-                  </span>
-                  <span
-                    className={`text-xs ml-1 tabular-nums ${
-                      activeCategory === cat.slug ? 'text-brand-primary opacity-60' : 'text-ink-muted'
-                    }`}
-                  >
-                    {cat.count}
-                  </span>
-                </button>
-              ))}
+                    <span
+                      className={`text-[11.5px] leading-tight ${
+                        isActive
+                          ? 'text-brand-primary font-semibold'
+                          : 'text-ink-tertiary group-hover:text-ink-secondary'
+                      }`}
+                    >
+                      {cat.label}
+                    </span>
+                    <span
+                      className={`text-[10.5px] tabular-nums flex-shrink-0 ml-1 ${
+                        isActive ? 'text-brand-primary opacity-60' : 'text-ink-muted'
+                      }`}
+                    >
+                      {cat.count}
+                    </span>
+                  </button>
+                );
+              })}
             </nav>
           </aside>
 
           {/* Right content */}
           <div className="flex-1 min-w-0">
+            {/* Search result count */}
             {query.trim() && (
-              <p className="text-sm text-ink-tertiary mb-5">
-                {filteredCalcs.length === 0
-                  ? `No results for "${query}"`
-                  : `${filteredCalcs.length} result${filteredCalcs.length === 1 ? '' : 's'} for "${query}"`}
-              </p>
-            )}
-
-            {grouped.length === 0 ? (
-              <div className="py-16 text-center">
-                <p className="text-body text-ink-tertiary">No calculators found for &ldquo;{query}&rdquo;</p>
+              <div className="mb-8 flex items-center gap-3">
+                <p className="text-sm text-ink-tertiary">
+                  {filteredCalcs.length === 0 ? (
+                    'No results'
+                  ) : (
+                    <>
+                      <span className="font-semibold text-ink-secondary">{filteredCalcs.length}</span>{' '}
+                      result{filteredCalcs.length === 1 ? '' : 's'}
+                    </>
+                  )}{' '}
+                  for{' '}
+                  <span className="font-medium text-ink-secondary">&ldquo;{query}&rdquo;</span>
+                </p>
                 <button
                   onClick={() => setQuery('')}
-                  className="mt-2 text-sm text-brand-primary hover:underline"
+                  className="text-xs text-brand-primary hover:underline"
+                >
+                  Clear
+                </button>
+              </div>
+            )}
+
+            {/* Empty state */}
+            {grouped.length === 0 && (
+              <div className="py-20 text-center">
+                <p className="text-body text-ink-tertiary">
+                  No calculators found for &ldquo;{query}&rdquo;
+                </p>
+                <button
+                  onClick={() => setQuery('')}
+                  className="mt-3 text-sm text-brand-primary hover:underline"
                 >
                   Clear search
                 </button>
               </div>
-            ) : (
-              <div className="space-y-10">
-                {grouped.map(({ category: cat, tools }) => (
-                  <section
-                    key={cat.slug}
-                    ref={(el) => {
-                      sectionRefs.current[cat.slug] = el;
-                    }}
-                    className={`rounded-lg transition-colors duration-700 ${
-                      highlightedCategory === cat.slug ? 'bg-brand-primaryLight/40' : ''
-                    }`}
-                  >
-                    {/* Section header */}
-                    <div className="flex items-baseline gap-3 mb-3">
-                      <h3 className="text-h3 text-ink-primary font-semibold">{cat.label}</h3>
-                      <span className="text-xs text-ink-muted">{tools.length} tools</span>
-                    </div>
-
-                    {/* 3-column tool grid — no decorative colors, no icon squares */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                      {tools.map((tool) => (
-                        <Link
-                          key={tool.slug}
-                          href={`/calculators/${tool.slug}/`}
-                          className="flex flex-col py-2.5 px-3 rounded hover:bg-brand-primaryLight transition-colors group"
-                        >
-                          <div className="flex items-center gap-2 min-w-0">
-                            <span className="text-sm font-medium text-ink-primary group-hover:text-brand-primary leading-snug truncate">
-                              {tool.name}
-                            </span>
-                            {tool.isNew && (
-                              <span className="flex-shrink-0 text-[10px] font-semibold px-1.5 py-0.5 bg-brand-primaryLight text-brand-primaryText rounded uppercase tracking-wider leading-none">
-                                New
-                              </span>
-                            )}
-                          </div>
-                          <span className="text-xs text-ink-muted mt-0.5 leading-snug line-clamp-1">
-                            {tool.description}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  </section>
-                ))}
-              </div>
             )}
+
+            {/* Category sections */}
+            {grouped.map(({ category: cat, tools }, i) => (
+              <section
+                key={cat.slug}
+                data-category={cat.slug}
+                ref={(el) => {
+                  sectionRefs.current[cat.slug] = el;
+                }}
+                className={`
+                  ${i > 0 ? 'border-t border-border pt-10 mt-10' : ''}
+                  ${highlightedCategory === cat.slug ? 'relative' : ''}
+                `}
+              >
+                {/* Highlight overlay on URL-param activation */}
+                {highlightedCategory === cat.slug && (
+                  <div
+                    className="absolute inset-0 -mx-4 rounded-xl pointer-events-none transition-opacity duration-700"
+                    style={{ backgroundColor: '#EEF2FF', opacity: 0.4 }}
+                  />
+                )}
+
+                {/* Section header */}
+                <div className="mb-5 relative">
+                  <div className="flex items-baseline gap-3">
+                    <h2
+                      className="font-serif text-[26px] leading-tight text-ink-primary"
+                    >
+                      {cat.label}
+                    </h2>
+                    <span className="text-xs text-ink-muted tabular-nums font-normal">
+                      {tools.length} tools
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs text-ink-muted leading-relaxed">
+                    {cat.description}
+                  </p>
+                </div>
+
+                {/* Tool grid — 3 columns, clean hover rows, no decoration */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                  {tools.map((tool) => (
+                    <Link
+                      key={tool.slug}
+                      href={`/calculators/${tool.slug}/`}
+                      className="group flex flex-col py-3 px-3 rounded-lg hover:bg-brand-primaryLight transition-colors"
+                    >
+                      <div className="flex items-start gap-2 min-w-0">
+                        <span className="flex-1 text-sm font-medium text-ink-primary group-hover:text-brand-primary leading-snug transition-colors">
+                          {tool.name}
+                        </span>
+                        {tool.isNew && (
+                          <span className="flex-shrink-0 mt-px text-[9px] font-bold px-1.5 py-[3px] bg-brand-primaryLight text-brand-primaryText border border-brand-primaryBorder rounded-sm uppercase tracking-widest leading-none">
+                            New
+                          </span>
+                        )}
+                      </div>
+                      <span className="mt-1 text-[11px] text-ink-muted leading-snug line-clamp-1">
+                        {tool.description}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ))}
           </div>
         </div>
       </div>
