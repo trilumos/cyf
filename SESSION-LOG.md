@@ -31,6 +31,41 @@ Copy the template below, fill it in, append it under "## Sessions" in reverse ch
 
 ## Sessions
 
+### Session 5 — 2026-05-23
+
+**Completed this session:**
+- Hero calculator panel: built 5-tab interactive version (EMI/SIP/Tax/FD/FIRE with live sliders), then reverted to static display placeholder per user request (inputs non-functional, currency sync missing — deferred to when calculator pages are built)
+- DM Serif Display font added to layout.tsx + tailwind.config.ts
+- CalculatorParamReader component: reads URL params and scrolls to #results-section
+- 200 static calculator stub pages at /calculators/[slug]/ with generateStaticParams
+- src/global.d.ts: declare module '*.css' to fix TS CSS import error
+- Navbar: full-width layout (removed max-w-page constraint), logo 16px → 18px, mobile menu now mirrors desktop (Calculators/Blog/About + CurrencySelector + All Tools CTA, removed stale category-specific links)
+- ToolCard: removed icon square, added badge (Popular/Trending) + hover arrow, specific hover shadow/translateY
+- CategoryCard: removed colored top border, plain white card with name/description/count layout
+- Blog cards: added 96px gradient thumbnail per category, fixed FY 2025-26 → FY 2026-27, added date field
+- Section padding: moved px-4 from outer section to inner max-w-page div (px-4 sm:px-6) to align with trending strip
+- globals.css: added .hero-slider, .tool-card, .category-card, .blog-card CSS
+
+**Last git commit hash:** 45be5ac
+**Last git commit message:** fix: homepage tool cards, category cards, blog cards design polish
+
+**Exact stopping point:**
+Days 0–3 complete. Session 5 extras done (hero panel, navbar, homepage card design). Visual checkpoint confirmed by user.
+
+**What is next:**
+- **Day 4** — Build the All Tools page (`/all-tools/`) per `03-DESIGN-SYSTEM.md`:
+  - Page header (H2 + subtitle + SearchBar)
+  - Sticky filter pills row (`All` + one per category, query param `?category=` on mount)
+  - Two-column layout: sticky left rail (category nav) + right content (one section per category, 3-col tool grid)
+  - Rebuild `calculators-index.ts` from the full 200-entry `calculators.ts` (current file is stale 47-entry subset)
+  - Wire up MegaMenu "View all" footer links
+
+**Blockers / notes:**
+- `calcyourfinance.com` domain still on Vercel — do NOT touch until launch day
+- `NEXT_PUBLIC_ADS_ENABLED` env var controls ad visibility — flip to `'true'` in Cloudflare Pages settings after AdSense approval
+- Hero calculator interactivity deferred: inputs are static display only; full interactivity (live sliders, currency-aware values) to be built when calculator pages are implemented
+- Hero panel currency: hardcoded INR — needs CurrencyProvider context wiring when interactivity is added
+
 ### Session 4 — 2026-05-22
 
 **Completed this session:**
