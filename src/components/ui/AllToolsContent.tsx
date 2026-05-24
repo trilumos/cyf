@@ -511,18 +511,13 @@ export function AllToolsContent() {
       </div>
 
       {/* ── Two-column body ──────────────────────────────────────────── */}
-      <div className="flex flex-1">
-        {/* Sidebar — sticky, scrolls independently */}
+      <div className="flex">
+        {/* Sidebar — scrolls normally with the page, not sticky */}
         <aside
           className="hidden lg:flex flex-col flex-shrink-0 bg-surface"
           style={{
             width: '220px',
             borderRight: '0.5px solid #E5E7EB',
-            position: 'sticky',
-            top: '105px',
-            alignSelf: 'flex-start',
-            height: 'calc(100vh - 105px)',
-            overflowY: 'auto',
           }}
         >
           <div
