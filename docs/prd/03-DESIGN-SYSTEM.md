@@ -42,7 +42,8 @@ colors: {
   warningText: '#92400E',
   danger: '#EF4444',
   dangerBg: '#FEF2F2',
-  // Category accents (used as small color dots only)
+  // Category accents — DATA ONLY. Per CLAUDE.md, category color is rendered in exactly ONE place:
+  // the 3px left border on the active mega-menu category row. Never as dots, bars, or badges anywhere else.
   cat: {
     loan: '#1B4FD8',
     investment: '#0EA5E9',
@@ -164,7 +165,7 @@ Build these as reusable components in `/src/components/`:
 4. Full-width ad banner (728×90)
 5. "Browse by category" section
    - 4-column grid of 12 CategoryCards
-   - Each card: small color bar on top (using `cat.[slug]` color), category name, "N calculators"
+   - Each card: category name, short description, "N calculators" count. NO color bar (category color is data-only per CLAUDE.md)
 6. "Latest from the blog" section
    - Heading + "All articles →" link
    - 3-column blog grid
@@ -188,7 +189,7 @@ Build these as reusable components in `/src/components/`:
      - Active item: blue left border + light blue background
      - Clicking scrolls to category section AND activates the pill filter
    - **Right area (1fr):** content with one section per category
-     - Each section: header with colored dot + category name + count, then 3-column grid of tool items
+     - Each section: header with category name + count (no colored dot), then 3-column grid of tool items
      - Each tool item: small icon square, tool name, short description, optional "New" badge
 5. `<Footer />`
 
@@ -217,11 +218,11 @@ Build these as reusable components in `/src/components/`:
        - "Your results" small label
        - 3-column grid of result number cards (label + big value)
        - Chart below (Recharts, uses `--brand-primary` palette)
-       - **AI Summary block** (PlainEnglishSummary component)
-         - Pill: "✦ AI Summary" + "What does this mean for you?"
-         - Plain-English first paragraph using `<strong>` for key numbers
-         - Yellow highlight box for the key insight (`bg-warningBg`, `border-l-2 border-warning`, `rounded-r`)
-         - Green tip box with bulb icon (`bg-successBg`, `text-successText`), includes a link to a related tool
+       - **Plain-English summary block** (PlainEnglishSummary component) — functional color only; no glyph/emoji, no yellow/green, no colored side-stripe
+         - Label: "What this means for you" (plain text, no decorative glyph)
+         - Intro paragraph using `<strong>` for key numbers
+         - Key insight on a subtle `bg-brand-primaryLight` (#EEF2FF) tint, `rounded-lg`, `p-3` — full edge, NO colored left-stripe
+         - Tip line (`text-ink-secondary`) that ends in a `text-brand-primary` link to a related tool
      - AdSlot (728×90) — below results
      - Educational content section
        - H3: "What is [tool]?"

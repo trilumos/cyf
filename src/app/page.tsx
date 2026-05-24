@@ -30,15 +30,8 @@ const BLOG_PLACEHOLDERS = [
   { title: 'How to calculate your FIRE number in India',            slug: 'fire-number-india',          category: 'Retirement', readTime: '6 min read', date: 'May 2026' },
 ];
 
-const BLOG_GRADIENTS: Record<string, string> = {
-  'Investment': 'linear-gradient(135deg, #EEF2FF 0%, #DBEAFE 100%)',
-  'Tax':        'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)',
-  'Retirement': 'linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%)',
-  'Loans':      'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)',
-  'Insurance':  'linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)',
-  'Business':   'linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%)',
-};
-const BLOG_GRADIENT_DEFAULT = 'linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%)';
+// Blog-card thumbnail: flat brand tint (no gradient / no decorative color per CLAUDE.md).
+const BLOG_THUMB_BG = '#EEF2FF';
 
 export default function HomePage() {
   return (
@@ -205,10 +198,11 @@ export default function HomePage() {
                   overflow: 'hidden',
                 }}
               >
-                {/* Thumbnail gradient */}
+                {/* Thumbnail — flat brand tint, no gradient */}
                 <div style={{
                   height: '96px',
-                  background: BLOG_GRADIENTS[post.category] ?? BLOG_GRADIENT_DEFAULT,
+                  background: BLOG_THUMB_BG,
+                  borderBottom: '0.5px solid #E5E7EB',
                   flexShrink: 0,
                 }} />
 

@@ -8,14 +8,9 @@ interface ToolCardProps {
   category: Category;
 }
 
-const trendingBadge: React.CSSProperties = {
-  fontSize: '9px', fontWeight: 700, letterSpacing: '0.05em',
-  textTransform: 'uppercase', color: '#065F46',
-  background: '#D1FAE5', border: '0.5px solid #A7F3D0',
-  borderRadius: '4px', padding: '2px 6px',
-};
-
-const popularBadge: React.CSSProperties = {
+// One functional badge style (brand blue) for both Popular and Trending —
+// category/decorative color is not used (CLAUDE.md functional-color rule).
+const badgeStyle: React.CSSProperties = {
   fontSize: '9px', fontWeight: 700, letterSpacing: '0.05em',
   textTransform: 'uppercase', color: '#1B4FD8',
   background: '#EEF2FF', border: '0.5px solid #C7D2FE',
@@ -30,7 +25,7 @@ export function ToolCard({ calculator }: ToolCardProps) {
     >
       {/* Badge + arrow row */}
       <div className="flex items-center justify-between">
-        <span style={calculator.isTrending ? trendingBadge : popularBadge}>
+        <span style={badgeStyle}>
           {calculator.isTrending ? 'Trending' : 'Popular'}
         </span>
         <IconArrowRight

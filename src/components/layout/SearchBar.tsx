@@ -12,21 +12,6 @@ const fuse = new Fuse(CALCULATORS_INDEX, {
   includeScore: false,
 });
 
-const CATEGORY_COLORS: Record<string, string> = {
-  'Loan & EMI':       'bg-cat-loan/10 text-cat-loan',
-  'Investment':       'bg-cat-investment/10 text-cat-investment',
-  'Tax':              'bg-cat-tax/10 text-cat-tax',
-  'Retirement':       'bg-cat-retirement/10 text-cat-retirement',
-  'Insurance':        'bg-cat-insurance/10 text-cat-insurance',
-  'Business':         'bg-cat-business/10 text-cat-business',
-  'Currency & FX':    'bg-cat-currency/10 text-cat-currency',
-  'Real Estate':      'bg-cat-realestate/10 text-cat-realestate',
-  'Personal Finance': 'bg-cat-personal/10 text-cat-personal',
-  'Stocks & Crypto':  'bg-cat-stocks/10 text-cat-stocks',
-  'Economics':        'bg-cat-economics/10 text-cat-economics',
-  'Financial Math':   'bg-cat-math/10 text-cat-math',
-};
-
 interface SearchBarProps {
   /** 'navbar' = compact inline bar; 'hero' = full-width 44px bar for homepage */
   size?: 'navbar' | 'hero';
@@ -132,11 +117,7 @@ export function SearchBar({
                       <p className="text-sm font-medium text-ink-primary truncate">{calc.name}</p>
                       <p className="text-xs text-ink-muted truncate">{calc.description}</p>
                     </div>
-                    <span
-                      className={`shrink-0 text-mini uppercase px-2 py-0.5 rounded-full font-semibold ${
-                        CATEGORY_COLORS[calc.category] ?? 'bg-border-subtle text-ink-muted'
-                      }`}
-                    >
+                    <span className="shrink-0 text-xs text-ink-muted">
                       {calc.category}
                     </span>
                   </Link>

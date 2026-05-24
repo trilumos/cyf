@@ -380,18 +380,18 @@ Two-panel floating dropdown. See `03-DESIGN-SYSTEM.md` for full visual spec.
 
 ### Footer — identical on every page
 
-Dark blue background (`#1B4FD8`). 4-column grid:
+White background (`bg-surface`) with a top border (`border-t border-border`) — NOT dark blue. Per CLAUDE.md, brand color is functional-only (buttons, links, active states), so the footer ground stays white; links use `text-brand-primary`. 4-column grid (2 columns on mobile):
 
-- Column 1 (wider): Logo + "Free finance calculators for everyone. No sign-up, no nonsense — just accurate answers in seconds."
-- Column 2 **Calculators**: Loan & EMI, Investment, Tax, Retirement (links to All Tools page filtered by each category)
-- Column 3 **Company**: About, Blog, Contact, Sitemap
-- Column 4 **Legal**: Privacy Policy, Disclaimer, Terms of Use
+- Column 1 (wider): Logo + tagline "Free finance calculators for every money decision. No sign-up required." + dynamic copyright `© {new Date().getFullYear()} CalcYourFinance. All rights reserved.`
+- Column 2 **Calculators**: Loan & EMI, Investment, Tax, Retirement, All 200+ Calculators (links to the All Tools page filtered by each category)
+- Column 3 **Popular Tools**: EMI, SIP, Income Tax, FD, Home Loan EMI (direct links to the highest-traffic calculators)
+- Column 4 **Company** (About, Blog, Contact) + **Legal** (Privacy Policy, Disclaimer), stacked
 
-Bottom bar (separated by thin border):
-- Left: `© [current year] CalcYourFinance. All results are estimates only.`
-- Right: `Not financial advice.`
+Bottom strip (separated by a thin top border): a single centered disclaimer — "All calculators provide estimates for informational purposes only. Not financial advice. Consult a qualified financial advisor before making any investment or financial decisions."
 
-The current year in the footer is dynamic: `{new Date().getFullYear()}`.
+The copyright year is dynamic: `{new Date().getFullYear()}`.
+
+**Deferred / intentionally omitted:** add a **Sitemap** link to the Company group once `/sitemap.xml` is generated (Day 26 — until then it would be a dead link). **Terms of Use** is omitted: no Terms page is planned, so Legal = Privacy Policy + Disclaimer only.
 
 ---
 

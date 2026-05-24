@@ -116,7 +116,7 @@ These rules apply to every component, page, and UI element in this project.
 Never violate these without explicit user confirmation in chat.
 
 1. NO EMOJI — not in UI, not in copy, not in labels, not in headings, not anywhere on the site
-2. NO DECORATIVE COLOR — no colored dots, no colored icon squares, no color-coded category indicators, no amber/yellow/orange accents, no rainbow category colors in UI
+2. NO DECORATIVE COLOR — no colored category dots, no colored icon squares, no color-coded category indicators, no amber/yellow/orange accents, no rainbow category colors in UI. Exception: a single small brand-blue "live" indicator dot in the hero eyebrow pill is allowed.
 3. COLOR IS FUNCTIONAL ONLY:
    - Brand blue #1B4FD8 → buttons, links, active states, hover borders, logo
    - #EEF2FF → active/hover fill backgrounds only
@@ -125,8 +125,8 @@ Never violate these without explicit user confirmation in chat.
    - Category colors → exist in data files only. ONLY visible use: 3px left border on active left panel row in mega menu. Nowhere else.
 4. NO BOXES OR BORDERS around tool rows inside dropdowns, lists, or navigation menus
 5. NO GRADIENTS — anywhere
-6. NO SHADOWS — except the mega menu dropdown box-shadow
-7. NO BLUR, NO GLOW, NO DECORATIVE EFFECTS
+6. SHADOWS — subtle elevation only. Allowed for floating overlay dropdowns (mega menu, navbar search, currency selector) and gentle card hover-lift / the hero calculator card. Keep them soft, low-opacity, brand-tinted or neutral (e.g. 0 4px 14px rgba(27,79,216,0.06)). No heavy, dark, or purely decorative drop shadows; no glow.
+7. NO BLUR, NO GLOW. Functional transitions (hover, focus, dropdown open/close) are fine; the only permitted decorative motion is the subtle pulse on the hero "live" dot.
 8. WHITESPACE OVER DECORATION — if a section feels empty, increase padding or improve typography. Never add decorative elements to fill space.
 9. PROFESSIONAL FINANCIAL TOOL AESTHETIC — every design decision must reinforce trust and credibility. When choosing between two options always pick the more conservative, cleaner one.
 10. BEFORE adding any visual element using color, ask: does this color communicate something functional to the user? If no → remove it.
