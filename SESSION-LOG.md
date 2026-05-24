@@ -31,6 +31,48 @@ Copy the template below, fill it in, append it under "## Sessions" in reverse ch
 
 ## Sessions
 
+### Session 7 — 2026-05-24
+
+**Completed this session — Day 5 fully complete:**
+- Read PRD docs `05-LIVING-DATA.md` and `01-FRESHNESS-AND-RESEARCH.md` before any work
+- Web-researched all rates from primary/authoritative sources (incometaxindia.gov.in, epfindia.gov.in, dea.gov.in, cbic.gov.in, irs.gov, pib.gov.in, bankbazaar.com confirmed against search results)
+- Populated 10 JSON files in `src/data/financial-rules/`:
+  - `india-tax-new-regime.json` — FY 2026-27 slabs (0-4L:0%, 4-8L:5%, 8-12L:10%, 12-16L:15%, 16-20L:20%, 20-24L:25%, 24L+:30%), std deduction 75K, 87A rebate 60K
+  - `india-tax-old-regime.json` — FY 2026-27, all three age groups (below60 / 60-79 / 80+), 87A rebate 12.5K
+  - `india-section-80c.json` — Rs 1.5L limit (unchanged since 2014), eligible instruments list
+  - `india-section-80d.json` — 25K/50K self+family, 25K/50K parents, 5K preventive checkup sublimit
+  - `india-capital-gains.json` — LTCG 12.5%/STCG 20% equity; property grandfathering clause for pre-Jul-2024 assets
+  - `india-gst-rates.json` — GST 2.0 post-56th council (effective 22-Sep-2025): 0%, 5%, 18%, 40%; 3% gold; 28% tobacco
+  - `india-epf-rates.json` — 8.25% FY 2026-27; EPF/EPS contribution split explained
+  - `india-ppf-rates.json` — 7.1% Q1 FY 2026-27 (confirmed DEA 30-Mar-2026 notification); rate history; contribution/withdrawal rules
+  - `us-tax-brackets.json` — 2026 IRS brackets all four filing statuses; OBBBA deductions (senior $6K, tips $25K, overtime $12.5K/$25K); standard deductions
+  - `us-401k-limits.json` — 401k $24,500; catch-up 50+: $8K; SECURE 2.0 catch-up 60-63: $11.25K; IRA $7,500; SIMPLE $17K
+- Created meta files: `_LAST_UPDATED.json`, `_CHANGELOG.md`, `_NEEDS_VERIFICATION.md` (5 low/medium items flagged)
+- Built `scripts/build-manifest.mjs` — auto-regenerates manifest from JSON files, flags overdue reviews (exit code 1 if any overdue)
+- Built `src/components/calculator/LastUpdatedBadge.tsx` — renders "Last updated: [date] · Source: [domain link]" under calculator titles
+- TypeScript check passed clean (npx tsc --noEmit)
+- Manifest script ran successfully: 10 files indexed, 0 overdue
+
+**Last git commit hash:** ac45a0c
+**Last git commit message:** feat: Day 5 — living financial data system
+
+**Exact stopping point:**
+Day 5 100% complete. All financial-rules JSON files populated from web-verified sources. LastUpdatedBadge component ready for use in calculator pages. No visual changes to deploy.
+
+**What is next:**
+- **Day 6** per `docs/prd/04-TECHNICAL.md`:
+  - Build the first real calculator page — EMI Calculator as the reference implementation template
+  - Wire `LastUpdatedBadge` into the calculator page layout
+  - Wire hero panel interactivity (5 tabs: EMI/SIP/Tax/FD/FIRE) using real compute() functions
+  - Wire hero panel currency context to `CurrencyProvider`
+
+**Blockers / notes:**
+- Surcharge at 50L-1Cr band for new regime: bankbazaar shows 5%, historic rate is 10% — used 10% in JSON. Verify from Income Tax Act 2025 official text before publishing the income tax calculator.
+- PPF Q2 FY 2026-27 rate (Jul-Sep 2026) review due 2026-07-01 — check DEA notification
+- `calcyourfinance.com` domain still on Vercel — do NOT touch until launch day
+- `NEXT_PUBLIC_ADS_ENABLED` env var — flip to `'true'` in Cloudflare Pages after AdSense approval
+- Hero panel interactivity + currency context still deferred to Day 6+ (calculator pages)
+
 ### Session 6 — 2026-05-24
 
 **Completed this session — Day 4 fully complete:**
