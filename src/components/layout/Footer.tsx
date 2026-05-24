@@ -11,7 +11,7 @@ const links = {
   popular: [
     { label: "EMI Calculator", href: "/calculators/emi-calculator/" },
     { label: "SIP Calculator", href: "/calculators/sip-calculator/" },
-    { label: "Income Tax Calculator", href: "/calculators/income-tax-calculator/" },
+    { label: "Income Tax Calculator", href: "/calculators/income-tax-calculator-india/" },
     { label: "FD Calculator", href: "/calculators/fd-calculator/" },
     { label: "Home Loan EMI", href: "/calculators/home-loan-emi-calculator/" },
   ],

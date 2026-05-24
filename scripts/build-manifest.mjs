@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * Regenerates src/data/financial-rules/_LAST_UPDATED.json from all JSON files
- * in that directory. Run via: node scripts/build-manifest.mjs
- * Hooked into pre-commit and CI via .github/workflows/verify-rates.yml.
+ * in that directory, and exits non-zero if any file's review_due has passed.
+ * Run manually after editing any rule file: node scripts/build-manifest.mjs
+ * (The monthly CI job runs scripts/verify-rates.mjs, which opens review issues.)
  */
 
 import { readdir, readFile, writeFile } from 'node:fs/promises';

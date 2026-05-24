@@ -49,11 +49,11 @@ const DISPLAYS: Record<TabId, CalcDisplay> = {
   },
   tax: {
     title: 'Income Tax Calculator',
-    slug: 'income-tax-calculator',
+    slug: 'income-tax-calculator-india',
     inputs: [
       { label: 'Annual income (CTC)',       value: '₹ 15,00,000', hint: '',            barPct: 50 },
       { label: 'Deductions (80C, HRA…)',    value: '₹ 1,50,000',  hint: '',            barPct: 30 },
-      { label: 'Tax regime',                value: 'New regime',   hint: 'FY 2025-26', barPct: 0  },
+      { label: 'Tax regime',                value: 'New regime',   hint: 'FY 2026-27', barPct: 0  },
     ],
     resultLabel: 'Tax payable',
     result: '₹ 97,500',

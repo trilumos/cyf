@@ -9,9 +9,9 @@ import { getByCategory, type Calculator } from "@/data/calculators";
 // ─── Trending ────────────────────────────────────────────────────────────────
 
 const TRENDING = [
-  { label: "Old vs New Tax Regime", slug: "new-vs-old-tax-regime-calculator" },
-  { label: "FIRE Calculator",       slug: "fire-calculator" },
-  { label: "SIP Step-Up",           slug: "step-up-sip-calculator" },
+  { label: "Old vs New Tax Regime", slug: "old-vs-new-tax-regime-calculator" },
+  { label: "FIRE Calculator",       slug: "fire-number-calculator" },
+  { label: "SIP Step-Up",           slug: "sip-step-up-calculator" },
   { label: "Home Loan EMI",         slug: "home-loan-emi-calculator" },
   { label: "Currency Converter",    slug: "currency-converter" },
 ];
