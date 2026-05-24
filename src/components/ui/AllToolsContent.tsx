@@ -511,7 +511,7 @@ export function AllToolsContent() {
       </div>
 
       {/* ── Two-column body ──────────────────────────────────────────── */}
-      <div className="flex flex-1">
+      <div className="flex">
         {/* Sidebar — sticky, full height minus navbar */}
         <aside
           className="hidden lg:flex flex-col flex-shrink-0 bg-surface overflow-y-auto"
@@ -554,8 +554,8 @@ export function AllToolsContent() {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 min-w-0 flex flex-col">
-          <div className="flex-1" style={{ padding: '20px 24px' }}>
+        <main className="flex-1 min-w-0">
+          <div style={{ padding: '20px 24px' }}>
             {/* Popular section — only when "All" selected, no search */}
             {showPopular && (
               <div style={{ marginBottom: '24px' }}>
