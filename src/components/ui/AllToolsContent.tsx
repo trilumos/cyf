@@ -514,13 +514,12 @@ export function AllToolsContent() {
       <div className="flex">
         {/* Sidebar — sticky, full height minus navbar */}
         <aside
-          className="hidden lg:flex flex-col flex-shrink-0 bg-surface overflow-y-auto"
+          className="hidden lg:flex flex-col flex-shrink-0 bg-surface"
           style={{
             width: '220px',
             borderRight: '0.5px solid #E5E7EB',
             position: 'sticky',
             top: '64px',
-            height: 'calc(100vh - 64px)',
             alignSelf: 'flex-start',
           }}
         >
