@@ -365,7 +365,7 @@ export function AllToolsContent() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-page">
+    <div className="flex flex-col bg-page">
       {/* ── Page header ─────────────────────────────────────────────── */}
       <div className="bg-surface" style={{ borderBottom: '0.5px solid #E5E7EB' }}>
         {/* Row 1: title + search + toggle */}

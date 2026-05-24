@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
+import LayoutShell from '@/components/layout/LayoutShell';
 import { AllToolsContent } from '@/components/ui/AllToolsContent';
 
 export const metadata: Metadata = {
@@ -10,8 +11,10 @@ export const metadata: Metadata = {
 
 export default function AllToolsPage() {
   return (
-    <Suspense>
-      <AllToolsContent />
-    </Suspense>
+    <LayoutShell>
+      <Suspense>
+        <AllToolsContent />
+      </Suspense>
+    </LayoutShell>
   );
 }
