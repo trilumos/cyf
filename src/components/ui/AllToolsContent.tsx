@@ -365,7 +365,7 @@ export function AllToolsContent() {
   };
 
   return (
-    <div className="flex flex-col bg-page">
+    <div className="flex flex-col bg-surface">
       {/* ── Page header ─────────────────────────────────────────────── */}
       <div className="bg-surface" style={{ borderBottom: '0.5px solid #E5E7EB' }}>
         {/* Row 1: title + search + toggle */}
@@ -511,16 +511,18 @@ export function AllToolsContent() {
       </div>
 
       {/* ── Two-column body ──────────────────────────────────────────── */}
-      <div className="flex">
-        {/* Sidebar — sticky, full height minus navbar */}
+      <div className="flex flex-1">
+        {/* Sidebar — sticky, scrolls independently */}
         <aside
           className="hidden lg:flex flex-col flex-shrink-0 bg-surface"
           style={{
             width: '220px',
             borderRight: '0.5px solid #E5E7EB',
             position: 'sticky',
-            top: '64px',
+            top: '105px',
             alignSelf: 'flex-start',
+            height: 'calc(100vh - 105px)',
+            overflowY: 'auto',
           }}
         >
           <div
@@ -664,36 +666,36 @@ export function AllToolsContent() {
               </section>
             ))}
           </div>
-
-          {/* Footer strip */}
-          <div
-            style={{
-              padding: '10px 24px',
-              background: '#fff',
-              borderTop: '0.5px solid #E5E7EB',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: '8px',
-            }}
-          >
-            <span style={{ fontSize: '12px', color: '#374151' }}>
-              <span style={{ fontWeight: 600 }}>200</span> calculators — all free, no sign-up required
-            </span>
-            <Link
-              href="/contact/"
-              style={{
-                fontSize: '12px',
-                color: '#1B4FD8',
-                fontWeight: 500,
-                textDecoration: 'none',
-              }}
-            >
-              Suggest a calculator &rarr;
-            </Link>
-          </div>
         </main>
+      </div>
+
+      {/* ── Bottom strip — static, always above site footer ─────────── */}
+      <div
+        style={{
+          padding: '10px 24px',
+          background: '#fff',
+          borderTop: '0.5px solid #E5E7EB',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '8px',
+        }}
+      >
+        <span style={{ fontSize: '12px', color: '#374151' }}>
+          <span style={{ fontWeight: 600 }}>200</span> calculators — all free, no sign-up required
+        </span>
+        <Link
+          href="/contact/"
+          style={{
+            fontSize: '12px',
+            color: '#1B4FD8',
+            fontWeight: 500,
+            textDecoration: 'none',
+          }}
+        >
+          Suggest a calculator &rarr;
+        </Link>
       </div>
     </div>
   );
