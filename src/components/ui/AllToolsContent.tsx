@@ -304,8 +304,14 @@ export function AllToolsContent() {
   const fuse = useMemo(
     () =>
       new Fuse(CALCULATORS, {
-        keys: ['name', 'description', 'keywords'],
-        threshold: 0.35,
+        keys: [
+          { name: 'name', weight: 0.7 },
+          { name: 'keywords', weight: 0.2 },
+          { name: 'description', weight: 0.1 },
+        ],
+        threshold: 0.3,
+        ignoreLocation: true,
+        minMatchCharLength: 2,
         includeScore: true,
       }),
     [],
@@ -326,22 +332,38 @@ export function AllToolsContent() {
   }, [searchParams]);
 
   // Derived data
-  const filteredCalcs = query.trim()
-    ? fuse.search(query).map((r) => r.item)
-    : CALCULATORS;
+  const trimmedQuery = query.trim();
+  const isSearching = trimmedQuery.length > 0;
 
+  // Flat, relevance-ranked results when searching.
+  // Exact / prefix / substring name matches are boosted above fuzzy matches,
+  // so typing a calculator's name surfaces it first; "similar" tools follow.
+  const searchResults = useMemo(() => {
+    if (!isSearching) return [];
+    const q = trimmedQuery.toLowerCase();
+    const hits = fuse.search(trimmedQuery).map((r) => r.item);
+    const rank = (name: string) => {
+      const n = name.toLowerCase();
+      if (n === q) return 0;
+      if (n.startsWith(q)) return 1;
+      if (n.includes(q)) return 2;
+      return 3;
+    };
+    return [...hits].sort((a, b) => rank(a.name) - rank(b.name));
+  }, [fuse, isSearching, trimmedQuery]);
+
+  // Category grouping — used only when NOT searching
   const allGrouped = CATEGORIES.map((cat) => ({
     category: cat,
-    tools: filteredCalcs.filter((c) => c.category === cat.slug),
+    tools: CALCULATORS.filter((c) => c.category === cat.slug),
   })).filter((g) => g.tools.length > 0);
 
-  // When a specific category is selected with no search, show only that category
   const visibleGroups =
-    activeCategory === 'all' || query.trim()
+    activeCategory === 'all'
       ? allGrouped
       : allGrouped.filter((g) => g.category.slug === activeCategory);
 
-  const showPopular = activeCategory === 'all' && !query.trim();
+  const showPopular = activeCategory === 'all' && !isSearching;
   const popularCalcs = POPULAR_SLUGS.map((slug) =>
     CALCULATORS.find((c) => c.slug === slug),
   ).filter(Boolean) as Calculator[];
@@ -592,7 +614,7 @@ export function AllToolsContent() {
             )}
 
             {/* No-results state */}
-            {filteredCalcs.length === 0 && query.trim() && (
+            {isSearching && searchResults.length === 0 && (
               <div
                 style={{
                   textAlign: 'center',
@@ -605,8 +627,53 @@ export function AllToolsContent() {
               </div>
             )}
 
-            {/* Category sections */}
-            {visibleGroups.map(({ category: cat, tools }) => (
+            {/* Search results — flat, relevance-ranked (exact/closest match first) */}
+            {isSearching && searchResults.length > 0 && (
+              <section style={{ marginBottom: '32px' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    borderBottom: '0.5px solid #E5E7EB',
+                    paddingBottom: '10px',
+                    marginBottom: '12px',
+                  }}
+                >
+                  <h2
+                    style={{
+                      fontSize: '15px',
+                      fontWeight: 700,
+                      letterSpacing: '-0.3px',
+                      color: '#111827',
+                      margin: 0,
+                    }}
+                  >
+                    Search results
+                  </h2>
+                  <span style={{ fontSize: '11px', color: '#9CA3AF' }}>
+                    {searchResults.length}
+                  </span>
+                </div>
+
+                {viewMode === 'list' ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                    {searchResults.map((tool) => (
+                      <ListRow key={tool.slug} tool={tool} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
+                    {searchResults.map((tool) => (
+                      <GridCard key={tool.slug} tool={tool} />
+                    ))}
+                  </div>
+                )}
+              </section>
+            )}
+
+            {/* Category sections — only when NOT searching */}
+            {!isSearching && visibleGroups.map(({ category: cat, tools }) => (
               <section
                 key={cat.slug}
                 id={`cat-${cat.slug}`}
