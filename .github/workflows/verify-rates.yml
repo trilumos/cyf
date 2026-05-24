@@ -4,6 +4,16 @@ on:
   schedule:
     - cron: '0 9 1 * *'
   workflow_dispatch:
+    inputs:
+      asof:
+        description: 'Override "today" (YYYY-MM-DD) for a test run. Blank = real current date.'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run: log what would happen, do NOT open issues.'
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   check-rates:
@@ -21,3 +31,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          # Manual-dispatch overrides only; both are empty on the scheduled run
+          # (so the monthly job always uses the real date and runs live).
+          ASOF: ${{ inputs.asof }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
