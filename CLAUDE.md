@@ -52,6 +52,17 @@ Then tell the user: what has been completed, what is next, and **wait for them t
 This rule exists because Cloudflare Pages auto-deploys on every push to `main`. A visual check after every change catches layout regressions, broken builds, and styling issues before they compound.
 
 ---
+## Required skills — load before any UI work
+
+Before writing any code for any page, component, or UI element, always load and apply these three skills:
+
+/impeccable
+/frontend-design
+/ui-ux-pro-max
+
+These are non-negotiable. Every design decision, every component, every page must be evaluated against all three skills before implementation begins. This applies to new pages, redesigns, edits, and even small UI tweaks.
+
+If you are about to write any frontend code without having loaded all three skills first — stop and load them.
 
 ## Never do these things
 
