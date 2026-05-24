@@ -1,0 +1,39 @@
+{
+  "rule_name": "India EPF — Employee Provident Fund Rates",
+  "country": "IN",
+  "scope": "Employees and employers covered under EPF & MP Act 1952. Mandatory for establishments with 20+ employees; employees earning up to Rs 15,000/month basic wage.",
+  "effective_from": "FY 2026-27",
+  "effective_until": null,
+  "source_url": "https://www.epfindia.gov.in",
+  "source_name": "Employees' Provident Fund Organisation (EPFO), Ministry of Labour and Employment",
+  "last_verified": "2026-05-24",
+  "verified_by": "manual",
+  "review_due": "2027-03-31",
+  "notes": "Interest rate of 8.25% for FY 2026-27 announced by EPFO Central Board of Trustees. Same as FY 2024-25 and FY 2025-26 — three consecutive years of stability. Interest is calculated on monthly running balance but credited annually on 31 March. Tax-free up to Rs 2.5L annual contribution (employee share); above Rs 2.5L is taxable.",
+  "data": {
+    "interest_rate": 0.0825,
+    "interest_rate_pct": "8.25%",
+    "interest_calculation": "monthly_running_balance",
+    "interest_credit_frequency": "annual",
+    "contribution_rates": {
+      "employee_contribution_pct": 0.12,
+      "employer_contribution_pct": 0.12,
+      "employer_epf_share_pct": 0.0367,
+      "employer_eps_share_pct": 0.0833,
+      "notes": "Employer's 12% splits: 3.67% to EPF account + 8.33% to Employee Pension Scheme (EPS). EPS 8.33% is capped on Rs 15,000 wage = Rs 1,250/month max."
+    },
+    "wage_ceiling_for_mandatory_coverage": 15000,
+    "eps_wage_ceiling": 15000,
+    "edli_contribution_pct": 0.005,
+    "edli_wage_ceiling": 15000,
+    "tax_exemption": {
+      "employee_contribution_up_to": 250000,
+      "notes": "Employee EPF contribution up to Rs 2.5L/year is tax-exempt under Section 80C (old regime). Interest on contribution above Rs 2.5L/year is taxable."
+    },
+    "withdrawal_rules": {
+      "full_withdrawal_after_service_years": 5,
+      "partial_withdrawal_allowed": true,
+      "notes": "Partial withdrawal allowed for specific purposes (medical, marriage, education, home purchase) with service conditions."
+    }
+  }
+}

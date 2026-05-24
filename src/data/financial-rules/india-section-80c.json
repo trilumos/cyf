@@ -1,0 +1,32 @@
+{
+  "rule_name": "India Section 80C — Tax Deduction Limit",
+  "country": "IN",
+  "scope": "Individual and HUF taxpayers under old tax regime only.",
+  "effective_from": "FY 2014-15",
+  "effective_until": null,
+  "source_url": "https://incometaxindia.gov.in/Pages/tax-information-services.aspx",
+  "source_name": "Income Tax Department, Government of India",
+  "last_verified": "2026-05-24",
+  "verified_by": "manual",
+  "review_due": "2027-02-15",
+  "notes": "Limit unchanged since Budget 2014-15 (raised from 1L to 1.5L). Not available under new regime. Budget 2026-27 made no changes. Eligible investments include: PPF, ELSS, NSC, life insurance premiums, home loan principal, tuition fees, EPF, 5-year FD, Sukanya Samriddhi.",
+  "data": {
+    "deduction_limit": 150000,
+    "eligible_investments": [
+      { "name": "EPF (Employee Provident Fund)", "max": null, "notes": "Subject to 80C overall limit" },
+      { "name": "PPF (Public Provident Fund)", "max": 150000 },
+      { "name": "ELSS (Equity Linked Savings Scheme)", "max": null, "notes": "3-year lock-in" },
+      { "name": "NSC (National Savings Certificate)", "max": null },
+      { "name": "Life Insurance Premium", "max": null, "notes": "Premium up to 10% of sum assured for policies issued after 01-Apr-2012" },
+      { "name": "5-Year Bank/Post Office FD", "max": null },
+      { "name": "Sukanya Samriddhi Yojana", "max": 150000 },
+      { "name": "Senior Citizen Savings Scheme (SCSS)", "max": null },
+      { "name": "Home Loan Principal Repayment", "max": null },
+      { "name": "Tuition Fees (up to 2 children)", "max": null },
+      { "name": "NPS Tier I (additional 80CCD(1))", "max": 150000, "notes": "Part of 80C limit" },
+      { "name": "Unit Linked Insurance Plan (ULIP)", "max": null }
+    ],
+    "additional_nps_80ccd1b": 50000,
+    "notes_80ccd1b": "Rs 50,000 additional deduction under Section 80CCD(1B) for NPS Tier I, over and above 80C limit of Rs 1.5L"
+  }
+}

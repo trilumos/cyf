@@ -1,0 +1,73 @@
+{
+  "rule_name": "India Capital Gains Tax Rates",
+  "country": "IN",
+  "scope": "Resident individual, HUF. Rates apply to assessment year 2027-28 (FY 2026-27).",
+  "effective_from": "FY 2026-27",
+  "effective_until": null,
+  "source_url": "https://incometaxindia.gov.in/w/capital-gain",
+  "source_name": "Income Tax Department, Government of India",
+  "last_verified": "2026-05-24",
+  "verified_by": "manual",
+  "review_due": "2027-02-15",
+  "notes": "Post-Budget 2024 (Finance Act 2024, effective 23-Jul-2024) major restructuring: LTCG rate unified to 12.5% across asset classes; indexation removed for new acquisitions; STCG on equity raised to 20%. Budget 2026-27 made no further changes to these rates. Grandfathering: property acquired before 23-Jul-2024 can opt for 20% with indexation if beneficial.",
+  "data": {
+    "equity_and_equity_mf": {
+      "notes": "Listed equity shares and equity-oriented mutual funds where STT is paid at time of sale.",
+      "ltcg": {
+        "holding_period_months": 12,
+        "rate": 0.125,
+        "exemption_per_fy": 125000,
+        "surcharge_capped_at": 0.15
+      },
+      "stcg": {
+        "holding_period_months": 12,
+        "rate": 0.20,
+        "notes": "Raised from 15% to 20% by Finance Act 2024 effective 23-Jul-2024"
+      }
+    },
+    "property_land_building": {
+      "notes": "Immovable property — land and buildings.",
+      "ltcg": {
+        "holding_period_months": 24,
+        "rate_post_23jul2024": 0.125,
+        "indexation_available": false,
+        "grandfathering": {
+          "applies_to": "Assets acquired before 23-Jul-2024 by resident individual/HUF",
+          "option": "May choose 20% with indexation if it results in lower tax"
+        }
+      },
+      "stcg": {
+        "holding_period_months": 24,
+        "rate": "as_per_slab",
+        "notes": "Added to total income and taxed at applicable income tax slab rate"
+      }
+    },
+    "debt_funds_and_bonds": {
+      "notes": "Debt mutual funds, bonds, debentures.",
+      "ltcg": {
+        "holding_period_months": 24,
+        "rate": "as_per_slab",
+        "notes": "Added to total income and taxed as per slab since Finance Act 2023"
+      },
+      "stcg": {
+        "rate": "as_per_slab"
+      }
+    },
+    "gold_and_physical_assets": {
+      "ltcg": {
+        "holding_period_months": 24,
+        "rate": 0.125,
+        "indexation_available": false
+      },
+      "stcg": {
+        "rate": "as_per_slab"
+      }
+    },
+    "set_off_and_carry_forward": {
+      "ltcl_against_ltcg": true,
+      "stcl_against_ltcg_or_stcg": true,
+      "carry_forward_years": 8,
+      "special_fy2026_27": "Long-term capital losses incurred up to 31-Mar-2026 can be set off against STCG in AY 2027-28 (FY 2026-27) — one-time transitional provision."
+    }
+  }
+}

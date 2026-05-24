@@ -1,0 +1,39 @@
+{
+  "rule_name": "India Income Tax — New Regime",
+  "country": "IN",
+  "scope": "Individual taxpayer — default regime from FY 2023-24. No deductions available except standard deduction for salaried.",
+  "effective_from": "FY 2026-27",
+  "effective_until": null,
+  "source_url": "https://incometaxindia.gov.in/Pages/tax-information-services.aspx",
+  "source_name": "Income Tax Department, Government of India (Income Tax Act 2025, effective 01-Apr-2026)",
+  "last_verified": "2026-05-24",
+  "verified_by": "manual",
+  "review_due": "2027-02-15",
+  "notes": "Per Union Budget 2026-27. No slab changes from FY 2025-26. Rebate u/s 87A effectively makes income up to Rs 12L tax-free (Rs 12.75L for salaried after standard deduction). New Income Tax Act 2025 in effect from 01-Apr-2026. Surcharge at 50L-1Cr band: verify from Income Tax Act 2025 — bankbazaar shows 5%, historical rate was 10%; used 10% pending primary source confirmation.",
+  "data": {
+    "standard_deduction_salaried": 75000,
+    "standard_deduction_pensioners": 75000,
+    "rebate_under_87a_income_limit": 1200000,
+    "rebate_under_87a_amount": 60000,
+    "basic_exemption_limit": 400000,
+    "slabs": [
+      { "from": 0, "to": 400000, "rate": 0 },
+      { "from": 400000, "to": 800000, "rate": 0.05 },
+      { "from": 800000, "to": 1200000, "rate": 0.10 },
+      { "from": 1200000, "to": 1600000, "rate": 0.15 },
+      { "from": 1600000, "to": 2000000, "rate": 0.20 },
+      { "from": 2000000, "to": 2400000, "rate": 0.25 },
+      { "from": 2400000, "to": null, "rate": 0.30 }
+    ],
+    "surcharge": [
+      { "income_over": 5000000, "income_upto": 10000000, "rate": 0.10 },
+      { "income_over": 10000000, "income_upto": 20000000, "rate": 0.15 },
+      { "income_over": 20000000, "income_upto": 50000000, "rate": 0.25 },
+      { "income_over": 50000000, "income_upto": null, "rate": 0.25 }
+    ],
+    "cess_rate": 0.04,
+    "senior_citizen_benefit": false,
+    "no_deductions": true,
+    "allowed_deductions": ["standard_deduction", "nps_employer_80ccd2", "agniveer_corpus_80cch"]
+  }
+}

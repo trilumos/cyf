@@ -1,0 +1,114 @@
+{
+  "rule_name": "India GST Rate Structure",
+  "country": "IN",
+  "scope": "All registered businesses supplying goods and services in India.",
+  "effective_from": "2025-09-22",
+  "effective_until": null,
+  "source_url": "https://www.cbic.gov.in/entities/gst",
+  "source_name": "Central Board of Indirect Taxes and Customs (CBIC), Government of India",
+  "last_verified": "2026-05-24",
+  "verified_by": "manual",
+  "review_due": "2026-12-01",
+  "notes": "GST 2.0 reforms from 56th GST Council meeting (Sept 2025) simplified slabs. Main rates are now 0%, 5%, 18%, 40%. The 12% slab was largely eliminated; 28% slab retained only for tobacco products. 3% slab exists for gold/precious metals. Review after each GST Council meeting for category-specific changes.",
+  "data": {
+    "slabs": [
+      {
+        "rate": 0,
+        "label": "Nil / Exempt",
+        "key_categories": [
+          "Fresh vegetables, fruits, nuts (unprocessed)",
+          "Unprocessed grains and cereals",
+          "Fresh milk, curd, lassi, buttermilk",
+          "Fresh eggs, meat, fish (non-packaged)",
+          "33 specified lifesaving drugs",
+          "Books, newspapers, educational materials",
+          "Bangles, handloom fabric",
+          "Individual health and life insurance (exempted from GST 2.0)",
+          "Healthcare services by hospitals",
+          "Educational services"
+        ]
+      },
+      {
+        "rate": 0.0025,
+        "label": "0.25%",
+        "key_categories": [
+          "Rough diamonds and precious stones"
+        ]
+      },
+      {
+        "rate": 0.03,
+        "label": "3%",
+        "key_categories": [
+          "Gold, silver, platinum (precious metals)",
+          "Jewellery"
+        ]
+      },
+      {
+        "rate": 0.05,
+        "label": "5%",
+        "key_categories": [
+          "Personal care items (hair oil, shampoo, toothpaste, soap)",
+          "Processed foods (spices, oils, sugar, edible fats)",
+          "Butter, ghee, cheese",
+          "Prepared/preserved vegetables, fruits, nuts",
+          "Prepared/preserved fish and seafood",
+          "Agricultural equipment and tractors",
+          "Medical supplies (thermometers, diagnostic kits, glucometers)",
+          "Solar-powered devices and panels",
+          "Textiles and apparel up to Rs 2,500 per piece",
+          "Metal utensils and household items",
+          "Coffee, tea (other than instant)"
+        ]
+      },
+      {
+        "rate": 0.18,
+        "label": "18%",
+        "key_categories": [
+          "Electronics (TVs, air conditioners, refrigerators, washing machines)",
+          "Automobiles (standard passenger cars)",
+          "Auto components (most)",
+          "Machinery and industrial equipment",
+          "Apparel above Rs 2,500 per piece",
+          "Furniture and furnishings",
+          "Pharmaceuticals and industrial chemicals",
+          "Petroleum products (some)",
+          "Restaurants (most dine-in — without ITC opted)",
+          "IT services, telecom services",
+          "Financial services",
+          "Construction services",
+          "Professional services (legal, consulting)"
+        ]
+      },
+      {
+        "rate": 0.28,
+        "label": "28%",
+        "key_categories": [
+          "Pan masala",
+          "Tobacco and tobacco products",
+          "Cigarettes"
+        ]
+      },
+      {
+        "rate": 0.40,
+        "label": "40% (Luxury & Sin)",
+        "key_categories": [
+          "High-sugar carbonated beverages",
+          "Caffeinated beverages",
+          "Luxury vehicles (motorcycles above 350cc)",
+          "High-end passenger cars",
+          "Yachts and pleasure vessels",
+          "Gambling and betting services",
+          "Revolvers and pistols",
+          "Aircraft for personal use"
+        ]
+      }
+    ],
+    "composition_scheme_rates": {
+      "manufacturers": 0.01,
+      "traders": 0.01,
+      "restaurants_not_serving_alcohol": 0.05,
+      "notes": "Composition scheme for small businesses with turnover up to Rs 1.5 crore (Rs 75L for special category states)"
+    },
+    "igst_notes": "IGST applies on inter-state supplies at same rate as CGST + SGST combined."
+  }
+}

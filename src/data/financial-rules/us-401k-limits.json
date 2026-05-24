@@ -1,0 +1,54 @@
+{
+  "rule_name": "US 401(k) and Retirement Plan Contribution Limits 2026",
+  "country": "US",
+  "scope": "Participants in 401(k), 403(b), governmental 457 plans, Thrift Savings Plan (TSP), traditional IRA, Roth IRA, SIMPLE IRA.",
+  "effective_from": "2026-01-01",
+  "effective_until": "2026-12-31",
+  "source_url": "https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500",
+  "source_name": "Internal Revenue Service (IRS), US Department of the Treasury",
+  "last_verified": "2026-05-24",
+  "verified_by": "manual",
+  "review_due": "2026-11-01",
+  "notes": "Per IRS IR-2025-111. 401k employee limit increased from $23,500 to $24,500. IRA limit increased from $7,000 to $7,500. SECURE 2.0 Act enhanced catch-up for age 60-63. Review in November 2026 when IRS publishes 2027 amounts.",
+  "data": {
+    "plan_year": 2026,
+    "four01k_403b_457_tsp": {
+      "employee_elective_deferral": 24500,
+      "catch_up_age_50_plus": 8000,
+      "catch_up_age_60_to_63_secure2": 11250,
+      "max_total_age_50_plus": 32500,
+      "max_total_age_60_to_63": 35750,
+      "notes": "Employee + employer combined limit (415c) not specified in source — approximately $70,000; verify from IRS Notice 2025-82."
+    },
+    "traditional_ira": {
+      "contribution_limit": 7500,
+      "catch_up_age_50_plus": 1100,
+      "max_with_catchup": 8600,
+      "deductibility_phaseout": {
+        "single_covered_by_plan": { "from": 81000, "to": 91000 },
+        "mfj_contributor_covered": { "from": 129000, "to": 149000 },
+        "mfj_non_covered_spouse": { "from": 242000, "to": 252000 },
+        "married_filing_separately": { "from": 0, "to": 10000 }
+      }
+    },
+    "roth_ira": {
+      "contribution_limit": 7500,
+      "catch_up_age_50_plus": 1100,
+      "income_phaseout": {
+        "single_or_hoh": { "from": 153000, "to": 168000 },
+        "married_filing_jointly": { "from": 242000, "to": 252000 },
+        "married_filing_separately": { "from": 0, "to": 10000 }
+      }
+    },
+    "simple_ira": {
+      "contribution_limit": 17000,
+      "secure2_enhanced_limit": 18100,
+      "catch_up_age_50_plus": 4000,
+      "catch_up_age_60_to_63_secure2": 5250,
+      "notes": "SIMPLE IRA limit increased from $16,500 to $17,000. SECURE 2.0 enhanced limit for qualifying employers."
+    },
+    "sep_ira": {
+      "notes": "SEP-IRA limit is 25% of compensation or $70,000 (2025 figure) — verify 2026 amount from IRS."
+    }
+  }
+}

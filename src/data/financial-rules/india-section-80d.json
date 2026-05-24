@@ -1,0 +1,35 @@
+{
+  "rule_name": "India Section 80D — Medical Insurance Deduction",
+  "country": "IN",
+  "scope": "Individual and HUF taxpayers under old tax regime only.",
+  "effective_from": "FY 2018-19",
+  "effective_until": null,
+  "source_url": "https://incometaxindia.gov.in/Pages/tax-information-services.aspx",
+  "source_name": "Income Tax Department, Government of India",
+  "last_verified": "2026-05-24",
+  "verified_by": "manual",
+  "review_due": "2027-02-15",
+  "notes": "Limits unchanged in Budget 2026-27. Deduction for health insurance premiums paid for self, spouse, dependent children, and parents. Preventive health check-up sub-limit included within overall cap. Not available under new regime.",
+  "data": {
+    "self_family_below_60": {
+      "health_insurance_limit": 25000,
+      "preventive_checkup_sublimit": 5000
+    },
+    "self_family_senior_60_plus": {
+      "health_insurance_limit": 50000,
+      "preventive_checkup_sublimit": 5000
+    },
+    "parents_below_60": {
+      "health_insurance_limit": 25000,
+      "preventive_checkup_sublimit": 5000
+    },
+    "parents_senior_60_plus": {
+      "health_insurance_limit": 50000,
+      "preventive_checkup_sublimit": 5000
+    },
+    "max_total_deduction_all_below_60": 50000,
+    "max_total_deduction_parents_senior": 75000,
+    "max_total_deduction_all_senior": 100000,
+    "notes": "Max if self+family senior AND parents senior = Rs 50,000 + Rs 50,000 = Rs 1,00,000. Preventive check-up sub-limit of Rs 5,000 is within the respective cap, not additional."
+  }
+}

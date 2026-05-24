@@ -1,0 +1,44 @@
+{
+  "rule_name": "India Income Tax — Old Regime",
+  "country": "IN",
+  "scope": "Individual taxpayer opting out of new regime. Allows all deductions (80C, 80D, HRA, etc.).",
+  "effective_from": "FY 2026-27",
+  "effective_until": null,
+  "source_url": "https://incometaxindia.gov.in/Pages/tax-information-services.aspx",
+  "source_name": "Income Tax Department, Government of India (Income Tax Act 2025, effective 01-Apr-2026)",
+  "last_verified": "2026-05-24",
+  "verified_by": "manual",
+  "review_due": "2027-02-15",
+  "notes": "Per Union Budget 2026-27. No changes from prior year. Must opt-in explicitly; new regime is default. Standard deduction applies only to salaried individuals and pensioners. 87A rebate makes effective zero tax up to 5L income.",
+  "data": {
+    "standard_deduction_salaried": 50000,
+    "standard_deduction_pensioners": 50000,
+    "rebate_under_87a_income_limit": 500000,
+    "rebate_under_87a_amount": 12500,
+    "slabs_below_60": [
+      { "from": 0, "to": 250000, "rate": 0 },
+      { "from": 250000, "to": 500000, "rate": 0.05 },
+      { "from": 500000, "to": 1000000, "rate": 0.20 },
+      { "from": 1000000, "to": null, "rate": 0.30 }
+    ],
+    "slabs_senior_60_to_79": [
+      { "from": 0, "to": 300000, "rate": 0 },
+      { "from": 300000, "to": 500000, "rate": 0.05 },
+      { "from": 500000, "to": 1000000, "rate": 0.20 },
+      { "from": 1000000, "to": null, "rate": 0.30 }
+    ],
+    "slabs_super_senior_80_plus": [
+      { "from": 0, "to": 500000, "rate": 0 },
+      { "from": 500000, "to": 1000000, "rate": 0.20 },
+      { "from": 1000000, "to": null, "rate": 0.30 }
+    ],
+    "surcharge": [
+      { "income_over": 5000000, "income_upto": 10000000, "rate": 0.10 },
+      { "income_over": 10000000, "income_upto": 20000000, "rate": 0.15 },
+      { "income_over": 20000000, "income_upto": 50000000, "rate": 0.25 },
+      { "income_over": 50000000, "income_upto": null, "rate": 0.37 }
+    ],
+    "cess_rate": 0.04,
+    "allows_all_deductions": true
+  }
+}

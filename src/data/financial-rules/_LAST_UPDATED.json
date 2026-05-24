@@ -1,0 +1,86 @@
+{
+  "manifest_version": 1,
+  "last_generated": "2026-05-24T05:02:32.878Z",
+  "files": [
+    {
+      "filename": "india-capital-gains.json",
+      "rule_name": "India Capital Gains Tax Rates",
+      "country": "IN",
+      "last_verified": "2026-05-24",
+      "review_due": "2027-02-15",
+      "verified_by": "manual"
+    },
+    {
+      "filename": "india-epf-rates.json",
+      "rule_name": "India EPF — Employee Provident Fund Rates",
+      "country": "IN",
+      "last_verified": "2026-05-24",
+      "review_due": "2027-03-31",
+      "verified_by": "manual"
+    },
+    {
+      "filename": "india-gst-rates.json",
+      "rule_name": "India GST Rate Structure",
+      "country": "IN",
+      "last_verified": "2026-05-24",
+      "review_due": "2026-12-01",
+      "verified_by": "manual"
+    },
+    {
+      "filename": "india-ppf-rates.json",
+      "rule_name": "India PPF — Public Provident Fund Rates",
+      "country": "IN",
+      "last_verified": "2026-05-24",
+      "review_due": "2026-07-01",
+      "verified_by": "manual"
+    },
+    {
+      "filename": "india-section-80c.json",
+      "rule_name": "India Section 80C — Tax Deduction Limit",
+      "country": "IN",
+      "last_verified": "2026-05-24",
+      "review_due": "2027-02-15",
+      "verified_by": "manual"
+    },
+    {
+      "filename": "india-section-80d.json",
+      "rule_name": "India Section 80D — Medical Insurance Deduction",
+      "country": "IN",
+      "last_verified": "2026-05-24",
+      "review_due": "2027-02-15",
+      "verified_by": "manual"
+    },
+    {
+      "filename": "india-tax-new-regime.json",
+      "rule_name": "India Income Tax — New Regime",
+      "country": "IN",
+      "last_verified": "2026-05-24",
+      "review_due": "2027-02-15",
+      "verified_by": "manual"
+    },
+    {
+      "filename": "india-tax-old-regime.json",
+      "rule_name": "India Income Tax — Old Regime",
+      "country": "IN",
+      "last_verified": "2026-05-24",
+      "review_due": "2027-02-15",
+      "verified_by": "manual"
+    },
+    {
+      "filename": "us-401k-limits.json",
+      "rule_name": "US 401(k) and Retirement Plan Contribution Limits 2026",
+      "country": "US",
+      "last_verified": "2026-05-24",
+      "review_due": "2026-11-01",
+      "verified_by": "manual"
+    },
+    {
+      "filename": "us-tax-brackets.json",
+      "rule_name": "US Federal Income Tax Brackets 2026",
+      "country": "US",
+      "last_verified": "2026-05-24",
+      "review_due": "2026-11-01",
+      "verified_by": "manual"
+    }
+  ]
+}

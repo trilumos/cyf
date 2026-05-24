@@ -1,0 +1,57 @@
+{
+  "rule_name": "India PPF — Public Provident Fund Rates",
+  "country": "IN",
+  "scope": "Resident Indian individuals. One account per person (except for minors). Non-residents and NRIs cannot open new accounts; existing accounts continue until maturity.",
+  "effective_from": "2026-04-01",
+  "effective_until": null,
+  "source_url": "https://www.indiapost.gov.in/Financial/Pages/Content/ppf.aspx",
+  "source_name": "Department of Economic Affairs, Ministry of Finance, Government of India",
+  "last_verified": "2026-05-24",
+  "verified_by": "manual",
+  "review_due": "2026-07-01",
+  "notes": "Rate of 7.1% p.a. confirmed for Q1 FY 2026-27 (Apr-Jun 2026) per DEA notification dated 30-Mar-2026. Rate unchanged since April 2020 (was 7.9% before that). Review on 1 July 2026 for Q2 FY 2026-27 rate. Interest compounded annually, credited on 31 March. Tax-free — EEE status (Exempt at contribution, Exempt on interest, Exempt on maturity).",
+  "data": {
+    "current_interest_rate": 0.071,
+    "current_rate_pct": "7.1%",
+    "effective_quarter": "Q1 FY 2026-27 (01-Apr-2026 to 30-Jun-2026)",
+    "interest_compounding": "annual",
+    "interest_credit_date": "31 March each year",
+    "interest_calculation_basis": "minimum_balance_between_5th_and_last_day_of_month",
+    "contribution_limits": {
+      "minimum_per_year": 500,
+      "maximum_per_year": 150000,
+      "minimum_per_transaction": 500,
+      "frequency": "up to 12 deposits per financial year"
+    },
+    "tenure": {
+      "initial_years": 15,
+      "extension_block_years": 5,
+      "extension_with_contributions": true,
+      "extension_without_contributions": true
+    },
+    "tax_status": {
+      "contribution_deduction": "Section 80C (up to Rs 1.5L, old regime)",
+      "interest_taxability": "exempt",
+      "maturity_taxability": "exempt",
+      "regime": "EEE"
+    },
+    "premature_closure": {
+      "allowed_after_years": 5,
+      "conditions": ["serious illness", "higher education", "change of residency status"],
+      "penalty_rate_reduction": 0.01
+    },
+    "loan_facility": {
+      "available_from_year": 3,
+      "available_till_year": 6,
+      "max_loan_pct_of_balance": 0.25
+    },
+    "partial_withdrawal": {
+      "available_from_year": 7,
+      "max_withdrawal_pct_of_balance": 0.50
+    },
+    "rate_history": [
+      { "period": "FY 2019-20 Q1 to Q3", "rate": 0.079 },
+      { "period": "FY 2019-20 Q4 onwards to FY 2026-27 Q1", "rate": 0.071 }
+    ]
+  }
+}
