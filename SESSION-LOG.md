@@ -31,6 +31,37 @@ Copy the template below, fill it in, append it under "## Sessions" in reverse ch
 
 ## Sessions
 
+### Session 6 — 2026-05-24
+
+**Completed this session — Day 4 fully complete:**
+- Rebuilt `/all-tools/` page (`AllToolsContent.tsx`) per pixel-perfect spec: full-width layout, 220px left category rail, category pills row, "Most popular" section (8 tools), per-category sections, list/grid view toggle, footer strip
+- Rebuilt `src/data/calculators-index.ts` — now derives all 200 entries from `calculators.ts` (was stale 47-entry static list); wired to navbar SearchBar
+- Updated `SearchBar.tsx` `CATEGORY_COLORS` keys to match new `categoryName` values
+- Verified MegaMenu "View all" links already wired (`MegaMenu.tsx:287`, `:300`)
+- Wrapped all-tools `page.tsx` in `LayoutShell` (navbar + footer were missing)
+- Layout fixes: removed `flex-1` stretch gap; made left rail non-sticky (scrolls with page, stretches via default align-items); removed `mt-16` from shared `Footer.tsx` (was creating 64px gray gap above footer site-wide)
+- Search rewrite: flat relevance-ranked results when searching (no longer category-grouped, which buried exact matches); exact/prefix/substring name-match boost so typing a calculator name surfaces it first; Fuse config improved (name weight 0.7 / keywords 0.2 / description 0.1, threshold 0.3, `ignoreLocation: true`, `minMatchCharLength: 2`)
+- CLAUDE.md: user added "Required skills" section (load /impeccable, /frontend-design, /ui-ux-pro-max before any UI work) + "Deferred features" section (hero interactivity + hero currency context)
+
+**Last git commit hash:** e53a14c
+**Last git commit message:** fix: all-tools search — flat relevance ranking, exact name match first
+
+**Exact stopping point:**
+Day 4 100% complete. All Tools page built, layout polished, navbar/footer integrated, search made relevance-aware. All visual checkpoints confirmed by user ("looks good").
+
+**What is next:**
+- **Day 5** per `docs/prd/04-TECHNICAL.md`:
+  - Set up `/src/data/financial-rules/` directory
+  - Read `05-LIVING-DATA.md` (JSON schema) + `01-FRESHNESS-AND-RESEARCH.md` (sourcing rules) FIRST
+  - Web-research + populate 7 JSON files with current FY 2026-27 values: india-tax-old-regime, india-tax-new-regime, india-gst-rates, india-epf-rates, india-ppf-rates, us-tax-brackets, us-401k-limits
+  - Build `LastUpdatedBadge` component
+
+**Blockers / notes:**
+- `calcyourfinance.com` domain still on Vercel — do NOT touch until launch day
+- `NEXT_PUBLIC_ADS_ENABLED` env var — flip to `'true'` in Cloudflare Pages after AdSense approval
+- Day 5 rates require live web search — never hardcode/guess government rates (CLAUDE.md rule)
+- Hero panel interactivity + currency context still deferred to Day 6+ (calculator pages)
+
 ### Session 5 — 2026-05-23
 
 **Completed this session:**
