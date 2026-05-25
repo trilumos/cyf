@@ -1,5 +1,7 @@
 # 04 — Technical Implementation
 
+> **RECONCILED 2026-05-25.** Where this doc covers the calculator page, PDF export, charts, currency, or schema, **`08-CALCULATOR-BUILD-STANDARD.md` is authoritative** and overrides any older wording here. Key corrections baked into this doc: installed major versions differ from the samples below (recharts **3.x**, jspdf **4.x**, next-mdx-remote **6.x**); PDF uses native jsPDF + `jspdf-autotable` (not whole-page `html2canvas`); currency detection is static-only (ipapi.co removed); calculator schema is `SoftwareApplication`; there is **no `deploy.yml`** — Cloudflare Pages auto-deploys on push; `next-seo` is unused (Metadata API is the mechanism).
+
 ## Tech stack
 
 | Layer | Choice | Why |
@@ -78,20 +80,20 @@ export default nextConfig;
 │   │   ├── calculator/    CalculatorShell, Inputs, Results, PlainEnglishSummary, ResultsChart, LastUpdatedBadge, RelatedToolsCard, RelatedArticlesCard, ExportShareCard, EducationalContent, ComparisonTable, FAQSection
 │   │   ├── ui/            ToolCard, CategoryCard, BlogCard, FeaturedBlogCard, BreadcrumbNav, CtaCalculatorCard, TocSidebar
 │   │   └── seo/           JsonLd, MetaTags
-│   ├── calculators/
-│   │   ├── _template/      Reference implementation
-│   │   ├── loan-emi/       18 files
-│   │   ├── investment/     20 files
-│   │   ├── tax/            16 files
-│   │   ├── retirement/     12 files
-│   │   ├── insurance/      10 files
-│   │   ├── business/       14 files
-│   │   ├── currency-fx/    8 files
-│   │   ├── real-estate/    12 files
-│   │   ├── personal-finance/ 14 files
-│   │   ├── stocks-crypto/  10 files
-│   │   ├── economics/      10 files
-│   │   └── financial-math/ 12 files
+│   ├── calculators/        // file count per folder = blueprint count in doc 02 (authoritative)
+│   │   ├── _template/      Reference implementation (EMI, Day 6)
+│   │   ├── loan-emi/       24
+│   │   ├── investment/     24
+│   │   ├── tax/            20
+│   │   ├── retirement/     16
+│   │   ├── insurance/      12
+│   │   ├── business/       18
+│   │   ├── currency-fx/    10
+│   │   ├── real-estate/    14
+│   │   ├── personal-finance/ 18
+│   │   ├── stocks-crypto/  16
+│   │   ├── economics/      12
+│   │   └── financial-math/ 16
 │   ├── content/
 │   │   └── blog/                          // 12 MDX articles at launch
 │   ├── data/
@@ -224,7 +226,7 @@ Every page must set:
 
 **All pages:** `Organization`, `WebSite` with `SearchAction`
 
-**Calculator pages:** `FAQPage` (from the FAQ section), `HowTo` (from the "How to use this calculator" steps), `BreadcrumbList`, `WebApplication` (the calculator itself with `applicationCategory: "FinanceApplication"`)
+**Calculator pages:** `FAQPage` (from the FAQ section), `HowTo` (from the "How to use this calculator" steps), `BreadcrumbList`, **`SoftwareApplication`** (the calculator itself with `applicationCategory: "FinanceApplication"`, `operatingSystem: "Web"`, `offers.price: "0"`). **Do NOT add `aggregateRating`** unless a real rating system exists — fabricated ratings are a Google penalty. (Supersedes the earlier `WebApplication` choice.)
 
 **Article pages:** `Article` (with `headline`, `datePublished`, `dateModified`, `author`, `image`), `BreadcrumbList`, `FAQPage` if applicable
 
@@ -253,6 +255,10 @@ User-agent: *
 Allow: /
 Sitemap: https://calcyourfinance.com/sitemap.xml
 ```
+
+### `llms.txt` (Day 26, low effort)
+
+Auto-generate `/public/llms.txt` from `CALCULATORS` at build time — a structured index (one line per calculator + per article with URL and one-line description) so AI search engines (Perplexity, ChatGPT/Claude search, Copilot) can surface the right pages. Cheap to add, keeps itself in sync. Optional `/public/llms-full.txt` later.
 
 ### Core Web Vitals targets
 
@@ -324,13 +330,15 @@ In root layout, conditionally inject the AdSense script:
 
 ### Ad slot inventory per calculator page
 
-Total: 5 ad slots per calculator page
+> **REVISED to 3 slots** (was 5). The left ad rail is gone — see doc 08 §2. Fewer ads = better Core Web Vitals and better AdSense standing while the account is under review.
 
-1. Left rail top — 300×250 (sticky)
-2. Left rail bottom — 300×150 (sticky)
-3. Center between inputs and results — 728×90
-4. Center below results — 728×90
-5. Right rail bottom — 300×150 (below export buttons)
+Total: 3 ad slots per calculator page
+
+1. In-content responsive unit — between inputs and results
+2. In-content responsive unit — below results
+3. Right rail — 300×250 (below the Export/Share card)
+
+`AdSlot` reserves each slot's dimensions even when `NEXT_PUBLIC_ADS_ENABLED=false`, so enabling ads causes zero layout shift (doc 08 §2).
 
 Plus 1 ad in the homepage ("Browse by category" banner) and 1 mid-article ad on each article page, and 1 ad in the blog listing sidebar.
 
@@ -347,12 +355,15 @@ Set in Cloudflare Pages env settings. To enable ads post-AdSense-approval, chang
 
 ## PDF export
 
+> **Approach (locked):** native jsPDF **text** + `jspdf-autotable` **tables** + a **crisp 2× raster snapshot of the single chart element** (not the whole page). This yields selectable text, < 150 KB files, and reliable chart rendering — unlike whole-page `html2canvas`, which produced blurry multi-MB rasters with broken Recharts SVGs. Add `jspdf-autotable` on Day 6. Full-vector `svg2pdf.js` was considered and deferred (not worth per-chart tuning across 200 calculators). See doc 08 §6.
+
 ### Library setup
 
 ```typescript
 // /src/lib/pdf-export.ts
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';                 // v4 API
+import autoTable from 'jspdf-autotable';       // tables (amortization, comparison)
+import html2canvas from 'html2canvas';         // ONLY to snapshot the chart element at scale: 2
 
 export async function exportCalculatorPDF(opts: {
   calculatorName: string;
@@ -388,27 +399,30 @@ The "Export as PDF" button in ExportShareCard calls this. Should complete in und
 
 ## Currency detection
 
+> **ipapi.co REMOVED.** Its free tier (1000 req/day) silently breaks under real traffic. Detection is now **static-only** — no third-party call, no rate limit, no backend, privacy-friendly. The manual `CurrencySelector` in the navbar is the real control. Implemented in `src/lib/currency-context.tsx`. See doc 08 §7.
+
 ```typescript
-// /src/lib/currency.ts
+// /src/lib/currency-context.tsx (detection order)
 
 const CACHE_KEY = 'cyf_currency_pref';
-const CACHE_TTL = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 export async function detectCurrency(): Promise<CurrencyCode> {
-  // 1. Check localStorage override
+  // 1. Saved preference (localStorage) — the user's explicit choice always wins
   const saved = localStorage.getItem(CACHE_KEY);
   if (saved) return JSON.parse(saved).currency;
 
-  // 2. Try ipapi.co (free tier, no key)
-  try {
-    const res = await fetch('https://ipapi.co/json/');
-    const { currency } = await res.json();
-    if (currency) return currency;
-  } catch { /* fall through */ }
+  // 2. Browser locale, e.g. en-IN → INR, en-GB → GBP
+  const locale = navigator.language || '';
+  const byLocale = localeToCurrency(locale);
+  if (byLocale) return byLocale;
 
-  // 3. Fallback to browser locale
-  const locale = navigator.language || 'en-US';
-  return localeToCurrency(locale) ?? 'USD';
+  // 3. Timezone tiebreaker, e.g. Asia/Kolkata → INR
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const byTz = tzToCurrency(tz);
+  if (byTz) return byTz;
+
+  // 4. Default
+  return 'INR';
 }
 
 export function setUserCurrency(code: CurrencyCode) {
@@ -559,10 +573,12 @@ Build in priority order (highest Google search volume first):
 
 ## Cloudflare Pages deployment
 
-### GitHub Actions workflow
+> **No `deploy.yml` exists or is needed.** Cloudflare Pages is connected to the GitHub repo and **auto-builds + auto-deploys on every push to `main`** (build command `npm run build`, output `out`). The only GitHub Actions workflow in the repo is `verify-rates.yml` (monthly rate check). The `deploy.yml` sample below is retained for reference only — do not create it; a second deploy path would double-build and conflict with Cloudflare's own CI.
+
+### GitHub Actions workflow (reference only — NOT used)
 
 ```yaml
-# .github/workflows/deploy.yml
+# .github/workflows/deploy.yml  ← DO NOT CREATE (Cloudflare auto-deploys on push)
 name: Deploy to Cloudflare Pages
 
 on:

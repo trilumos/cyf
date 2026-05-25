@@ -77,7 +77,7 @@ If you are about to write any frontend code without having loaded all three skil
 
 ## PRD documents — consult before making decisions
 
-All 8 PRD files live in `docs/prd/`. Read the relevant one before building anything.
+All PRD files live in `docs/prd/`. Read the relevant one before building anything.
 
 | File | When to read |
 |------|-------------|
@@ -89,6 +89,18 @@ All 8 PRD files live in `docs/prd/`. Read the relevant one before building anyth
 | `05-LIVING-DATA.md` | Before creating any financial-rules JSON file |
 | `06-LAUNCH-AND-POST-LAUNCH.md` | Before touching deployment, analytics, or AdSense |
 | `07-DAY-ZERO-SETUP.md` | Reference for the initial setup steps |
+| `08-CALCULATOR-BUILD-STANDARD.md` | **Before building ANY calculator (Day 6+). Authoritative — overrides older calculator-page/PDF/chart/currency/schema wording in docs 02–05.** |
+
+### Locked build decisions (validated 2026-05-25, full detail in doc 08 §0)
+
+- **Calculator page layout:** center column + one 300px right rail. NO left ad rail. 3 ad slots (2 in-content responsive + 1 right-rail 300×250). `AdSlot` reserves dimensions when ads are off (zero CLS).
+- **PDF export:** native jsPDF text + `jspdf-autotable` + 2× raster snapshot of the chart only. Not whole-page html2canvas.
+- **Currency:** static-only detection (navigator.language + timezone + manual selector). ipapi.co removed.
+- **Calculator schema:** `SoftwareApplication`. Never fabricate `aggregateRating`.
+- **Installed majors differ from PRD samples:** recharts 3.x, jspdf 4.x, next-mdx-remote 6.x. `next-seo` unused.
+- **Deploy:** Cloudflare auto-deploys on push to `main`. No `deploy.yml`.
+- **Legal pages:** About + Privacy + Disclaimer + **Terms** all required (AdSense already applied on the MVP — keep parity before swap).
+- **Content:** anti-template checklist (doc 08 §3) enforced per calculator.
 
 ---
 

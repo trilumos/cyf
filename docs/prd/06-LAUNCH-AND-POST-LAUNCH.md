@@ -46,8 +46,9 @@ This document covers everything that happens after Claude Code finishes building
 
 ### Legal readiness
 
-- [ ] Privacy Policy includes: data collected (none), cookies (only AdSense post-approval), third-party services (ipapi.co, Cloudflare, AdSense, FX API), user rights
+- [ ] Privacy Policy includes: data collected (none), cookies (only AdSense post-approval), third-party services (Cloudflare, AdSense, FX API — note: ipapi.co removed), user rights
 - [ ] Disclaimer explicitly states "not financial advice", "results are estimates", "consult a professional"
+- [ ] **Terms of Use page live** (legal-page parity with the MVP under AdSense review — required before domain swap)
 - [ ] Contact email (`hello@calcyourfinance.com`) is set up and monitored — use Cloudflare Email Routing to forward to your personal email (free)
 - [ ] If targeting EU users: cookie consent banner ready (only needed once ads are enabled)
 
@@ -181,6 +182,14 @@ This gives you professional email addresses for the contact page with zero cost.
 ### Goal: AdSense approval, first organic clicks, content expansion
 
 ### AdSense Application Process
+
+> **STATUS UPDATE (2026-05-25): AdSense has ALREADY been applied for** against the current `calcyourfinance.com` MVP (on Vercel). That MVP has About, Privacy, and Terms pages and calculator pages carrying how-to / what-is / FAQ content; it does **not** have blog articles. Implications for the new Cloudflare build:
+> - **The application is tied to the domain.** When the new build swaps onto `calcyourfinance.com`, it must be at least as content-rich and policy-compliant as the MVP, or the account is at risk.
+> - **Legal-page parity is mandatory before swap:** the new build must ship About + Privacy + Disclaimer + **Terms** (the Terms page was wrongly dropped in an earlier doc-02 draft — it is now required; see doc 02).
+> - **No broken links / no thin pages** at swap time. Every calculator page's educational + FAQ content is exactly what's under review — this is why the anti-template content discipline (doc 08 §3) is load-bearing, not optional.
+> - Do not re-apply or change anything in the AdSense dashboard during the build. The `NEXT_PUBLIC_ADS_ENABLED=false → true` flip happens only after approval is confirmed.
+>
+> The original application guidance below is retained for reference and for any future re-application.
 
 **Requirements before applying** (verify each):
 

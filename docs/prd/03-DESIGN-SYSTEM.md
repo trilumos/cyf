@@ -91,7 +91,7 @@ Apply `font-family: var(--font-inter), system-ui, sans-serif` globally.
 ## Spacing & sizing
 
 - Page max width: `1200px`, centered with `px-4` on mobile, `px-6` desktop
-- Calculator page grid: `155px` left col, `1fr` center, `155px` right col, `gap-4`
+- Calculator page grid: **`minmax(0,1fr)` center + `300px` right rail, `gap-8`** (no left rail). See `08-CALCULATOR-BUILD-STANDARD.md` §2 — this supersedes the old `155px / 1fr / 155px` three-column grid, which could not physically hold 300px ads.
 - Card border radius: `rounded-xl` (12px) for major cards, `rounded-lg` (8px) for inner sections, `rounded-md` (6px) for buttons/pills
 - Card border: `border border-border` (0.5px solid `#E5E7EB`)
 - Card padding: `p-4` to `p-6` depending on density
@@ -198,49 +198,35 @@ Build these as reusable components in `/src/components/`:
 
 ### Individual calculator page (`/calculators/[slug]/`)
 
+> **AUTHORITATIVE SPEC: see `08-CALCULATOR-BUILD-STANDARD.md` §2.** The layout below is a summary; doc 08 is the source of truth for the calculator-page layout, module interface, content checklist, charts, PDF, and schema. The earlier "three-column with left + right ad rails" design has been replaced because 300px ads cannot fit a 155px rail and the double-rail layout hurt Core Web Vitals and AdSense standing.
+
 **Structure (top to bottom):**
 
 1. `<Navbar />`
 2. Breadcrumb: `Home › [Category] › [Calculator Name]`
-3. Three-column grid layout (`gap-3`)
-   - **Left column (155px):** floating cards stack, sticky until footer
-     - AdSlot (300×250)
-     - AdSlot (300×150)
-   - **Center column (1fr):** single white card with everything inside
-     - H2 (tool name)
-     - Sub line: brief description
+3. **Two-area grid: center column (`minmax(0,1fr)`, max ≈ 760px) + right rail (`300px`, sticky), `gap-8`. No left rail.**
+   - **Center column:**
+     - H1 (tool name) + sub line (brief description)
      - **LastUpdatedBadge** (only for calculators that read from a JSON file)
-     - Inputs section
-       - Each input: small label, input row (with embedded value tag), slider below
-       - Sliders use `--brand-primary` track and thumb
-     - AdSlot (728×90) — between inputs and results
-     - Results section (background `bg-brand-primaryLight`, border `border-brand-primaryBorder`, `rounded-lg`, `p-4`)
+     - Inputs section — each input: small label, input row with embedded value tag, slider below (`--brand-primary` track/thumb)
+     - AdSlot (responsive in-content) — between inputs and results
+     - Results section (background `bg-brand-primaryLight` #EEF2FF, border `border-brand-primaryBorder`, `rounded-lg`, `p-4`)
        - "Your results" small label
-       - 3-column grid of result number cards (label + big value)
-       - Chart below (Recharts, uses `--brand-primary` palette)
-       - **Plain-English summary block** (PlainEnglishSummary component) — functional color only; no glyph/emoji, no yellow/green, no colored side-stripe
-         - Label: "What this means for you" (plain text, no decorative glyph)
-         - Intro paragraph using `<strong>` for key numbers
-         - Key insight on a subtle `bg-brand-primaryLight` (#EEF2FF) tint, `rounded-lg`, `p-3` — full edge, NO colored left-stripe
-         - Tip line (`text-ink-secondary`) that ends in a `text-brand-primary` link to a related tool
-     - AdSlot (728×90) — below results
-     - Educational content section
-       - H3: "What is [tool]?"
-       - 2–3 paragraphs of body text
-       - H3: "How to use this calculator"
-       - Numbered steps
-       - H3: "Formula"
-       - Math formula with worked example
-       - ComparisonTable (only for tools where a comparison adds value)
-       - FAQSection (4–5 Q&As, emits FAQ JSON-LD schema)
-   - **Right column (155px):** floating cards stack, sticky until footer
+       - grid of result number cards (label + big value)
+       - Chart (Recharts v3, `#1B4FD8` palette) — **only when it adds information** (doc 08 §4)
+       - **Plain-English summary block** — label "What this means for you" (plain text, no glyph/emoji), intro with `<strong>` numbers, key insight on a full-edge `#EEF2FF` tint (`rounded-lg`, `p-3`, NO colored side-stripe), tip line ending in a `text-brand-primary` related-tool link
+     - AdSlot (responsive in-content) — below results
+     - Educational content: H3 "What is [tool]?" (2–3 paras) · H3 "How to use" (worked example, real ₹ amounts) · H3 "Formula" (with worked example) · ComparisonTable (only where meaningful) · FAQSection (≥5 real-query Q&As, emits FAQ JSON-LD)
+   - **Right rail (300px, sticky `top-24`):**
      - RelatedToolsCard (5 sibling tools from same category)
      - RelatedArticlesCard (2–3 related blog articles)
-     - ExportShareCard ("Export as PDF" primary button + "Copy result link" secondary button)
-     - AdSlot (300×150) — **below the export card** (this was an explicit user requirement)
+     - ExportShareCard ("Export as PDF" primary + "Copy result link" secondary)
+     - AdSlot (300×250) — **below the export card**
 4. `<Footer />`
 
-**Mobile behavior:** stacks to single column. Left ads collapse to 1 inline ad above the calculator. Right cards move to below the calculator content. Inline ads stay between inputs/results and below results.
+**Total ad slots = 3** (2 responsive in-content + 1 right-rail 300×250). `AdSlot` must reserve slot dimensions even when ads are disabled (zero layout shift on enable) — see doc 08 §2.
+
+**Mobile behavior (< lg):** single column. Right-rail cards move below the educational content in order Related Tools → Related Articles → Export/Share. In-content ads stay between inputs/results and below results; the right-rail 300×250 becomes an in-content responsive unit.
 
 ### Blog listing page (`/blog/`)
 

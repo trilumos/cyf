@@ -31,6 +31,31 @@ Copy the template below, fill it in, append it under "## Sessions" in reverse ch
 
 ## Sessions
 
+### Session 9 — 2026-05-25
+
+**Completed this session — validated the user's IMPROVEMENT-REPORT.md and reconciled the entire PRD so Day 6 has zero ambiguity (docs-only, no code/build changes):**
+- Validated all ~20 report items against the actual codebase (not just PRD text): read `currency-context.tsx`, `AdSlot.tsx`, `LastUpdatedBadge.tsx`, `calculators.ts`, `categories.ts`, `[slug]/page.tsx`, `package.json`. Verdicts — ADOPT: anti-template content (§1–5), native PDF (§8), llms.txt (§9.6), SoftwareApplication schema (§9.7, no fake aggregateRating), 1:1 article roadmap (§9.8); REVISE: ipapi.co→static-only geo (§7), PDF scope (autotable + raster chart, svg2pdf deferred), OG images deferred (§9.1); REJECT: build parallelization (§9.2 — no deploy.yml exists, CF builds on its own CI), inline search index (§9.3 premature), and noted §9.4's "no analytics" claim was factually wrong (doc 06 already has CF Analytics).
+- Found + fixed 6 PRD loopholes the report missed: (1) **calculator-page grid was physically impossible** — 155px rails vs 300px ads (would have blocked Day 6); (2) AdSlot returns `null` instead of reserving space (CLS); (3) dep-version drift (recharts 3.x / jspdf 4.x / mdx 6.x vs PRD samples); (4) dead `next-seo` dep; (5) stale per-category file counts vs blueprint; (6) phantom `deploy.yml` double-deploy.
+- **User decisions captured:** calc layout = center + 1 right rail; PDF = native jsPDF + autotable; currency = static-only (my call, CF Function rejected as too complex for static site); AdSense = ALREADY APPLIED on the Vercel MVP (has About/Privacy/Terms, no articles) → legal-page parity (incl. Terms) now required before domain swap.
+- **PRD edits:** NEW `docs/prd/08-CALCULATOR-BUILD-STANDARD.md` (authoritative: locked decisions, installed dep versions, final layout §2, anti-template checklist §3, chart matrix §4, module interface + JSON-LD §5, PDF §6, currency §7, LastUpdatedBadge §8, Definition of Done §9, Day-6 scope §10). Patched `03` (layout), `04` (PDF/currency/schema/deploy/llms.txt/ad inventory/file counts), `02` (re-added Terms page + 1:1 article roadmap), `06` (AdSense status + legal parity), `CLAUDE.md` (doc-08 table entry + Locked Build Decisions block), `IMPROVEMENT-REPORT.md` (validation-outcome table).
+- Verified: no active `155px` or `WebApplication` specs remain in PRD (only "superseded by" notes). 9 PRD docs total.
+
+**Last git commit hash:** (this session's final commit)
+**Last git commit message:** docs: validate improvement report + reconcile PRD for Day 6 (new doc 08)
+
+**Exact stopping point:**
+PRD validation + reconciliation 100% complete. No code touched, no build run (docs-only). Ready to begin Day 6 next session.
+
+**What is next:**
+- **Day 6** per `docs/prd/08-CALCULATOR-BUILD-STANDARD.md` §10 (authoritative) + `04-TECHNICAL.md` build order: build the EMI Calculator end-to-end as the reference template, in order — types+format lib → AdSlot reserved-placeholder fix → shell/components (CalculatorShell center+right-rail, Inputs, Results #EEF2FF, PlainEnglishSummary, ResultsChart recharts v3, Related/Export/Educational/FAQ) → JsonLd + schema builders → install `jspdf-autotable` + `pdf-export.ts` → EMI module (meeting §3 checklist) → wire `[slug]/page.tsx` → wire hero EMI tab to shared compute() + CurrencyProvider. Build + tsc green → visual checkpoint.
+
+**Blockers / notes:**
+- Two judgment calls the user can reverse: currency = static-only (not CF Function); Terms page re-added.
+- Open Day-25 decision: contact-form strategy (Formspree vs CF Function vs mailto) — lean Formspree/mailto for zero-backend.
+- `jspdf-autotable` not yet installed — `npm i jspdf-autotable` on Day 6.
+- `next-seo` is dead weight (unused) — remove when convenient.
+- `calcyourfinance.com` still on Vercel + under AdSense review — do NOT touch until launch; new build must keep legal-page parity before swap.
+
 ### Session 8 — 2026-05-25
 
 **Completed this session — full pre-Day-6 audit + remediation of all findings:**

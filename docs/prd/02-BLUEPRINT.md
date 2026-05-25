@@ -12,6 +12,7 @@ calcyourfinance.com/about/                    → About page
 calcyourfinance.com/contact/                  → Contact page
 calcyourfinance.com/privacy-policy/           → Privacy Policy
 calcyourfinance.com/disclaimer/               → Disclaimer
+calcyourfinance.com/terms/                     → Terms of Use
 calcyourfinance.com/sitemap.xml               → Auto-generated sitemap
 calcyourfinance.com/robots.txt                → Static
 ```
@@ -334,6 +335,8 @@ Each calculator entry has: `name`, `slug`, `category`, `description`, `keywords`
 
 ## Blog seed articles (12 at launch — one per category)
 
+> **Article roadmap (added 2026-05-25):** 12 at launch is only the start. The long-term target is **~1 companion article per calculator** for internal-linking density and topical authority — the single strongest lever for organic ranking. Cadence: 4–6 articles/month → ~60–72 by month 12 → approaching 200+ by month 24. Each calculator's `articleSlugs[]` grows to 1–3 entries over time. Post-launch, every new calculator ships with its companion article in the same PR. This is post-launch ops, not part of the Day-6→Week-4 build.
+
 When writing these, use the **actual current year** in titles and content. Update the JSON below with the live year before creating.
 
 | Title pattern | Slug pattern | Category |
@@ -385,13 +388,13 @@ White background (`bg-surface`) with a top border (`border-t border-border`) —
 - Column 1 (wider): Logo + tagline "Free finance calculators for every money decision. No sign-up required." + dynamic copyright `© {new Date().getFullYear()} CalcYourFinance. All rights reserved.`
 - Column 2 **Calculators**: Loan & EMI, Investment, Tax, Retirement, All 200+ Calculators (links to the All Tools page filtered by each category)
 - Column 3 **Popular Tools**: EMI, SIP, Income Tax, FD, Home Loan EMI (direct links to the highest-traffic calculators)
-- Column 4 **Company** (About, Blog, Contact) + **Legal** (Privacy Policy, Disclaimer), stacked
+- Column 4 **Company** (About, Blog, Contact) + **Legal** (Privacy Policy, Disclaimer, Terms of Use), stacked
 
 Bottom strip (separated by a thin top border): a single centered disclaimer — "All calculators provide estimates for informational purposes only. Not financial advice. Consult a qualified financial advisor before making any investment or financial decisions."
 
 The copyright year is dynamic: `{new Date().getFullYear()}`.
 
-**Deferred / intentionally omitted:** add a **Sitemap** link to the Company group once `/sitemap.xml` is generated (Day 26 — until then it would be a dead link). **Terms of Use** is omitted: no Terms page is planned, so Legal = Privacy Policy + Disclaimer only.
+**Legal pages (REVISED 2026-05-25):** Legal = Privacy Policy + Disclaimer + **Terms of Use**. The Terms page is **required**, not omitted — the live `calcyourfinance.com` MVP (currently under AdSense review) already has a Terms page, so the new build must keep legal-page parity before any domain swap to avoid breaking AdSense compliance. (This reverses the earlier "Terms omitted" decision.) **Deferred:** add a **Sitemap** link to the Company group once `/sitemap.xml` is generated (Day 26 — until then it would be a dead link).
 
 ---
 
