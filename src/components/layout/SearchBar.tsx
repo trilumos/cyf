@@ -7,8 +7,14 @@ import { IconSearch, IconX } from '@tabler/icons-react';
 import { CALCULATORS_INDEX, type CalcEntry } from '@/data/calculators-index';
 
 const fuse = new Fuse(CALCULATORS_INDEX, {
-  keys: ['name', 'category', 'description'],
-  threshold: 0.35,
+  keys: [
+    { name: 'name', weight: 0.7 },
+    { name: 'keywords', weight: 0.2 },
+    { name: 'description', weight: 0.1 },
+  ],
+  threshold: 0.3,
+  ignoreLocation: true,
+  minMatchCharLength: 2,
   includeScore: false,
 });
 

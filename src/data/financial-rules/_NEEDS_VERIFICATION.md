@@ -6,7 +6,6 @@ Items marked `verified_by: "needs_manual_verification"` or flagged in notes as u
 
 | File | Field | Issue | Priority |
 |------|-------|--------|----------|
-| `india-tax-new-regime.json` | `surcharge[0].rate` (50L-1Cr) | bankbazaar shows 5%, historic rate is 10%. Verify from Income Tax Act 2025 official text or incometaxindia.gov.in. | Medium |
 | `us-tax-brackets.json` | `capital_gains_rates` | LTCG thresholds are approximate; verify exact 2026 figures from IRS RP-25-32. | Low |
 | `us-tax-brackets.json` | `standard_deduction.additional_blind` | $1,600 figure is approximate; verify exact 2026 amount from IRS. | Low |
 | `us-401k-limits.json` | `four01k_403b_457_tsp.total_annual_additions` | 415(c) combined employer+employee limit not sourced; verify from IRS Notice 2025-82. | Low |

@@ -39,7 +39,7 @@ export function LastUpdatedBadge({
             href={sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline hover:text-ink-base transition-colors"
+            className="underline hover:text-ink-secondary transition-colors"
             title={sourceName}
           >
             {domain}

@@ -4,9 +4,17 @@ import LayoutShell from '@/components/layout/LayoutShell';
 import { AllToolsContent } from '@/components/ui/AllToolsContent';
 
 export const metadata: Metadata = {
-  title: 'All Finance Calculators — 200+ Free Tools | CalcYourFinance',
+  title: 'All Finance Calculators — 200+ Free Tools',
   description:
     'Browse all 200+ free finance calculators across 12 categories — EMI, SIP, tax, retirement, insurance, and more. No sign-up required.',
+  alternates: { canonical: '/all-tools/' },
+  openGraph: {
+    type: 'website',
+    title: 'All Finance Calculators — 200+ Free Tools | CalcYourFinance',
+    description:
+      'Browse all 200+ free finance calculators across 12 categories — EMI, SIP, tax, retirement, insurance, and more. No sign-up required.',
+    url: '/all-tools/',
+  },
 };
 
 export default function AllToolsPage() {

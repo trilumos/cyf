@@ -3,8 +3,13 @@ import LayoutShell from '@/components/layout/LayoutShell';
 import { ToolCard } from '@/components/ui/ToolCard';
 import { CategoryCard } from '@/components/ui/CategoryCard';
 import { HeroCalculatorPanel } from '@/components/ui/HeroCalculatorPanel';
+import type { Metadata } from 'next';
 import { CALCULATORS } from '@/data/calculators';
 import { CATEGORIES, getCategoryBySlug } from '@/data/categories';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 const popularTools = CALCULATORS.filter((c) => c.isPopular).slice(0, 8);
 
@@ -26,7 +31,7 @@ const TRENDING_PILLS = [
 // Placeholder blog posts — replaced once blog content is built (Day 7)
 const BLOG_PLACEHOLDERS = [
   { title: 'SIP vs Lumpsum: Which strategy wins in 2026?',          slug: 'sip-vs-lumpsum-2026',        category: 'Investment', readTime: '5 min read', date: 'May 2026' },
-  { title: 'Old vs New Tax Regime: Complete FY 2026-27 comparison', slug: 'old-vs-new-tax-regime-2027', category: 'Tax',        readTime: '7 min read', date: 'Apr 2026' },
+  { title: 'Old vs New Tax Regime: Complete FY 2026-27 comparison', slug: 'old-vs-new-tax-regime-2026', category: 'Tax',        readTime: '7 min read', date: 'Apr 2026' },
   { title: 'How to calculate your FIRE number in India',            slug: 'fire-number-india',          category: 'Retirement', readTime: '6 min read', date: 'May 2026' },
 ];
 

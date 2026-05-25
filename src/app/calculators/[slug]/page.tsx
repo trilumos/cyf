@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import LayoutShell from '@/components/layout/LayoutShell';
@@ -8,6 +9,22 @@ import { getCategoryBySlug } from '@/data/categories';
 
 export function generateStaticParams() {
   return CALCULATORS.map((c) => ({ slug: c.slug }));
+}
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const calc = CALCULATORS.find((c) => c.slug === params.slug);
+  if (!calc) return { title: 'Calculator Not Found' };
+  return {
+    title: calc.name,
+    description: calc.description,
+    alternates: { canonical: `/calculators/${calc.slug}/` },
+    openGraph: {
+      type: 'website',
+      title: `${calc.name} | CalcYourFinance`,
+      description: calc.description,
+      url: `/calculators/${calc.slug}/`,
+    },
+  };
 }
 
 export default function CalculatorPage({ params }: { params: { slug: string } }) {

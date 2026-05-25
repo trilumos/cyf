@@ -18,10 +18,31 @@ const dmSerif = DM_Serif_Display({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://calcyourfinance.com";
+const SITE_DESCRIPTION =
+  "200+ free finance calculators for EMI, SIP, tax, retirement, and more. No sign-up required.";
+
 export const metadata: Metadata = {
-  title: "CalcYourFinance — Free Finance Calculators",
-  description:
-    "200+ free finance calculators for EMI, SIP, tax, retirement, and more. No sign-up required.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "CalcYourFinance — Free Finance Calculators",
+    template: "%s | CalcYourFinance",
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: "CalcYourFinance",
+  openGraph: {
+    type: "website",
+    siteName: "CalcYourFinance",
+    title: "CalcYourFinance — Free Finance Calculators",
+    description: SITE_DESCRIPTION,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CalcYourFinance — Free Finance Calculators",
+    description: SITE_DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
