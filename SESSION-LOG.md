@@ -31,6 +31,39 @@ Copy the template below, fill it in, append it under "## Sessions" in reverse ch
 
 ## Sessions
 
+### Session 8 — 2026-05-25
+
+**Completed this session — full pre-Day-6 audit + remediation of all findings:**
+- Ran a 12-domain read-only audit (build, tsc, data integrity, design rules, financial JSON, SEO, config, perf). Build + `tsc --noEmit` green; 200 calculators, no duplicate slugs, category counts reconciled; financial data web-verified accurate (IRS 2026 401k/brackets/std-deduction, India new-regime slabs + 50L-1Cr surcharge 10%, GST 2.0).
+- Fixed all 11 issues (4 commits, visual checkpoint after each visible change):
+  1. Tailwind `content` globs now cover `src/calculators`, `src/content`, `src/lib` (Day-6 styles won't be purged).
+  2. 6 broken calculator slugs fixed (mega-menu trending ×3, footer + hero income-tax → `-india`, net-worth relatedSlug).
+  3. `FY 2025-26` → `FY 2026-27` (calculators.ts desc + hero tax tab).
+  4. Built `scripts/verify-rates.mjs` (monthly review_due + budget-calendar → opens labelled GitHub issues; dry-run + de-dup + ASOF override). Bumped workflow to checkout/setup-node@v6 + node 22, added manual asof/dry_run dispatch inputs. **Live-tested on GitHub** (real issue opened + closed by user).
+  5. `03-DESIGN-SYSTEM.md` conformed to CLAUDE.md — AI-summary block rewritten ("What this means for you" label, #EEF2FF tint, no glyph/yellow/green/side-stripe); category color documented data-only.
+  6. `02-BLUEPRINT.md` footer spec aligned to shipped white footer (keep Popular Tools, defer Sitemap, drop Terms).
+  7. Navbar search category-color badges → neutral text; ToolCard green Trending badge → brand-blue; homepage blog gradients → flat #EEF2FF. CLAUDE.md design principles amended per user: Rule 6 allows subtle elevation shadows; Rules 2 & 7 allow one hero "live" pulse-dot.
+  8. SEO metadata — root `metadataBase` + title template (`%s | CalcYourFinance`) + OG/Twitter/robots; per-calc `generateMetadata` (title/desc/canonical/OG); all-tools + home canonical.
+  9. Navbar Fuse config tuned to match all-tools (name .7/keywords .2/desc .1, threshold .3, ignoreLocation, minMatch 2); fixed dead `hover:text-ink-base` → `hover:text-ink-secondary`; removed redundant `@types/jspdf`.
+  10. Cleared web-verified-correct India new-regime surcharge row from `_NEEDS_VERIFICATION.md`.
+  11. Homepage blog placeholder slug `old-vs-new-tax-regime-2027` → `-2026` (match calculators.ts).
+
+**Last git commit hash:** 8701b32
+**Last git commit message:** fix: SEO metadata, search/badge cleanups, stale flag (Issues 8-11)
+
+**Exact stopping point:**
+Pre-Day-6 audit + remediation 100% complete. Codebase clean: build green, tsc clean, no broken nav links, PRD docs reconciled with CLAUDE.md. Ready to begin Day 6.
+
+**What is next:**
+- **Day 6** per `docs/prd/04-TECHNICAL.md`: build the EMI Calculator end-to-end as the reference template (CalculatorShell, inputs + sliders, results cards, amortization chart, PlainEnglishSummary "What this means for you" block, PDF export, educational content, FAQ JSON-LD, Related tools/articles). Wire `LastUpdatedBadge`. Then wire deferred hero panel interactivity + `CurrencyProvider` context.
+
+**Blockers / notes:**
+- Deferred by user decision (Day 6+): AdSlot reserved-dimension placeholder (Day 6, before calc ad-rails exist), Home nav link (logo-as-home kept), unbuilt-page links blog/about/contact/legal (Day 7/25), OG image + `robots.txt` + `sitemap.xml` (Day 26), inline-style→Tailwind-token refactor, `categories.ts` id/label→name rename, all-tools deep-link fade.
+- CLAUDE.md design principles 2/6/7 amended this session to permit subtle shadows + one hero pulse-dot. Design skills' generic bans (side-stripe, etc.) are overridden by CLAUDE.md per instruction priority.
+- `verify-rates` Action needs repo Settings → Actions → Workflow permissions = "Read and write" (set by user). First real fire ~1 Jul 2026 (PPF Q2 review due 2026-07-01).
+- `PROMPT.md` has a pre-existing uncommitted edit — intentionally left untouched all session.
+- `calcyourfinance.com` still on Vercel — do NOT touch until launch.
+
 ### Session 7 — 2026-05-24
 
 **Completed this session — Day 5 fully complete:**
