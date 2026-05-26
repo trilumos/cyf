@@ -1,3 +1,14 @@
+export interface CalculatorSummary {
+  headline: string;
+  intro: string;
+  insights: Array<{
+    type: 'insight' | 'caution' | 'tip';
+    heading: string;
+    body: string;
+    relatedToolSlug?: string;
+  }>;
+}
+
 export interface CalculatorModule {
   slug: string;
   seo?: { title: string; description: string; keywords?: string[] };
@@ -25,11 +36,7 @@ export interface CalculatorModule {
   generateSummary: (
     inputs: Record<string, number | string>,
     results: Record<string, number>
-  ) => {
-    intro: string;
-    highlight: string;
-    tip: { text: string; relatedToolSlug?: string };
-  };
+  ) => CalculatorSummary;
   educational: {
     whatIs: string;
     howToUse: string[];

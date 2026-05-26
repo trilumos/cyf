@@ -71,8 +71,6 @@ export function CalculatorClientUI({ slug }: CalculatorClientUIProps) {
         currency={currency}
       />
 
-      <AdSlot size="responsive" position="calc-in-content-1" />
-
       <CalculatorResults
         results={calcModule.results}
         values={results}
@@ -91,11 +89,13 @@ export function CalculatorClientUI({ slug }: CalculatorClientUIProps) {
 
       {summary && <PlainEnglishSummary summary={summary} />}
 
-      <AdSlot size="responsive" position="calc-in-content-2" />
-
       <EducationalContent educational={calcModule.educational} />
 
+      <AdSlot size="responsive" position="calc-in-content-1" />
+
       <FAQSection faqs={calcModule.educational.faqs} />
+
+      <AdSlot size="responsive" position="calc-in-content-2" />
 
       {/* Mobile: right-rail cards below content */}
       <div className="lg:hidden flex flex-col gap-4 pt-2">

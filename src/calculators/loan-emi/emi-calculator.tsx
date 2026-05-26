@@ -117,36 +117,59 @@ export const emiCalculator: CalculatorModule = {
     const P = Number(inputs.loanAmount);
     const r = Number(inputs.interestRate);
     const n = Number(inputs.tenureYears);
-    const { emi, totalInterest, interestToLoan } = results;
+    const { emi, totalInterest, totalPayment, interestToLoan } = results;
 
-    // Income needed to stay within the 30% EMI-to-income rule
     const incomeFor30pct = Math.round(emi / 0.30);
+    const rM = r / 12 / 100;
+    const firstMonthInterest = P * rM;
+    const interestPctOfEmi = Math.round((firstMonthInterest / emi) * 100);
+    const repaymentMultiple = P > 0 ? (totalPayment / P).toFixed(2) : '1.00';
 
-    // Savings from choosing (n-5) years instead — only if n > 5
-    let savingsBlock = '';
+    const insights: Array<{
+      type: 'insight' | 'caution' | 'tip';
+      heading: string;
+      body: string;
+      relatedToolSlug?: string;
+    }> = [
+      {
+        type: 'insight',
+        heading: `You pay ${formatCompact(totalInterest, 'INR')} in interest — ${Math.round(interestToLoan)}% extra on top of what you borrowed`,
+        body: `Total amount repaid: <strong>${formatCompact(totalPayment, 'INR')}</strong>. For every ₹1 lakh borrowed, you return ₹${repaymentMultiple} lakhs. In year one, <strong>${interestPctOfEmi}% of each EMI</strong> is just interest — only ${100 - interestPctOfEmi}% reduces what you owe. This is why making prepayments early in the loan has the biggest impact.`,
+      },
+      {
+        type: 'insight',
+        heading: `Monthly take-home you need: ${formatCurrency(incomeFor30pct, 'INR')}`,
+        body: `Keep all EMIs under 30% of take-home pay — the safe personal finance rule. At <strong>${formatCurrency(emi, 'INR')}/month</strong>, your take-home should be at least <strong>${formatCurrency(incomeFor30pct, 'INR')}/month</strong>. Banks also calculate your FOIR (Fixed Obligation to Income Ratio) across all loans — applications where FOIR exceeds 55% are typically rejected.`,
+      },
+    ];
+
     if (n > 5) {
       const altN = (n - 5) * 12;
-      const rM = r / 12 / 100;
-      const altFactor = Math.pow(1 + rM, altN);
-      const altEmi = (P * rM * altFactor) / (altFactor - 1);
+      const altFactor = rM > 0 ? Math.pow(1 + rM, altN) : 1;
+      const altEmi = rM > 0 ? (P * rM * altFactor) / (altFactor - 1) : P / altN;
       const altInterest = altEmi * altN - P;
       const saved = Math.round(totalInterest - altInterest);
       const extra = Math.round(altEmi - emi);
       if (saved > 0) {
-        savingsBlock = ` Choosing a ${n - 5}-year tenure instead saves <strong>${formatCompact(saved, 'INR')}</strong> in interest for just <strong>${formatCurrency(extra, 'INR')}</strong> more per month.`;
+        insights.push({
+          type: 'caution',
+          heading: `Choosing ${n - 5} years instead saves you ${formatCompact(saved, 'INR')}`,
+          body: `Your EMI goes up by <strong>${formatCurrency(extra, 'INR')}/month</strong> — but you save <strong>${formatCompact(saved, 'INR')}</strong> in total interest. That is money you keep instead of paying to the bank. If your income can support the higher EMI, the shorter tenure is almost always the better financial decision.`,
+        });
       }
     }
 
+    insights.push({
+      type: 'tip',
+      heading: 'One lump-sum prepayment can save lakhs',
+      body: `A single prepayment — even just 3 months of EMI — cuts your interest bill significantly. Ask your bank to reduce the <strong>tenure</strong> (not the EMI) when prepaying; that saves more money over the long run. For floating-rate home loans, prepayment is <strong>free by law</strong> (RBI mandate since 2011). Fixed-rate loans may have a penalty in the agreement.`,
+      relatedToolSlug: 'loan-prepayment-calculator',
+    });
+
     return {
-      intro: `Your monthly EMI of <strong>${formatCurrency(emi, 'INR')}</strong> on a <strong>${formatCompact(P, 'INR')}</strong> loan at <strong>${r}%</strong> for <strong>${n} years</strong>.`,
-      highlight:
-        `You will pay <strong>${formatCompact(totalInterest, 'INR')}</strong> in total interest — <strong>${Math.round(interestToLoan)}% of the principal</strong>. ` +
-        `To stay within the 30% EMI-to-income rule, your monthly take-home should be at least <strong>${formatCurrency(incomeFor30pct, 'INR')}</strong>.` +
-        savingsBlock,
-      tip: {
-        text: 'Making a lump-sum prepayment — even once — can cut years off your tenure and save lakhs in interest.',
-        relatedToolSlug: 'loan-prepayment-calculator',
-      },
+      headline: `${formatCurrency(emi, 'INR')} every month for ${n} ${n === 1 ? 'year' : 'years'}`,
+      intro: `On a <strong>${formatCompact(P, 'INR')}</strong> loan at <strong>${r}%</strong> interest, your fixed monthly EMI is <strong>${formatCurrency(emi, 'INR')}</strong>. You pay this exact amount every month for <strong>${n} years</strong> (${n * 12} instalments total) until the loan is fully cleared.`,
+      insights,
     };
   },
   educational: {
